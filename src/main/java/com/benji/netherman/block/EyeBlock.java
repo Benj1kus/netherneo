@@ -19,13 +19,10 @@ import org.jetbrains.annotations.Nullable;
 public class EyeBlock extends HorizontalDirectionalBlock implements EntityBlock {
     public static final MapCodec<EyeBlock> CODEC = simpleCodec(EyeBlock::new);
 
-    private static final VoxelShape SHAPE_NS =
-            Block.box(0.0D, 0.0D, 7.0D,
-                    16.0D, 16.0D, 9.0D);
-
-    private static final VoxelShape SHAPE_EW =
-            Block.box(7.0D, 0.0D, 0.0D,
-                    9.0D, 16.0D, 16.0D);
+    private static final VoxelShape SHAPE_N = Block.box(0, 0, 14, 16, 16, 16);
+    private static final VoxelShape SHAPE_E = Block.box(0, 0, 0, 2, 16, 16);
+    private static final VoxelShape SHAPE_S = Block.box(0, 0, 0, 16, 16, 2);
+    private static final VoxelShape SHAPE_W = Block.box(14, 0, 0, 16, 16, 16);
 
 
     public EyeBlock(Properties properties) {
@@ -54,9 +51,12 @@ public class EyeBlock extends HorizontalDirectionalBlock implements EntityBlock 
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return state.getValue(FACING).getAxis() == Direction.Axis.X
-                ? SHAPE_EW
-                : SHAPE_NS;
+        return switch (state.getValue(FACING)) {
+            case NORTH, UP, DOWN -> SHAPE_N;
+            case SOUTH -> SHAPE_S;
+            case WEST -> SHAPE_W;
+            case EAST -> SHAPE_E;
+        };
     }
 
     @Nullable

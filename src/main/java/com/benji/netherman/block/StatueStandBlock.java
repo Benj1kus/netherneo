@@ -19,7 +19,9 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
@@ -28,6 +30,13 @@ public class StatueStandBlock extends HorizontalDirectionalBlock {
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
 
     private static final VoxelShape SHAPE = Block.box(2.0D, 0.0D, 2.0D, 14.0D, 16.0D, 14.0D);
+
+    private static final VoxelShape SHAPE_LOWER = Shapes.or(Block.box(0, 0, 0, 16, 7, 16), Block.box(2, 7, 2, 14, 12, 14), Block.box(5, 12, 5, 11, 23, 11));
+    private static final VoxelShape SHAPE_UPPER = Shapes.or(Block.box(3, 0, 3, 13, 11, 13), Block.box(5, 11, 5, 11, 23, 11));
+    private static final VoxelShape SHAPE_UPPER_NORTH = Shapes.or(SHAPE_UPPER, Block.box(3, 11, 3, 13, 25, 7));
+    private static final VoxelShape SHAPE_UPPER_EAST = Shapes.or(SHAPE_UPPER, Block.box(9, 11, 3, 13, 25, 13));
+    private static final VoxelShape SHAPE_UPPER_SOUTH = Shapes.or(SHAPE_UPPER, Block.box(3, 11, 9, 13, 25, 13));
+    private static final VoxelShape SHAPE_UPPER_WEST = Shapes.or(SHAPE_UPPER, Block.box(3, 11, 3, 7, 25, 13));
 
     public StatueStandBlock(Properties properties) {
         super(properties);
@@ -118,6 +127,11 @@ public class StatueStandBlock extends HorizontalDirectionalBlock {
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPE; 
+        return state.getValue(HALF) == DoubleBlockHalf.LOWER ? SHAPE_LOWER : switch (state.getValue(FACING)) {
+            case NORTH, UP, DOWN -> SHAPE_UPPER_NORTH;
+            case SOUTH -> SHAPE_UPPER_SOUTH;
+            case WEST -> SHAPE_UPPER_WEST;
+            case EAST -> SHAPE_UPPER_EAST;
+        };
     }
 }

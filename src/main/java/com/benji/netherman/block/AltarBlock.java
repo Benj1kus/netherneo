@@ -32,6 +32,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,7 +48,11 @@ public class AltarBlock extends HorizontalDirectionalBlock implements EntityBloc
     public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
     public static final BooleanProperty GUESSED = BooleanProperty.create("guessed");
 
-    private static final VoxelShape SHAPE = Block.box(0.0D, 0.0D, 0.0D, 16.0D, 16.0D, 16.0D);
+    private static final VoxelShape SHAPE = Shapes.or(
+            Block.box(1, 0, 1, 15, 5, 15),
+            Block.box(3, 5, 3, 13, 14, 13),
+            Block.box(2, 14, 2, 14, 18, 14)
+    );
 
 
     public AltarBlock(Properties properties) {

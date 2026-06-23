@@ -370,6 +370,7 @@ public class NetherExp {
             () -> new BlackstonePlantBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK)
                     .lightLevel(state -> 10)
                     .instabreak()
+                    .noCollission()
                     .noOcclusion()));
 
     public static final DeferredHolder<StructureType<?>, StructureType<com.benji.netherman.worldgen.structure.MegaJigsawStructure>> MEGA_JIGSAW_STRUCTURE =
@@ -479,6 +480,7 @@ public class NetherExp {
             () -> new BlackstoneAxonBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.GRASS_BLOCK)
                     .lightLevel(state -> 10)
                     .instabreak()
+                    .noCollission()
                     .noOcclusion()));
 
     public static final DeferredItem<Item> BLACKSTONE_AXON_ITEM = ITEMS.register("blackstone_axon",
