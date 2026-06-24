@@ -1,7 +1,7 @@
-package com.benji.netherman.block;
+package com.benji.netherman.common.block;
 
-import com.benji.netherman.NetherExp;
-import com.benji.netherman.block.entity.TotemusHoleBlockEntity;
+import com.benji.netherman.common.block.entity.TotemusHoleBlockEntity;
+import com.benji.netherman.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -27,7 +27,7 @@ public class TotemusHoleBlock extends Block implements EntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return type == NetherExp.TOTEMUS_HOLE_BE.get() ?
+        return type == ModBlockEntities.TOTEMUS_HOLE.get() ?
                 (lvl, p, st, be) -> TotemusHoleBlockEntity.tick(lvl, p, st, (TotemusHoleBlockEntity) be) : null;
     }
 }

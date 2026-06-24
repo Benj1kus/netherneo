@@ -37,6 +37,8 @@ public class ModItems {
                     .craftRemainder(net.minecraft.world.item.Items.GLASS_BOTTLE)
                     .food(new net.minecraft.world.food.FoodProperties.Builder().nutrition(6).saturationModifier(0.1F).alwaysEdible().build())));
 
+    public static final DeferredItem<Item> MAZE_KEY = register("maze_key", () -> new Item(new Item.Properties().stacksTo(1)));
+
     public static final DeferredItem<Item> AZAZEL_GUIDE_BOOK = register("azazel_guide_book", () -> new AzazelGuideBookItem(new Item.Properties().stacksTo(1)));
 
     public static final DeferredItem<Item> GILDED_GOLEM_SPAWN_EGG = registerSpawnEgg("gilded_golem", ModEntities.GILDED_GOLEM);

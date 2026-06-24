@@ -1,8 +1,9 @@
-package com.benji.netherman.block.entity;
+package com.benji.netherman.common.block.entity;
 
-import com.benji.netherman.ModSounds;
+import com.benji.netherman.init.ModItems;
+import com.benji.netherman.init.ModSounds;
 import com.benji.netherman.NetherExp;
-import com.benji.netherman.block.FacePuzzleBlock;
+import com.benji.netherman.common.block.FacePuzzleBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
@@ -107,7 +108,7 @@ public class FacePuzzleBlockEntity extends BlockEntity implements GeoBlockEntity
                     100, 0.5, 0.5, 0.5, 0.2);
         }
 
-        ItemEntity key = new ItemEntity(level, this.worldPosition.getX() + 0.5, this.worldPosition.getY() + 0.5, this.worldPosition.getZ() + 0.5, new ItemStack(NetherExp.MAZE_KEY.get()));
+        ItemEntity key = new ItemEntity(level, this.worldPosition.getX() + 0.5, this.worldPosition.getY() + 0.5, this.worldPosition.getZ() + 0.5, new ItemStack(ModItems.MAZE_KEY.get()));
         level.addFreshEntity(key);
     }
 

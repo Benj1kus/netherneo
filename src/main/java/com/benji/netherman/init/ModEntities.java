@@ -3,6 +3,7 @@ package com.benji.netherman.init;
 import com.benji.netherman.NetherExp;
 import com.benji.netherman.common.entity.*;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.neoforged.bus.api.IEventBus;
@@ -115,6 +116,12 @@ public class ModEntities {
                     .sized(0.625f, 0.8125f)
                     .fireImmune()
                     .build("ghastly"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<TotemusPuzzleEntity>> TOTEMUS_PUZZLE = ENTITIES.register("totemus_puzzle",
+            () -> EntityType.Builder.of(TotemusPuzzleEntity::new, MobCategory.MONSTER)
+                    .sized(0.5F, 2.25F)
+                    .fireImmune()
+                    .build("totemus_puzzle"));
 
     public static void init(IEventBus bus) {
         ENTITIES.register(bus);

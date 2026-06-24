@@ -99,6 +99,7 @@ public class CommonEvents {
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(ModEntities.AZAZEL_GUIDE_BOOK.get(), AzazelGuideBookEntity.createAttributes().build());
+        event.put(ModEntities.TOTEMUS_PUZZLE.get(), TotemusPuzzleEntity.createAttributes().build());
         event.put(ModEntities.GILDED_GOLEM.get(), GildedGolemEntity.createAttributes().build());
         event.put(ModEntities.AZAZEL.get(), AzazelEntity.createAttributes().build());
         event.put(ModEntities.LASER.get(), LaserEntity.createAttributes().build());

@@ -1,6 +1,6 @@
-package com.benji.netherman.entity;
+package com.benji.netherman.common.entity;
 
-import com.benji.netherman.block.entity.TotemusHoleBlockEntity;
+import com.benji.netherman.common.block.entity.TotemusHoleBlockEntity;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;

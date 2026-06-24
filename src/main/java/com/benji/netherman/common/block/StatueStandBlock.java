@@ -1,13 +1,13 @@
 package com.benji.netherman.common.block;
 
-import com.benji.netherman.ModSounds;
-import com.benji.netherman.NetherExp;
+import com.benji.netherman.init.ModSounds;
+import com.benji.netherman.init.ModBlocks;
+import com.benji.netherman.init.ModItems;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -88,7 +88,7 @@ public class StatueStandBlock extends HorizontalDirectionalBlock {
             boolean isPuzzleZone = false;
 
             for (BlockPos checkPos : BlockPos.betweenClosed(pos.offset(-radius, -radius, -radius), pos.offset(radius, radius, radius))) {
-                if (level.getBlockState(checkPos).is(NetherExp.MAZE_DOOR.get())) {
+                if (level.getBlockState(checkPos).is(ModBlocks.MAZE_DOOR.get())) {
                     isPuzzleZone = true;
                     break;
                 }
@@ -140,7 +140,7 @@ public class StatueStandBlock extends HorizontalDirectionalBlock {
                 if (allPaired) {
                     level.playSound(null, pos, ModSounds.GIANT_BELL.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
 
-                    ItemEntity key = new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, new ItemStack(NetherExp.MAZE_KEY.get()));
+                    ItemEntity key = new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, new ItemStack(ModItems.MAZE_KEY.get()));
                     level.addFreshEntity(key);
 
                     for (BlockPos statPos : allStatuesInRoom) {

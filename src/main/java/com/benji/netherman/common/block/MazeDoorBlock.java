@@ -1,7 +1,10 @@
-package com.benji.netherman.block;
+package com.benji.netherman.common.block;
 
 import com.benji.netherman.NetherExp;
-import com.benji.netherman.block.entity.MazeDoorBlockEntity;
+import com.benji.netherman.common.block.entity.MazeDoorBlockEntity;
+import com.benji.netherman.init.ModBlockEntities;
+import com.benji.netherman.init.ModBlocks;
+import com.benji.netherman.init.ModItems;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -9,7 +12,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -64,7 +66,7 @@ public class MazeDoorBlock extends HorizontalDirectionalBlock implements EntityB
                 if (w == 0 && h == 0) continue;
                 BlockPos partPos = pos.relative(right, w).above(h);
                 if (level.getBlockState(partPos).canBeReplaced()) {
-                    level.setBlock(partPos, NetherExp.GRAND_DOOR_PART.get().defaultBlockState()
+                    level.setBlock(partPos, ModBlocks.GRAND_DOOR_PART.get().defaultBlockState()
                             .setValue(FACING, state.getValue(FACING))
                             .setValue(OPEN, false), 3);
                 }
@@ -85,9 +87,9 @@ public class MazeDoorBlock extends HorizontalDirectionalBlock implements EntityB
 
                 for (BlockPos checkPos : BlockPos.betweenClosed(pos.offset(-scanRadius, -scanRadius, -scanRadius), pos.offset(scanRadius, scanRadius, scanRadius))) {
                     BlockState checkState = level.getBlockState(checkPos);
-                    if (checkState.is(NetherExp.STATUE_STAND.get()) ||
-                            checkState.is(NetherExp.FACE_PUZZLE_LEFT_DOWN.get()) ||
-                            checkState.is(NetherExp.TOTEMUS_HOLE.get())) {
+                    if (checkState.is(ModBlocks.STATUE_STAND.get()) ||
+                            checkState.is(ModBlocks.FACE_PUZZLE_LEFT_DOWN.get()) ||
+                            checkState.is(ModBlocks.TOTEMUS_HOLE.get())) {
                         foundPuzzle = true;
                         break;
                     }
@@ -96,7 +98,7 @@ public class MazeDoorBlock extends HorizontalDirectionalBlock implements EntityB
                 entity.syncRequiresKey(foundPuzzle);
 
                 if (foundPuzzle) {
-                    if (stack.is(NetherExp.MAZE_KEY.get())) {
+                    if (stack.is(ModItems.MAZE_KEY.get())) {
                         stack.shrink(1);
                         level.playSound(null, pos, SoundEvents.UI_BUTTON_CLICK.value(), SoundSource.BLOCKS, 1.0F, 1.0F);
                         entity.openTemporary();
@@ -121,7 +123,7 @@ public class MazeDoorBlock extends HorizontalDirectionalBlock implements EntityB
                 for (int h = 0; h < 5; h++) {
                     if (w == 0 && h == 0) continue;
                     BlockPos partPos = pos.relative(right, w).above(h);
-                    if (level.getBlockState(partPos).is(NetherExp.GRAND_DOOR_PART.get())) {
+                    if (level.getBlockState(partPos).is(ModBlocks.GRAND_DOOR_PART.get())) {
                         level.setBlock(partPos, Blocks.AIR.defaultBlockState(), 3);
                     }
                 }
@@ -139,7 +141,7 @@ public class MazeDoorBlock extends HorizontalDirectionalBlock implements EntityB
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return type == NetherExp.MAZE_DOOR_BE.get() ?
+        return type == ModBlockEntities.MAZE_DOOR.get() ?
                 (lvl, p, st, be) -> MazeDoorBlockEntity.tick(lvl, p, st, (MazeDoorBlockEntity) be) : null;
     }
 

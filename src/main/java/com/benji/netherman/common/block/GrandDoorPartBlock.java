@@ -1,7 +1,6 @@
-package com.benji.netherman.block;
+package com.benji.netherman.common.block;
 
-import com.benji.netherman.NetherExp;
-import com.benji.netherman.block.entity.GrandDoorBlockEntity;
+import com.benji.netherman.init.ModBlocks;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -65,7 +64,7 @@ public class GrandDoorPartBlock extends HorizontalDirectionalBlock {
             for (int x = -5; x <= 5; x++) {
                 for (int z = -5; z <= 5; z++) {
                     BlockPos checkPos = pos.offset(x, -y, z);
-                    if (level.getBlockState(checkPos).is(NetherExp.GRAND_DOOR.get()) || level.getBlockState(checkPos).is(NetherExp.MAZE_DOOR.get())) {
+                    if (level.getBlockState(checkPos).is(ModBlocks.GRAND_DOOR.get()) || level.getBlockState(checkPos).is(ModBlocks.MAZE_DOOR.get())) {
                         return level.getBlockState(checkPos).useWithoutItem(level, player, new BlockHitResult(hit.getLocation(), hit.getDirection(), checkPos, hit.isInside()));
                     }
                 }
@@ -82,7 +81,7 @@ public class GrandDoorPartBlock extends HorizontalDirectionalBlock {
                     BlockPos checkPos = pos.offset(x, -y, z);
                     BlockState checkState = level.getBlockState(checkPos);
 
-                    if (checkState.is(NetherExp.GRAND_DOOR.get()) || checkState.is(NetherExp.MAZE_DOOR.get())) {
+                    if (checkState.is(ModBlocks.GRAND_DOOR.get()) || checkState.is(ModBlocks.MAZE_DOOR.get())) {
                         return checkState.useItemOn(stack, level, player, hand, new BlockHitResult(hit.getLocation(), hit.getDirection(), checkPos, hit.isInside()));
                     }
                 }
@@ -99,7 +98,7 @@ public class GrandDoorPartBlock extends HorizontalDirectionalBlock {
                 for (int x = -5; x <= 5; x++) {
                     for (int z = -5; z <= 5; z++) {
                         BlockPos checkPos = pos.offset(x, -y, z);
-                        if (level.getBlockState(checkPos).is(NetherExp.GRAND_DOOR.get())) {
+                        if (level.getBlockState(checkPos).is(ModBlocks.GRAND_DOOR.get())) {
                             level.destroyBlock(checkPos, false);
                         }
                     }

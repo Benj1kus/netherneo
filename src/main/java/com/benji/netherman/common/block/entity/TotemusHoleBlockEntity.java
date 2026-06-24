@@ -1,8 +1,11 @@
-package com.benji.netherman.block.entity;
+package com.benji.netherman.common.block.entity;
 
-import com.benji.netherman.ModSounds;
+import com.benji.netherman.init.ModBlockEntities;
+import com.benji.netherman.init.ModEntities;
+import com.benji.netherman.init.ModItems;
+import com.benji.netherman.init.ModSounds;
 import com.benji.netherman.NetherExp;
-import com.benji.netherman.entity.TotemusPuzzleEntity;
+import com.benji.netherman.common.entity.TotemusPuzzleEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.particles.ParticleTypes;
@@ -41,7 +44,7 @@ public class TotemusHoleBlockEntity extends BlockEntity {
     private TotemusPuzzleEntity myEntity = null;
 
     public TotemusHoleBlockEntity(BlockPos pos, BlockState state) {
-        super(NetherExp.TOTEMUS_HOLE_BE.get(), pos, state);
+        super(ModBlockEntities.TOTEMUS_HOLE.get(), pos, state);
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, TotemusHoleBlockEntity entity) {
@@ -94,7 +97,7 @@ public class TotemusHoleBlockEntity extends BlockEntity {
         this.myColor = color;
         this.puzzleState = STATE_ACTIVE;
 
-        TotemusPuzzleEntity entity = NetherExp.TOTEMUS_PUZZLE.get().create(level);
+        TotemusPuzzleEntity entity = ModEntities.TOTEMUS_PUZZLE.get().create(level);
         if (entity != null) {
             entity.setPos(this.worldPosition.getX() + 0.5, this.worldPosition.getY() + 1.0, this.worldPosition.getZ() + 0.5);
             entity.setColor(color);
@@ -154,7 +157,7 @@ public class TotemusHoleBlockEntity extends BlockEntity {
                     100, 0.5, 0.5, 0.5, 0.2);
         }
 
-        ItemEntity key = new ItemEntity(level, this.worldPosition.getX() + 0.5, this.worldPosition.getY() + 1.5, this.worldPosition.getZ() + 0.5, new ItemStack(NetherExp.MAZE_KEY.get()));
+        ItemEntity key = new ItemEntity(level, this.worldPosition.getX() + 0.5, this.worldPosition.getY() + 1.5, this.worldPosition.getZ() + 0.5, new ItemStack(ModItems.MAZE_KEY.get()));
         level.addFreshEntity(key);
 
         for (BlockPos pos : this.linkedHoles) {

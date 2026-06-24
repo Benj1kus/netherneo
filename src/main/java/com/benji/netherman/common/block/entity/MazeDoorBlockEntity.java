@@ -1,8 +1,10 @@
-package com.benji.netherman.block.entity;
+package com.benji.netherman.common.block.entity;
 
-import com.benji.netherman.ModSounds;
+import com.benji.netherman.init.ModBlockEntities;
+import com.benji.netherman.init.ModBlocks;
+import com.benji.netherman.init.ModSounds;
 import com.benji.netherman.NetherExp;
-import com.benji.netherman.block.MazeDoorBlock;
+import com.benji.netherman.common.block.MazeDoorBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;
@@ -46,7 +48,7 @@ public class MazeDoorBlockEntity extends BlockEntity implements GeoBlockEntity {
     public boolean requiresKey = false;
 
     public MazeDoorBlockEntity(BlockPos pos, BlockState state) {
-        super(NetherExp.MAZE_DOOR_BE.get(), pos, state);
+        super(ModBlockEntities.MAZE_DOOR.get(), pos, state);
     }
 
     public int getDoorState() { return doorState; }
@@ -75,7 +77,7 @@ public class MazeDoorBlockEntity extends BlockEntity implements GeoBlockEntity {
                         BlockPos p = this.worldPosition.relative(right, w).above(h);
                         BlockState st = this.level.getBlockState(p);
 
-                        if (st.is(NetherExp.GRAND_DOOR_PART.get()) && st.hasProperty(BlockStateProperties.OPEN) && st.getValue(BlockStateProperties.OPEN) != isOpen) {
+                        if (st.is(ModBlocks.GRAND_DOOR_PART.get()) && st.hasProperty(BlockStateProperties.OPEN) && st.getValue(BlockStateProperties.OPEN) != isOpen) {
                             this.level.setBlock(p, st.setValue(BlockStateProperties.OPEN, isOpen), 3);
                         }
                     }

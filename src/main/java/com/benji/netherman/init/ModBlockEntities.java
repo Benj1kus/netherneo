@@ -47,6 +47,24 @@ public class ModBlockEntities {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PointedBlackstoneBlockEntity>> POINTED_BLACKSTONE = BLOCK_ENTITIES.register("pointed_blackstone",
             () -> BlockEntityType.Builder.of(PointedBlackstoneBlockEntity::new, ModBlocks.POINTED_BLACKSTONE.get()).build(null));
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FacePuzzleBlockEntity>> FACE_PUZZLE_RIGHT_DOWN = BLOCK_ENTITIES.register("face_puzzle_right_down",
+            () -> BlockEntityType.Builder.of((pos, state) -> new FacePuzzleBlockEntity(ModBlockEntities.FACE_PUZZLE_RIGHT_DOWN.get(), pos, state), ModBlocks.FACE_PUZZLE_RIGHT_DOWN.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FacePuzzleBlockEntity>> FACE_PUZZLE_LEFT_UP = BLOCK_ENTITIES.register("face_puzzle_left_up",
+            () -> BlockEntityType.Builder.of((pos, state) -> new FacePuzzleBlockEntity(ModBlockEntities.FACE_PUZZLE_LEFT_UP.get(), pos, state), ModBlocks.FACE_PUZZLE_LEFT_UP.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FacePuzzleBlockEntity>> FACE_PUZZLE_RIGHT_UP = BLOCK_ENTITIES.register("face_puzzle_right_up",
+            () -> BlockEntityType.Builder.of((pos, state) -> new FacePuzzleBlockEntity(ModBlockEntities.FACE_PUZZLE_RIGHT_UP.get(), pos, state), ModBlocks.FACE_PUZZLE_RIGHT_UP.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FacePuzzleBlockEntity>> FACE_PUZZLE_LEFT_DOWN = BLOCK_ENTITIES.register("face_puzzle_left_down",
+            () -> BlockEntityType.Builder.of((pos, state) -> new FacePuzzleBlockEntity(ModBlockEntities.FACE_PUZZLE_LEFT_DOWN.get(), pos, state), ModBlocks.FACE_PUZZLE_LEFT_DOWN.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MazeDoorBlockEntity>> MAZE_DOOR = BLOCK_ENTITIES.register("maze_door",
+            () -> BlockEntityType.Builder.of(MazeDoorBlockEntity::new, ModBlocks.MAZE_DOOR.get()).build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TotemusHoleBlockEntity>> TOTEMUS_HOLE = BLOCK_ENTITIES.register("totemus_hole",
+            () -> BlockEntityType.Builder.of(TotemusHoleBlockEntity::new, ModBlocks.TOTEMUS_HOLE.get()).build(null));
+
     public static void init(IEventBus bus) {
         BLOCK_ENTITIES.register(bus);
     }

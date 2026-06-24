@@ -1,12 +1,11 @@
-package com.benji.netherman.block;
+package com.benji.netherman.common.block;
 
-import com.benji.netherman.block.entity.FacePuzzleBlockEntity;
+import com.benji.netherman.common.block.entity.FacePuzzleBlockEntity;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.context.BlockPlaceContext;

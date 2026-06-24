@@ -1,5 +1,6 @@
 package com.benji.netherman.common.entity;
 
+import com.benji.netherman.NetherExp;
 import com.benji.netherman.init.ModSounds;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.BlockPos;
@@ -150,7 +151,7 @@ public class GhastlyEntity extends TamableAnimal implements GeoEntity {
 
                     
                     Registry<Structure> registry = serverLevel.registryAccess().registryOrThrow(Registries.STRUCTURE);
-                    Holder<Structure> mansionHolder = registry.getHolder(ResourceKey.create(Registries.STRUCTURE, ResourceLocation.fromNamespaceAndPath("netherman", "mansion_nether"))).orElse(null);
+                    Holder<Structure> mansionHolder = registry.getHolder(ResourceKey.create(Registries.STRUCTURE, NetherExp.location("mansion_nether"))).orElse(null);
 
                     if (mansionHolder != null) {
                         

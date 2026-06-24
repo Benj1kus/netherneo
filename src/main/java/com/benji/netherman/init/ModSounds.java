@@ -1,7 +1,6 @@
 package com.benji.netherman.init;
 
 import com.benji.netherman.NetherExp;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;

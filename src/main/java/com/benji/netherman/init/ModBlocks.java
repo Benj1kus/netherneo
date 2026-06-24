@@ -4,6 +4,7 @@ import com.benji.netherman.NetherExp;
 import com.benji.netherman.common.block.*;
 import com.benji.netherman.common.item.AzazelTrophyItem;
 import com.benji.netherman.common.item.GeoBlockItem;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DoubleHighBlockItem;
 import net.minecraft.world.item.Item;
@@ -351,6 +352,47 @@ public class ModBlocks {
                     .requiresCorrectToolForDrops()
                     .noOcclusion()), new Item.Properties());
 
+    public static final DeferredBlock<Block> FACE_PUZZLE_RIGHT_DOWN = register("face_puzzle_right_down", () -> new FacePuzzleBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
+            .strength(2.0F)
+            .requiresCorrectToolForDrops()
+            .noOcclusion(),
+            2, ModBlockEntities.FACE_PUZZLE_RIGHT_DOWN), new Item.Properties());
+
+    public static final DeferredBlock<Block> FACE_PUZZLE_LEFT_UP = register("face_puzzle_left_up", () -> new FacePuzzleBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
+            .strength(2.0F)
+            .requiresCorrectToolForDrops()
+            .noOcclusion(),
+            2, ModBlockEntities.FACE_PUZZLE_LEFT_UP), new Item.Properties());
+
+    public static final DeferredBlock<Block> FACE_PUZZLE_RIGHT_UP = register("face_puzzle_right_up", () -> new FacePuzzleBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
+            .strength(2.0F)
+            .requiresCorrectToolForDrops()
+            .noOcclusion(),
+            3, ModBlockEntities.FACE_PUZZLE_RIGHT_UP), new Item.Properties());
+
+    public static final DeferredBlock<Block> FACE_PUZZLE_LEFT_DOWN = register("face_puzzle_left_down", () -> new FacePuzzleBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STONE)
+            .strength(2.0F)
+            .requiresCorrectToolForDrops()
+            .noOcclusion(),
+            3, ModBlockEntities.FACE_PUZZLE_LEFT_DOWN), new Item.Properties());
+
+    public static final DeferredBlock<Block> MAZE_DOOR = registerSpecialItem("maze_door", () -> new MazeDoorBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.POLISHED_BLACKSTONE_BRICKS)
+                    .strength(20.0F)
+                    .requiresCorrectToolForDrops()
+                    .noOcclusion()),
+            (door) -> () -> new GeoBlockItem(
+                    door.get(),
+                    new Item.Properties(),
+                    NetherExp.location("geo/maze_door.geo.json"),
+                    NetherExp.location("textures/block/maze_door.png"),
+                    NetherExp.location("animations/maze_door.animation.json"),
+                    NetherExp.location("textures/block/blackstone_column_emissive.png")
+            ));
+
+    public static final DeferredBlock<Block> TOTEMUS_HOLE = register("totemus_hole", () -> new TotemusHoleBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DEEPSLATE_BRICKS)
+                    .requiresCorrectToolForDrops()
+                    .strength(2.0F)
+                    .noOcclusion()), new Item.Properties());
 
     private static <T extends Block> DeferredBlock<T> register(String id, Supplier<T> block, Item.Properties pIProp) {
         DeferredBlock<T> toReturn = BLOCKS.register(id.toLowerCase(), block);

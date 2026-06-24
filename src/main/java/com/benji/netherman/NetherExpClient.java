@@ -2,10 +2,7 @@ package com.benji.netherman;
 
 import com.benji.netherman.client.ManipulationOverlay;
 import com.benji.netherman.client.renderer.*;
-import com.benji.netherman.client.renderer.entity.GhastlyRenderer;
-import com.benji.netherman.client.renderer.entity.GildedGolemRenderer;
-import com.benji.netherman.client.renderer.entity.GuardianRenderer;
-import com.benji.netherman.client.renderer.entity.WelcomerRenderer;
+import com.benji.netherman.client.renderer.entity.*;
 import com.benji.netherman.client.renderer.item.GeoBlockItemRenderer;
 import com.benji.netherman.common.item.GeoBlockItem;
 import com.benji.netherman.init.ModBlockEntities;
@@ -52,6 +49,11 @@ public class NetherExpClient {
         BlockEntityRenderers.register(ModBlockEntities.ALTAR.get(), AltarRenderer::new);
         BlockEntityRenderers.register(ModBlockEntities.GRAND_DOOR.get(), GrandDoorRenderer::new);
         BlockEntityRenderers.register(ModBlockEntities.POINTED_BLACKSTONE.get(), PointedBlackstoneRenderer::new);
+        BlockEntityRenderers.register(ModBlockEntities.MAZE_DOOR.get(), MazeDoorRenderer::new);
+        BlockEntityRenderers.register(ModBlockEntities.FACE_PUZZLE_LEFT_DOWN.get(), FacePuzzleLeftDownRenderer::new);
+        BlockEntityRenderers.register(ModBlockEntities.FACE_PUZZLE_RIGHT_DOWN.get(), FacePuzzleRightDownRenderer::new);
+        BlockEntityRenderers.register(ModBlockEntities.FACE_PUZZLE_LEFT_UP.get(), FacePuzzleLeftUpRenderer::new);
+        BlockEntityRenderers.register(ModBlockEntities.FACE_PUZZLE_RIGHT_UP.get(), FacePuzzleRightUpRenderer::new);
     }
 
     public void registerClientExtensions(RegisterClientExtensionsEvent event) {
@@ -67,8 +69,9 @@ public class NetherExpClient {
 
     public void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntities.AZAZEL_GUIDE_BOOK.get(), AzazelGuideBookRenderer::new);
+        event.registerEntityRenderer(ModEntities.TOTEMUS_PUZZLE.get(), TotemusPuzzleRenderer::new);
         event.registerEntityRenderer(ModEntities.GILDED_GOLEM.get(), GildedGolemRenderer::new);
-        event.registerEntityRenderer(ModEntities.CRIMSON_ARROW.get(), com.benji.netherman.client.renderer.entity.CrimsonArrowRenderer::new);
+        event.registerEntityRenderer(ModEntities.CRIMSON_ARROW.get(), CrimsonArrowRenderer::new);
         event.registerEntityRenderer(ModEntities.AZAZEL.get(), AzazelRenderer::new);
         event.registerEntityRenderer(ModEntities.LASER.get(), LaserRenderer::new);
         event.registerEntityRenderer(ModEntities.STATUE_BOSSUNIT.get(), StatueBossunitRenderer::new);
