@@ -1,15 +1,17 @@
-package com.benji.netherman.common.block;
+package com.benji.netherman.block;
 
-import com.benji.netherman.init.ModBlocks;
+import com.benji.netherman.NetherExp;
+import com.benji.netherman.block.entity.GrandDoorBlockEntity;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.RenderShape;
@@ -18,7 +20,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -47,11 +48,6 @@ public class GrandDoorPartBlock extends HorizontalDirectionalBlock {
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
-        return ModBlocks.GRAND_DOOR.toStack();
-    }
-
-    @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         if (state.getValue(OPEN)) return Shapes.empty(); 
         return state.getValue(FACING).getAxis() == Direction.Axis.X ? SHAPE_EW : SHAPE_NS;
@@ -69,13 +65,30 @@ public class GrandDoorPartBlock extends HorizontalDirectionalBlock {
             for (int x = -5; x <= 5; x++) {
                 for (int z = -5; z <= 5; z++) {
                     BlockPos checkPos = pos.offset(x, -y, z);
-                    if (level.getBlockState(checkPos).is(ModBlocks.GRAND_DOOR.get())) {
+                    if (level.getBlockState(checkPos).is(NetherExp.GRAND_DOOR.get()) || level.getBlockState(checkPos).is(NetherExp.MAZE_DOOR.get())) {
                         return level.getBlockState(checkPos).useWithoutItem(level, player, new BlockHitResult(hit.getLocation(), hit.getDirection(), checkPos, hit.isInside()));
                     }
                 }
             }
         }
         return InteractionResult.PASS;
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        for (int y = 0; y <= 11; y++) {
+            for (int x = -5; x <= 5; x++) {
+                for (int z = -5; z <= 5; z++) {
+                    BlockPos checkPos = pos.offset(x, -y, z);
+                    BlockState checkState = level.getBlockState(checkPos);
+
+                    if (checkState.is(NetherExp.GRAND_DOOR.get()) || checkState.is(NetherExp.MAZE_DOOR.get())) {
+                        return checkState.useItemOn(stack, level, player, hand, new BlockHitResult(hit.getLocation(), hit.getDirection(), checkPos, hit.isInside()));
+                    }
+                }
+            }
+        }
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     @Override
@@ -86,7 +99,7 @@ public class GrandDoorPartBlock extends HorizontalDirectionalBlock {
                 for (int x = -5; x <= 5; x++) {
                     for (int z = -5; z <= 5; z++) {
                         BlockPos checkPos = pos.offset(x, -y, z);
-                        if (level.getBlockState(checkPos).is(ModBlocks.GRAND_DOOR.get())) {
+                        if (level.getBlockState(checkPos).is(NetherExp.GRAND_DOOR.get())) {
                             level.destroyBlock(checkPos, false);
                         }
                     }

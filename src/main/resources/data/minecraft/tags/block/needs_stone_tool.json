@@ -9,6 +9,12 @@
     "netherman:azazel_trophy_stage2",
     "netherman:azazel_trophy_stage3",
     "netherman:potent_magma",
-    "netherman:locker_nether"
+    "netherman:locker_nether",
+    "netherman:totemus_hole",
+    "netherman:maze_door",
+    "netherman:face_puzzle_left_down",
+    "netherman:face_puzzle_left_up",
+    "netherman:face_puzzle_right_up",
+    "netherman:face_puzzle_right_down"
   ]
 }

@@ -1,9 +1,16 @@
 package com.benji.netherman.common.block;
 
+import com.benji.netherman.ModSounds;
+import com.benji.netherman.NetherExp;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -11,6 +18,9 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import java.util.ArrayList;
+import java.util.List;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
@@ -27,6 +37,7 @@ import org.jetbrains.annotations.Nullable;
 public class StatueStandBlock extends HorizontalDirectionalBlock {
     public static final MapCodec<StatueStandBlock> CODEC = simpleCodec(StatueStandBlock::new);
     public static final EnumProperty<DoubleBlockHalf> HALF = BlockStateProperties.DOUBLE_BLOCK_HALF;
+    public static final BooleanProperty SOLVED = BooleanProperty.create("solved");
 
     private static final VoxelShape SHAPE_LOWER = Shapes.or(Block.box(0, 0, 0, 16, 7, 16), Block.box(2, 7, 2, 14, 12, 14), Block.box(5, 12, 5, 11, 23, 11));
     private static final VoxelShape SHAPE_UPPER = Shapes.or(Block.box(3, 0, 3, 13, 11, 13), Block.box(5, 11, 5, 11, 23, 11));
@@ -39,7 +50,8 @@ public class StatueStandBlock extends HorizontalDirectionalBlock {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
-                .setValue(HALF, DoubleBlockHalf.LOWER)); 
+                .setValue(HALF, DoubleBlockHalf.LOWER)
+                .setValue(SOLVED, false));
     }
 
     @Override
@@ -49,26 +61,103 @@ public class StatueStandBlock extends HorizontalDirectionalBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, HALF);
+        builder.add(FACING, HALF, SOLVED);
     }
 
-    
+
     @Nullable
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         BlockPos pos = context.getClickedPos();
         Level level = context.getLevel();
-        
         if (pos.getY() < level.getMaxBuildHeight() - 1 && level.getBlockState(pos.above()).canBeReplaced(context)) {
-            return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+            return this.defaultBlockState()
+                    .setValue(FACING, context.getHorizontalDirection().getOpposite())
+                    .setValue(SOLVED, false);
         }
         return null;
     }
 
-    
+
     @Override
     public void setPlacedBy(Level level, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {
-        level.setBlock(pos.above(), state.setValue(HALF, DoubleBlockHalf.UPPER), 3);
+        level.setBlock(pos.above(), state.setValue(HALF, DoubleBlockHalf.UPPER).setValue(SOLVED, false), 3);
+
+        if (!level.isClientSide()) {
+            int radius = 10;
+            boolean isPuzzleZone = false;
+
+            for (BlockPos checkPos : BlockPos.betweenClosed(pos.offset(-radius, -radius, -radius), pos.offset(radius, radius, radius))) {
+                if (level.getBlockState(checkPos).is(NetherExp.MAZE_DOOR.get())) {
+                    isPuzzleZone = true;
+                    break;
+                }
+            }
+
+            if (isPuzzleZone) {
+                List<BlockPos> allStatuesInRoom = new ArrayList<>();
+                boolean hasSolvedStatue = false;
+
+                for (BlockPos checkPos : BlockPos.betweenClosed(pos.offset(-radius, -radius, -radius), pos.offset(radius, radius, radius))) {
+                    BlockState st = level.getBlockState(checkPos);
+                    if (st.is(this) && st.getValue(HALF) == DoubleBlockHalf.LOWER) {
+                        allStatuesInRoom.add(checkPos.immutable());
+                        if (st.getValue(SOLVED)) {
+                            hasSolvedStatue = true;
+                        }
+                    }
+                }
+                if (hasSolvedStatue || allStatuesInRoom.size() < 2) return;
+                boolean allPaired = true;
+
+                for (BlockPos statPos : allStatuesInRoom) {
+                    BlockState statState = level.getBlockState(statPos);
+                    Direction facing = statState.getValue(FACING);
+                    boolean hasPartner = false;
+
+                    for (int i = 1; i <= 10; i++) {
+                        BlockPos targetPos = statPos.relative(facing, i);
+                        BlockState targetState = level.getBlockState(targetPos);
+
+                        if (targetState.is(this) && targetState.getValue(HALF) == DoubleBlockHalf.LOWER) {
+                            if (targetState.getValue(FACING) == facing.getOpposite()) {
+                                hasPartner = true;
+                            }
+                            break;
+                        }
+
+                        if (targetState.isSolidRender(level, targetPos)) {
+                            break;
+                        }
+                    }
+
+                    if (!hasPartner) {
+                        allPaired = false;
+                        break;
+                    }
+                }
+
+                if (allPaired) {
+                    level.playSound(null, pos, ModSounds.GIANT_BELL.get(), SoundSource.BLOCKS, 1.0F, 1.0F);
+
+                    ItemEntity key = new ItemEntity(level, pos.getX() + 0.5, pos.getY() + 1.5, pos.getZ() + 0.5, new ItemStack(NetherExp.MAZE_KEY.get()));
+                    level.addFreshEntity(key);
+
+                    for (BlockPos statPos : allStatuesInRoom) {
+                        BlockState statState = level.getBlockState(statPos);
+
+                        level.setBlock(statPos, statState.setValue(SOLVED, true), 3);
+                        level.setBlock(statPos.above(), statState.setValue(HALF, DoubleBlockHalf.UPPER).setValue(SOLVED, true), 3);
+
+                        if (level instanceof ServerLevel serverLevel) {
+                            serverLevel.sendParticles(ParticleTypes.TOTEM_OF_UNDYING,
+                                    statPos.getX() + 0.5, statPos.getY() + 1.0, statPos.getZ() + 0.5,
+                                    30, 0.5, 0.5, 0.5, 0.1);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     

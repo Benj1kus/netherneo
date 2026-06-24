@@ -46,6 +46,15 @@
   "tooltip.netherman.chance_totem.line1": "致命傷を受けると%sへ転送",
   "tooltip.netherman.chance_totem.line2": "[SHIFT+RMB] - Gehinnomを召喚",
 
+  "block.netherman.maze_door": "迷宮の扉",
+  "item.netherman.maze_key": "サムソンの鍵",
+  "block.netherman.totemus_hole": "虹のパズル",
+  "block.netherman.face_puzzle_right_down": "顔のパズル",
+  "block.netherman.face_puzzle_right_up": "顔のパズル",
+  "block.netherman.face_puzzle_left_down": "顔のパズル",
+  "block.netherman.face_puzzle_left_up": "顔のパズル",
+  "message.netherman.door_locked": "§4パズルを解け！",
+
   "book.netherman.page1.line1": "§4§lCult of Azazel§f§l MODへようこそ！",
   "book.netherman.page1.line2": "このMODの簡単なガイドです。",
   "book.netherman.page1.line3": "プレイしていただきありがとうございます！",

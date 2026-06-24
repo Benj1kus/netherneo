@@ -39,6 +39,15 @@
   "tooltip.netherman.chance_totem.line1": "Dịch chuyển đến %s sau khi chịu đòn chí mạng",
   "tooltip.netherman.chance_totem.line2": "[SHIFT+RMB] - triệu hồi Gehinnom",
 
+  "block.netherman.maze_door": "Cửa mê cung",
+  "item.netherman.maze_key": "Chìa khóa Samson",
+  "block.netherman.totemus_hole": "Câu đố cầu vồng",
+  "block.netherman.face_puzzle_right_down": "Câu đố khuôn mặt",
+  "block.netherman.face_puzzle_right_up": "Câu đố khuôn mặt",
+  "block.netherman.face_puzzle_left_down": "Câu đố khuôn mặt",
+  "block.netherman.face_puzzle_left_up": "Câu đố khuôn mặt",
+  "message.netherman.door_locked": "§4Hãy giải câu đố!",
+
   "book.netherman.page1.line1": "Chào mừng bạn đã đến với mod §4§lCult of Azazel§f§l!",
   "book.netherman.page1.line2": "Đây là một cuốn cẩm nang về những thứ gì trong mod.",
   "book.netherman.page1.line3": "Cảm ơn bạn đã chơi mod này!",
