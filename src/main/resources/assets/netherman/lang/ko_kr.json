@@ -46,6 +46,17 @@
 	"tooltip.netherman.chance_totem.line1": "치명타를 받으면 %s(으)로 순간이동",
 	"tooltip.netherman.chance_totem.line2": "[SHIFT+RMB] - Gehinnom 소환",
 
+	"painting.netherman.face_painting.title": "아자젤",
+	"painting.netherman.face_painting.author": "§kAZRIEL",
+	"painting.netherman.king_painting.title": "왕",
+	"painting.netherman.king_painting.author": "§kAZRIEL",
+	"painting.netherman.village_painting.title": "불길",
+	"painting.netherman.village_painting.author": "§kAZRIEL",
+	"painting.netherman.angel_painting.title": "타락",
+	"painting.netherman.angel_painting.author": "§kAZRIEL",
+	"painting.netherman.throne_painting.title": "지배",
+	"painting.netherman.throne_painting.author": "§kAZRIEL",
+
 	"block.netherman.maze_door": "미로 문",
 	"item.netherman.maze_key": "삼손의 열쇠",
 	"block.netherman.totemus_hole": "무지개 퍼즐",
@@ -76,9 +87,11 @@
 	"block.netherman.l_puzzle": "§6[ꖎ]",
 	"block.netherman.altar": "제단",
 	"block.netherman.labyrinth_teleport": "게이트 텔레포터",
+	"block.netherman.labyrinth_bellspawn": "Gate Teleporter",
 
 	"creativetab.netherman_tab": "아자젤 교단",
 
+	"entity.netherman.bell_guardian": "벨러모스",
 	"entity.netherman.welcomer": "환영자",
 	"entity.netherman.believer_villager": "설교자",
 	"entity.netherman.trader": "상인",

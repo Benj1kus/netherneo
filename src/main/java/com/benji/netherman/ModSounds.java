@@ -32,7 +32,20 @@ public class ModSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> SAMSONIT_PLACE = registerSoundEvent("block.samsonit.place");
     public static final DeferredHolder<SoundEvent, SoundEvent> SAMSONIT_HIT = registerSoundEvent("block.samsonit.hit");
 
-    
+    public static final DeferredHolder<SoundEvent, SoundEvent>  TOTEMUS_PUZZLE = registerSoundEvent("totemus_puzzle");
+    public static final DeferredHolder<SoundEvent, SoundEvent>  HIRRING = registerSoundEvent("hirring");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> BELL_BEAST_1 = registerSoundEvent("bell_beast1");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BELL_BEAST_2 = registerSoundEvent("bell_beast2");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BELL_BEAST_3 = registerSoundEvent("bell_beast3");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BELL_BEAST_4 = registerSoundEvent("bell_beast4");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BELL_BEAST_5 = registerSoundEvent("bell_beast5");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BELL_BEAST_6 = registerSoundEvent("bell_beast6");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BELL_BEAST_7 = registerSoundEvent("bell_beast7");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BELL_BEAST_8 = registerSoundEvent("bell_beast8");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BELL_BEAST_9 = registerSoundEvent("bell_beast9");
+    public static final DeferredHolder<SoundEvent, SoundEvent> BELL_BEAST_LAUGH = registerSoundEvent("bell_beast_laugh");
+
     public static final DeferredHolder<SoundEvent, SoundEvent> SAMSONIT_BRICKS_STEP = registerSoundEvent("block.samsonit_bricks.step");
     public static final DeferredHolder<SoundEvent, SoundEvent> SAMSONIT_BRICKS_PLACE = registerSoundEvent("block.samsonit_bricks.place");
 

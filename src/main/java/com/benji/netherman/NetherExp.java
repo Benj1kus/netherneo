@@ -179,8 +179,24 @@ public class NetherExp {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<FacePuzzleBlockEntity>> FACE_PUZZLE_LEFT_DOWN_BE = BLOCK_ENTITIES.register("face_puzzle_left_down",
             () -> BlockEntityType.Builder.of((pos, state) -> new FacePuzzleBlockEntity(NetherExp.FACE_PUZZLE_LEFT_DOWN_BE.get(), pos, state), FACE_PUZZLE_LEFT_DOWN.get()).build(null));
 
+    public static final DeferredBlock<Block> SAMSONITE_BELL = BLOCKS.register("samsonite_bell",
+            () -> new SamsoniteBellBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BELL)));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SamsoniteBellBlockEntity>> SAMSONITE_BELL_BE = BLOCK_ENTITIES.register("samsonite_bell",
+            () -> BlockEntityType.Builder.of(SamsoniteBellBlockEntity::new, SAMSONITE_BELL.get()).build(null));
+
+    public static final DeferredBlock<Block> LABYRINTH_BELLSPAWN = BLOCKS.register("labyrinth_bellspawn",
+            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERITE_BLOCK)
+                    .lightLevel(state -> 15)
+                    .requiresCorrectToolForDrops()
+                    .strength(20.0F)
+                    .noOcclusion()));
+
+    public static final DeferredItem<Item> LABYRINTH_BELLSPAWN_ITEM = ITEMS.register("labyrinth_bellspawn",
+            () -> new BlockItem(LABYRINTH_BELLSPAWN.get(), new Item.Properties()));
+
     public static final DeferredBlock<Block> SAMSONIT = BLOCKS.register("samsonit",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.TUFF)
+            () -> new SamsonitBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.TUFF)
                     .strength(6.0F)
                     .requiresCorrectToolForDrops()
                     .sound(SAMSONIT_SOUNDS)));
@@ -374,7 +390,7 @@ public class NetherExp {
             () -> new BlockItem(LOCKER_NETHER.get(), new Item.Properties()));
 
     public static final DeferredBlock<Block> SAMSONIT_EYE = BLOCKS.register("samsonit_eye",
-            () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.TUFF)
+            () -> new SamsonitEyeBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.TUFF)
                     .strength(6.0F)
                     .requiresCorrectToolForDrops()
                     .sound(SAMSONIT_SOUNDS)));
@@ -873,6 +889,11 @@ public class NetherExp {
                     .fireImmune()
                     .build(ResourceLocation.fromNamespaceAndPath(MODID, "statue_entity").toString()));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<BellGuardianEntity>> BELL_GUARDIAN = ENTITIES.register("bell_guardian",
+            () -> EntityType.Builder.of(BellGuardianEntity::new, MobCategory.MONSTER)
+                    .sized(0.6F, 1.8F)
+                    .build(ResourceLocation.fromNamespaceAndPath(MODID, "bell_guardian").toString()));
+
 
     public static final DeferredHolder<EntityType<?>, EntityType<TraderEntity>> TRADER = ENTITIES.register("trader",
             () -> EntityType.Builder.of(TraderEntity::new, MobCategory.CREATURE)
@@ -1101,6 +1122,7 @@ public class NetherExp {
             event.accept(VOIDCORNERNETHER_ITEM);
             event.accept(MOSAIC_CHURCH_ITEM);
             event.accept(STATUE_STAND_ITEM);
+            event.accept(LABYRINTH_BELLSPAWN_ITEM);
             event.accept(VOIDMID_CAVE_ITEM);
             event.accept(VOIDCORNER_CAVE_ITEM);
             event.accept(VOIDMIDCORNER_CAVE_ITEM);
@@ -1176,6 +1198,7 @@ public class NetherExp {
             event.put(AZAZEL_GUIDE_BOOK_ENTITY.get(), AzazelGuideBookEntity.createAttributes().build());
             event.put(GILDED_GOLEM.get(), GildedGolemEntity.createAttributes().build());
             event.put(AZAZEL.get(), AzazelEntity.createAttributes().build());
+            event.put(BELL_GUARDIAN.get(), BellGuardianEntity.createAttributes().build());
             event.put(TOTEMUS_PUZZLE.get(), TotemusPuzzleEntity.createAttributes().build());
             event.put(LASER.get(), LaserEntity.createAttributes().build());
             event.put(STATUE_BOSSUNIT.get(), StatueBossunitEntity.createAttributes().build());
@@ -1235,6 +1258,8 @@ public class NetherExp {
             event.registerBlockEntityRenderer(NetherExp.LABYRINTH_TELEPORT_BE.get(), LabyrinthTeleportRenderer::new);
             event.registerBlockEntityRenderer(VOIDMIDCORNERNETHER_BE.get(), VoidNetherMidCornerRenderer::new);
             event.registerBlockEntityRenderer(VOIDCORNERNETHER_BE.get(), VoidNetherCornerRenderer::new);
+            event.registerBlockEntityRenderer(SAMSONITE_BELL_BE.get(), SamsoniteBellRenderer::new);
+            event.registerEntityRenderer(BELL_GUARDIAN.get(), BellGuardianRenderer::new);
             event.registerBlockEntityRenderer(VOIDMIDNETHER_BE.get(), VoidNetherMidRenderer::new);
             event.registerBlockEntityRenderer(TRAPHIVE_BE.get(), TraphiveRenderer::new);
             event.registerBlockEntityRenderer(EYE_BE.get(), EyeRenderer::new);

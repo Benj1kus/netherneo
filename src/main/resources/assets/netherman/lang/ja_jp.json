@@ -46,6 +46,17 @@
   "tooltip.netherman.chance_totem.line1": "致命傷を受けると%sへ転送",
   "tooltip.netherman.chance_totem.line2": "[SHIFT+RMB] - Gehinnomを召喚",
 
+  "painting.netherman.face_painting.title": "アザゼル",
+  "painting.netherman.face_painting.author": "§kAZRIEL",
+  "painting.netherman.king_painting.title": "王",
+  "painting.netherman.king_painting.author": "§kAZRIEL",
+  "painting.netherman.village_painting.title": "炎上",
+  "painting.netherman.village_painting.author": "§kAZRIEL",
+  "painting.netherman.angel_painting.title": "堕天",
+  "painting.netherman.angel_painting.author": "§kAZRIEL",
+  "painting.netherman.throne_painting.title": "支配",
+  "painting.netherman.throne_painting.author": "§kAZRIEL",
+
   "block.netherman.maze_door": "迷宮の扉",
   "item.netherman.maze_key": "サムソンの鍵",
   "block.netherman.totemus_hole": "虹のパズル",
@@ -133,9 +144,11 @@
   "block.netherman.l_puzzle": "§6[ꖎ]",
   "block.netherman.altar": "祭壇",
   "block.netherman.labyrinth_teleport": "ゲートテレポーター",
+  "block.netherman.labyrinth_bellspawn": "Gate Teleporter",
 
   "creativetab.netherman_tab": "Cult of Azazel",
 
+  "entity.netherman.bell_guardian": "ベルモス",
   "entity.netherman.welcomer": "歓迎者",
   "entity.netherman.trader": "商人",
   "entity.netherman.gilded_golem": "金装ゴーレム",

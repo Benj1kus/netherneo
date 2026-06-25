@@ -14,6 +14,21 @@
   "prison3": { "sounds": [ "netherman:prison3" ] },
   "prison4": { "sounds": [ "netherman:prison4" ] },
 
+  "hirring": { "sounds": [ "netherman:hirring" ] },
+  "totemus_puzzle": { "sounds": [ "netherman:totemus_puzzle" ] },
+
+  "bell_beast1": { "sounds": [ "netherman:bell_beast1" ] },
+  "bell_beast2": { "sounds": [ "netherman:bell_beast2" ] },
+  "bell_beast3": { "sounds": [ "netherman:bell_beast3" ] },
+  "bell_beast4": { "sounds": [ "netherman:bell_beast4" ] },
+
+  "bell_beast5": { "sounds": [ "netherman:bell_beast5" ] },
+  "bell_beast6": { "sounds": [ "netherman:bell_beast6" ] },
+  "bell_beast7": { "sounds": [ "netherman:bell_beast7" ] },
+  "bell_beast8": { "sounds": [ "netherman:bell_beast8" ] },
+  "bell_beast9": { "sounds": [ "netherman:bell_beast9" ] },
+  "bell_beast_laugh": { "sounds": [ "netherman:bell_beast_laugh" ] },
+
   "riftsound": { "sounds": [ "netherman:riftsound" ] },
   "statue_hurt1": { "sounds": [ "netherman:statue_hurt1" ] },
   "statue_hurt2": { "sounds": [ "netherman:statue_hurt2" ] },

@@ -39,6 +39,7 @@
   "block.netherman.l_puzzle": "§6[ꖎ]",
   "block.netherman.altar": "Altar",
   "block.netherman.labyrinth_teleport": "Tor-Teleporter",
+  "block.netherman.labyrinth_bellspawn": "Tor-Teleporter",
 
   "block.netherman.maze_door": "Labyrinthtür",
   "item.netherman.maze_key": "Samson-Schlüssel",
@@ -48,6 +49,17 @@
   "block.netherman.face_puzzle_left_down": "Gesichtsrätsel",
   "block.netherman.face_puzzle_left_up": "Gesichtsrätsel",
   "message.netherman.door_locked": "§4Löse das Rätsel!",
+
+  "painting.netherman.face_painting.title": "Azazel",
+  "painting.netherman.face_painting.author": "§kAZRIEL",
+  "painting.netherman.king_painting.title": "König",
+  "painting.netherman.king_painting.author": "§kAZRIEL",
+  "painting.netherman.village_painting.title": "Brand",
+  "painting.netherman.village_painting.author": "§kAZRIEL",
+  "painting.netherman.angel_painting.title": "Gefallen",
+  "painting.netherman.angel_painting.author": "§kAZRIEL",
+  "painting.netherman.throne_painting.title": "Herrschaft",
+  "painting.netherman.throne_painting.author": "§kAZRIEL",
 
   "book.netherman.page1.line1": "Willkommen beim §4§lCult of Azazel§f§l Mod!",
   "book.netherman.page1.line2": "Hier ist ein kurzer Leitfaden zum Mod.",
@@ -136,6 +148,8 @@
 
   "creativetab.netherman_tab": "Cult of Azazel",
 
+
+  "entity.netherman.bell_guardian": "Bellemoth",
   "entity.netherman.welcomer": "Willkommensbote",
   "entity.netherman.trader": "Händler",
   "entity.netherman.believer_villager": "Prediger",

@@ -46,6 +46,17 @@
   "tooltip.netherman.chance_totem.line1": "Te transporta al %s tras un golpe mortal",
   "tooltip.netherman.chance_totem.line2": "[SHIFT+RMB] - invocar a Gehinnom",
 
+  "painting.netherman.face_painting.title": "Azazel",
+  "painting.netherman.face_painting.author": "§kAZRIEL",
+  "painting.netherman.king_painting.title": "Rey",
+  "painting.netherman.king_painting.author": "§kAZRIEL",
+  "painting.netherman.village_painting.title": "Arder",
+  "painting.netherman.village_painting.author": "§kAZRIEL",
+  "painting.netherman.angel_painting.title": "Caído",
+  "painting.netherman.angel_painting.author": "§kAZRIEL",
+  "painting.netherman.throne_painting.title": "Dominio",
+  "painting.netherman.throne_painting.author": "§kAZRIEL",
+
   "block.netherman.maze_door": "Puerta del laberinto",
   "item.netherman.maze_key": "Llave de Sansón",
   "block.netherman.totemus_hole": "Rompecabezas arcoíris",
@@ -133,9 +144,12 @@
   "block.netherman.l_puzzle": "§6[ꖎ]",
   "block.netherman.altar": "Altar",
   "block.netherman.labyrinth_teleport": "Teletransportador de portal",
+  "block.netherman.labyrinth_bellspawn": "Gate Teleporter",
 
   "creativetab.netherman_tab": "Cult of Azazel",
 
+
+  "entity.netherman.bell_guardian": "Bellemoth",
   "entity.netherman.welcomer": "Recepcionista",
   "entity.netherman.trader": "Comerciante",
   "entity.netherman.gilded_golem": "Golem dorado",

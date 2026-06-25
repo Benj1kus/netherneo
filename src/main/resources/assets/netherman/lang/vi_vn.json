@@ -39,6 +39,17 @@
   "tooltip.netherman.chance_totem.line1": "Dịch chuyển đến %s sau khi chịu đòn chí mạng",
   "tooltip.netherman.chance_totem.line2": "[SHIFT+RMB] - triệu hồi Gehinnom",
 
+  "painting.netherman.face_painting.title": "Azazel",
+  "painting.netherman.face_painting.author": "§kAZRIEL",
+  "painting.netherman.king_painting.title": "Vua",
+  "painting.netherman.king_painting.author": "§kAZRIEL",
+  "painting.netherman.village_painting.title": "Thiêu rụi",
+  "painting.netherman.village_painting.author": "§kAZRIEL",
+  "painting.netherman.angel_painting.title": "Sa ngã",
+  "painting.netherman.angel_painting.author": "§kAZRIEL",
+  "painting.netherman.throne_painting.title": "Cai trị",
+  "painting.netherman.throne_painting.author": "§kAZRIEL",
+
   "block.netherman.maze_door": "Cửa mê cung",
   "item.netherman.maze_key": "Chìa khóa Samson",
   "block.netherman.totemus_hole": "Câu đố cầu vồng",
@@ -134,9 +145,12 @@
   "block.netherman.l_puzzle": "§6[ꖎ]",
   "block.netherman.altar": "Bàn thờ",
   "block.netherman.labyrinth_teleport": "Máy dịch chuyển cổng",
+  "block.netherman.labyrinth_bellspawn": "Gate Teleporter",
 
   "creativetab.netherman_tab": "Cult of Azazel",
-  
+
+
+  "entity.netherman.bell_guardian": "Bellemoth",
   "entity.netherman.welcomer": "Người đón tiếp",
   "entity.netherman.trader": "Người trao đổi",
   "entity.netherman.gilded_golem": "Người mạ vàng",

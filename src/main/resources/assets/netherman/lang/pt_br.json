@@ -27,6 +27,17 @@
   "item.netherman.azazel_guide_book": "§4Cult of Azazel Guidebook",
   "block.netherman.potent_magma": "Magma Potente",
 
+  "painting.netherman.face_painting.title": "Azazel",
+  "painting.netherman.face_painting.author": "§kAZRIEL",
+  "painting.netherman.king_painting.title": "Rei",
+  "painting.netherman.king_painting.author": "§kAZRIEL",
+  "painting.netherman.village_painting.title": "Queimar",
+  "painting.netherman.village_painting.author": "§kAZRIEL",
+  "painting.netherman.angel_painting.title": "Caído",
+  "painting.netherman.angel_painting.author": "§kAZRIEL",
+  "painting.netherman.throne_painting.title": "Domínio",
+  "painting.netherman.throne_painting.author": "§kAZRIEL",
+
   "block.netherman.maze_door": "Porta do labirinto",
   "item.netherman.maze_key": "Chave de Sansão",
   "block.netherman.totemus_hole": "Quebra-cabeça arco-íris",
@@ -121,9 +132,12 @@
   "block.netherman.l_puzzle": "§6[ꖎ]",
   "block.netherman.altar": "Altar",
   "block.netherman.labyrinth_teleport": "Teletransportador de portal",
+  "block.netherman.labyrinth_bellspawn": "Gate Teleporter",
 
   "creativetab.netherman_tab": "Cult of Azazel",
 
+
+  "entity.netherman.bell_guardian": "Bellemoth",
   "entity.netherman.welcomer": "Saudador",
   "entity.netherman.trader": "Mercador",
   "entity.netherman.gilded_golem": "Golem Dourado",
