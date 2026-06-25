@@ -177,6 +177,7 @@
   "block.netherman.totemus.zone.azazel": "阿撒茲勒的巢穴",
   "block.netherman.totemus.zone.city": "神聖之城",
   "block.netherman.totemus.zone.quarries": "被詛咒的採石場",
+  "block.netherman.totemus.zone.maze": "阿撒瀉勒迷宮",
 
   "advancement.netherman.enter_mansion.title": "該死……",
   "advancement.netherman.enter_mansion.description": "這簡直太奢華了！",
@@ -210,5 +211,6 @@
   "effect.netherman.fear": "恐懼？",
   "effect.netherman.faith": "信仰？",
   "effect.netherman.anxiety": "不要害怕",
+  "effect.netherman.alertness": "警覺？",
   "effect.netherman.excitement": "興奮？"
 }

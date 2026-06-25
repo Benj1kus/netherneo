@@ -178,6 +178,7 @@
   "block.netherman.totemus.zone.azazel": "CẤM ĐỊA AZAZEL",
   "block.netherman.totemus.zone.city": "MA THẦN VƯƠNG ĐÔ",
   "block.netherman.totemus.zone.quarries": "OÁN THẠCH QUẬT",
+  "block.netherman.totemus.zone.maze": "MA CUNG AZAZEL",
 
   "advancement.netherman.enter_mansion.title": "Uầy...",
   "advancement.netherman.enter_mansion.description": "Trông hoành tráng thật đấy!",
@@ -213,5 +214,6 @@
   "effect.netherman.fear": "Nỗi sợ?",
   "effect.netherman.faith": "Niềm tin?",
   "effect.netherman.anxiety": "Bất cẩn",
+  "effect.netherman.alertness": "Cảnh giác?",
   "effect.netherman.excitement": "Hứng thú?"
 }

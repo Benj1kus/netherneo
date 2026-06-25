@@ -32,6 +32,8 @@ public class ModSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> SAMSONIT_PLACE = registerSoundEvent("block.samsonit.place");
     public static final DeferredHolder<SoundEvent, SoundEvent> SAMSONIT_HIT = registerSoundEvent("block.samsonit.hit");
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> MAZE_AMBIENT = registerSoundEvent("maze_ambient");
+
     public static final DeferredHolder<SoundEvent, SoundEvent>  TOTEMUS_PUZZLE = registerSoundEvent("totemus_puzzle");
     public static final DeferredHolder<SoundEvent, SoundEvent>  HIRRING = registerSoundEvent("hirring");
 

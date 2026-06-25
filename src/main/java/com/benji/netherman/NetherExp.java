@@ -846,8 +846,9 @@ public class NetherExp {
     public static final DeferredHolder<MobEffect, ZoneEffect> EXCITEMENT_EFFECT = EFFECTS.register("excitement", () -> new ZoneEffect(0xFF0000));
     public static final DeferredHolder<MobEffect, ZoneEffect> FAITH_EFFECT = EFFECTS.register("faith", () -> new ZoneEffect(0x800080));
     public static final DeferredHolder<MobEffect, ZoneEffect> ANXIETY_EFFECT = EFFECTS.register("anxiety", () -> new ZoneEffect(0x8B0000));
+    public static final DeferredHolder<MobEffect, ZoneEffect> ALERTNESS_EFFECT = EFFECTS.register("alertness", () -> new ZoneEffect(0x8B0000));
 
-    
+
     public static final DeferredHolder<net.minecraft.world.item.crafting.RecipeSerializer<?>, net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer<?>> CRIMSON_ARROW_CRAFTING =
             RECIPE_SERIALIZERS.register("crimson_arrow_coating", () -> new net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer<>(com.benji.netherman.item.crafting.CrimsonArrowRecipe::new));
 

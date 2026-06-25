@@ -176,6 +176,7 @@
   "block.netherman.totemus.zone.azazel": "アザゼルの隠れ家",
   "block.netherman.totemus.zone.city": "聖なる都市",
   "block.netherman.totemus.zone.quarries": "呪われた採石場",
+  "block.netherman.totemus.zone.maze": "アザゼルの迷宮",
 
   "advancement.netherman.enter_mansion.title": "くそっ……",
   "advancement.netherman.enter_mansion.description": "なんて贅沢なんだ！",
@@ -207,6 +208,7 @@
 
   "effect.netherman.manipulation": "操り",
   "effect.netherman.fear": "恐怖？",
+  "effect.netherman.alertness": "警戒？",
   "effect.netherman.faith": "信仰？",
   "effect.netherman.anxiety": "恐れるな",
   "effect.netherman.excitement": "高揚？"

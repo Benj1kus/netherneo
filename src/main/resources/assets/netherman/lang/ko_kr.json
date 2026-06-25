@@ -119,6 +119,7 @@
 	"block.netherman.totemus.zone.azazel": "아자젤의 소굴",
 	"block.netherman.totemus.zone.city": "성스러운 도시",
 	"block.netherman.totemus.zone.quarries": "저주받은 채석장",
+	"block.netherman.totemus.zone.maze": "아자젤의 미로",
 
 	"advancement.netherman.enter_mansion.title": "맙소사...",
 	"advancement.netherman.enter_mansion.description": "이게 바로 사치라는 건가!",
@@ -208,6 +209,7 @@
 	"effect.netherman.manipulation": "조종",
 	"effect.netherman.fear": "공포?",
 	"effect.netherman.faith": "신앙?",
+	"effect.netherman.alertness": "경계?",
 	"effect.netherman.anxiety": "두려워하지 마라",
 	"effect.netherman.excitement": "흥분?"
 }

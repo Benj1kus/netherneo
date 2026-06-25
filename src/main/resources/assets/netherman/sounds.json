@@ -16,6 +16,7 @@
 
   "hirring": { "sounds": [ "netherman:hirring" ] },
   "totemus_puzzle": { "sounds": [ "netherman:totemus_puzzle" ] },
+  "maze_ambient": { "sounds": [ "netherman:maze_ambient" ] },
 
   "bell_beast1": { "sounds": [ "netherman:bell_beast1" ] },
   "bell_beast2": { "sounds": [ "netherman:bell_beast2" ] },

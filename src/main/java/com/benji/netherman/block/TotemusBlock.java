@@ -23,7 +23,7 @@ public class TotemusBlock extends BaseEntityBlock {
     public static final MapCodec<TotemusBlock> CODEC = simpleCodec(TotemusBlock::new);
 
     
-    public static final IntegerProperty TYPE = IntegerProperty.create("type", 0, 3);
+    public static final IntegerProperty TYPE = IntegerProperty.create("type", 0, 4);
 
     private static final VoxelShape SHAPE =
             Block.box(4.0D, 0.0D, 4.0D,
