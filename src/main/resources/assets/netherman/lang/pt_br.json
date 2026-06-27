@@ -162,10 +162,10 @@
 
   "block.netherman.totemus.arrived": "VOCÊ CHEGOU",
   "block.netherman.totemus.zone": "ZONA",
-  "block.netherman.totemus.zone.maze": "LABIRINTO DE AZAZEL",
   "block.netherman.totemus.zone.azazel": "O COVIL DE AZAZEL",
   "block.netherman.totemus.zone.city": "A CIDADE SAGRADA",
   "block.netherman.totemus.zone.quarries": "AS PEDREIRAS MALDITAS",
+  "block.netherman.totemus.zone.maze": "LABIRINTO DE AZAZEL",
 
   "block.netherman.grand_door_part": "Parte do grande portão",
   "tooltip.netherman.compass": "Ajuda a encontrar estruturas do mod",
@@ -222,8 +222,8 @@
 
   "effect.netherman.manipulation": "Manipulação",
   "effect.netherman.fear": "Medo?",
-  "effect.netherman.faith": "Fé?",
   "effect.netherman.alertness": "Alerta?",
+  "effect.netherman.faith": "Fé?",
   "effect.netherman.anxiety": "Não temas",
   "effect.netherman.excitement": "Entusiasmo?"
 }

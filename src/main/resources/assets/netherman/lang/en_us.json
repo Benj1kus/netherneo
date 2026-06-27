@@ -40,6 +40,15 @@
   "block.netherman.samsonit_eye": "Samsonite Carving Eye",
   "block.netherman.samsonit_key": "Keyhole",
 
+  "block.netherman.maze_door": "Maze Door",
+  "item.netherman.maze_key": "Samson Key",
+  "block.netherman.totemus_hole": "Rainbow puzzle",
+  "block.netherman.face_puzzle_right_down": "Face Puzzle",
+  "block.netherman.face_puzzle_right_up": "Face Puzzle",
+  "block.netherman.face_puzzle_left_down": "Face Puzzle",
+  "block.netherman.face_puzzle_left_up": "Face Puzzle",
+  "message.netherman.door_locked": "§4Solve the Puzzle!",
+
   "painting.netherman.face_painting.title": "Azazel",
   "painting.netherman.face_painting.author": "§kAZRIEL",
   "painting.netherman.king_painting.title": "King",
@@ -50,15 +59,6 @@
   "painting.netherman.angel_painting.author": "§kAZRIEL",
   "painting.netherman.throne_painting.title": "Rule",
   "painting.netherman.throne_painting.author": "§kAZRIEL",
-
-  "block.netherman.maze_door": "Maze Door",
-  "item.netherman.maze_key": "Samson Key",
-  "block.netherman.totemus_hole": "Rainbow puzzle",
-  "block.netherman.face_puzzle_right_down": "Face Puzzle",
-  "block.netherman.face_puzzle_right_up": "Face Puzzle",
-  "block.netherman.face_puzzle_left_down": "Face Puzzle",
-  "block.netherman.face_puzzle_left_up": "Face Puzzle",
-  "message.netherman.door_locked": "§4Solve the Puzzle!",
 
   "block.netherman.samsonit": "Samsonite",
   "block.netherman.chiseled_samsonit": "Chiseled samsonite",
@@ -117,9 +117,9 @@
 
   "block.netherman.totemus.arrived": "YOU ARRIVED",
   "block.netherman.totemus.zone": "ZONE",
-  "block.netherman.totemus.zone.maze": "AZAZEL MAZE",
   "block.netherman.totemus.zone.azazel": "AZAZELS LAIR",
   "block.netherman.totemus.zone.city": "THE SACRED CITY",
+  "block.netherman.totemus.zone.maze": "AZAZEL MAZE",
   "block.netherman.totemus.zone.quarries": "THE CURSED QUARRIES",
 
   "advancement.netherman.enter_mansion.title": "Damn...",
@@ -220,6 +220,7 @@
   "jukebox_song.netherman.city_ambient": "Casmox - §kGUARDIAN",
   "jukebox_song.netherman.maze_ambient": "Casmox - §kGUARDIAN",
   "jukebox_song.netherman.church_ambient": "Casmox - §kGUARDIAN",
+
 
   "effect.netherman.manipulation": "Manipulation",
   "effect.netherman.fear": "Fear?",

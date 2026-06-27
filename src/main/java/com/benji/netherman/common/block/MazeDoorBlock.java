@@ -12,6 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -141,7 +142,7 @@ public class MazeDoorBlock extends HorizontalDirectionalBlock implements EntityB
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return type == ModBlockEntities.MAZE_DOOR.get() ?
+        return type == NetherExp.MAZE_DOOR_BE.get() ?
                 (lvl, p, st, be) -> MazeDoorBlockEntity.tick(lvl, p, st, (MazeDoorBlockEntity) be) : null;
     }
 

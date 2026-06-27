@@ -41,6 +41,15 @@
   "block.netherman.labyrinth_teleport": "Tor-Teleporter",
   "block.netherman.labyrinth_bellspawn": "Tor-Teleporter",
 
+  "block.netherman.maze_door": "Labyrinthtür",
+  "item.netherman.maze_key": "Samson-Schlüssel",
+  "block.netherman.totemus_hole": "Regenbogenrätsel",
+  "block.netherman.face_puzzle_right_down": "Gesichtsrätsel",
+  "block.netherman.face_puzzle_right_up": "Gesichtsrätsel",
+  "block.netherman.face_puzzle_left_down": "Gesichtsrätsel",
+  "block.netherman.face_puzzle_left_up": "Gesichtsrätsel",
+  "message.netherman.door_locked": "§4Löse das Rätsel!",
+
   "painting.netherman.face_painting.title": "Azazel",
   "painting.netherman.face_painting.author": "§kAZRIEL",
   "painting.netherman.king_painting.title": "König",
@@ -51,15 +60,6 @@
   "painting.netherman.angel_painting.author": "§kAZRIEL",
   "painting.netherman.throne_painting.title": "Herrschaft",
   "painting.netherman.throne_painting.author": "§kAZRIEL",
-
-  "block.netherman.maze_door": "Labyrinthtür",
-  "item.netherman.maze_key": "Samson-Schlüssel",
-  "block.netherman.totemus_hole": "Regenbogenrätsel",
-  "block.netherman.face_puzzle_right_down": "Gesichtsrätsel",
-  "block.netherman.face_puzzle_right_up": "Gesichtsrätsel",
-  "block.netherman.face_puzzle_left_down": "Gesichtsrätsel",
-  "block.netherman.face_puzzle_left_up": "Gesichtsrätsel",
-  "message.netherman.door_locked": "§4Löse das Rätsel!",
 
   "book.netherman.page1.line1": "Willkommen beim §4§lCult of Azazel§f§l Mod!",
   "book.netherman.page1.line2": "Hier ist ein kurzer Leitfaden zum Mod.",
@@ -148,6 +148,7 @@
 
   "creativetab.netherman_tab": "Cult of Azazel",
 
+
   "entity.netherman.bell_guardian": "Bellemoth",
   "entity.netherman.welcomer": "Willkommensbote",
   "entity.netherman.trader": "Händler",
@@ -198,6 +199,7 @@
   "jukebox_song.netherman.city_ambient": "Casmox - §kGUARDIAN",
   "jukebox_song.netherman.maze_ambient": "Casmox - §kGUARDIAN",
   "jukebox_song.netherman.church_ambient": "Casmox - §kGUARDIAN",
+
 
   "item.netherman.manipulator_stick": "§4Stab der Manipulation",
   "item.netherman.crimson_arrow": "§4Purpurpfeil",

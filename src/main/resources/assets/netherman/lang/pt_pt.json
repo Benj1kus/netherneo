@@ -176,6 +176,8 @@
   "block.netherman.totemus.zone.azazel": "O COVIL DE AZAZEL",
   "block.netherman.totemus.zone.city": "A CIDADE SAGRADA",
   "block.netherman.totemus.zone.quarries": "AS PEDREIRAS MALDITAS",
+  "block.netherman.totemus.zone.maze": "LABIRINTO DE AZAZEL",
+
   "block.netherman.azazel_trophy": "§4Máscara de Azazel",
 
   "creativetab.netherman_tab": "Cult of Azazel",
@@ -222,6 +224,7 @@
 
   "effect.netherman.manipulation": "Manipulação",
   "effect.netherman.fear": "Medo?",
+  "effect.netherman.alertness": "Alerta?",
   "effect.netherman.faith": "Fé?",
   "effect.netherman.alertness": "Alerta?",
   "effect.netherman.anxiety": "Não temas",

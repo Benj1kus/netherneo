@@ -49,7 +49,7 @@
   "painting.netherman.angel_painting.author": "§kAZRIEL",
   "painting.netherman.throne_painting.title": "Cai trị",
   "painting.netherman.throne_painting.author": "§kAZRIEL",
-  
+
   "block.netherman.maze_door": "Cửa mê cung",
   "item.netherman.maze_key": "Chìa khóa Samson",
   "block.netherman.totemus_hole": "Câu đố cầu vồng",
@@ -175,10 +175,10 @@
 
   "block.netherman.totemus.arrived": "NGƯƠI ĐÃ ĐẾN RỒI!",
   "block.netherman.totemus.zone": "KHU VỰC",
-  "block.netherman.totemus.zone.maze": "MA CUNG AZAZEL",
   "block.netherman.totemus.zone.azazel": "CẤM ĐỊA AZAZEL",
   "block.netherman.totemus.zone.city": "MA THẦN VƯƠNG ĐÔ",
   "block.netherman.totemus.zone.quarries": "OÁN THẠCH QUẬT",
+  "block.netherman.totemus.zone.maze": "MA CUNG AZAZEL",
 
   "advancement.netherman.enter_mansion.title": "Uầy...",
   "advancement.netherman.enter_mansion.description": "Trông hoành tráng thật đấy!",
@@ -223,7 +223,7 @@
   "effect.netherman.manipulation": "Thao túng",
   "effect.netherman.fear": "Nỗi sợ?",
   "effect.netherman.faith": "Niềm tin?",
-  "effect.netherman.alertness": "Cảnh giác?",
   "effect.netherman.anxiety": "Bất cẩn",
+  "effect.netherman.alertness": "Cảnh giác?",
   "effect.netherman.excitement": "Hứng thú?"
 }

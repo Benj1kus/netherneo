@@ -148,6 +148,7 @@
 
   "creativetab.netherman_tab": "Cult of Azazel",
 
+
   "entity.netherman.bell_guardian": "Bellemoth",
   "entity.netherman.welcomer": "Recepcionista",
   "entity.netherman.trader": "Comerciante",
@@ -220,8 +221,8 @@
 
   "effect.netherman.manipulation": "¿Manipulación?",
   "effect.netherman.fear": "¿Miedo?",
-  "effect.netherman.faith": "¿Fe?",
   "effect.netherman.alertness": "¿Alerta?",
+  "effect.netherman.faith": "¿Fe?",
   "effect.netherman.anxiety": "No tengas miedo",
   "effect.netherman.excitement": "¿Emoción?"
 }
