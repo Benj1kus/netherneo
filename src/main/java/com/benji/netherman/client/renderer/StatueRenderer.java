@@ -1,7 +1,7 @@
 package com.benji.netherman.client.renderer;
 
 import com.benji.netherman.client.model.StatueModel;
-import com.benji.netherman.entity.StatueEntity;
+import com.benji.netherman.common.entity.StatueEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 

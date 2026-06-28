@@ -1,7 +1,7 @@
 package com.benji.netherman.client.layer;
 
 import com.benji.netherman.NetherExp;
-import com.benji.netherman.entity.GhastlyEntity;
+import com.benji.netherman.common.entity.GhastlyEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -16,7 +16,7 @@ import software.bernie.geckolib.renderer.GeoRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
 public class GhastlyHintLayer extends GeoRenderLayer<GhastlyEntity> {
-    private static final ResourceLocation HINT_TEXTURE = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/ghastly_hint_sheet.png");
+    private static final ResourceLocation HINT_TEXTURE = NetherExp.location("textures/entity/ghastly_hint_sheet.png");
 
     public GhastlyHintLayer(GeoRenderer<GhastlyEntity> entityRendererIn) {
         super(entityRendererIn);

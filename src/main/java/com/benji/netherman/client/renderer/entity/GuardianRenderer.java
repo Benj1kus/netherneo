@@ -3,9 +3,8 @@ package com.benji.netherman.client.renderer.entity;
 import com.benji.netherman.NetherExp;
 import com.benji.netherman.client.layer.GuardianEmissiveLayer;
 import com.benji.netherman.client.model.GuardianModel;
-import com.benji.netherman.entity.GuardianEntity;
+import com.benji.netherman.common.entity.GuardianEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class GuardianRenderer extends GeoEntityRenderer<GuardianEntity> {
@@ -14,6 +13,6 @@ public class GuardianRenderer extends GeoEntityRenderer<GuardianEntity> {
         this.shadowRadius = 1.0f;
 
         
-        addRenderLayer(new GuardianEmissiveLayer(this, ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/guardian_emissive.png")));
+        addRenderLayer(new GuardianEmissiveLayer(this, NetherExp.location("textures/entity/guardian_emissive.png")));
     }
 }

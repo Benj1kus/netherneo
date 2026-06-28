@@ -1,14 +1,14 @@
 package com.benji.netherman.client.model;
 
 import com.benji.netherman.NetherExp;
-import com.benji.netherman.entity.GhastlyEntity;
+import com.benji.netherman.common.entity.GhastlyEntity;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 
 public class GhastlyModel extends GeoModel<GhastlyEntity> {
-    private static final ResourceLocation MODEL = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "geo/ghastly.geo.json");
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/ghastly.png");
-    private static final ResourceLocation ANIMATION = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "animations/ghastly.animation.json");
+    private static final ResourceLocation MODEL = NetherExp.location("geo/ghastly.geo.json");
+    private static final ResourceLocation TEXTURE = NetherExp.location("textures/entity/ghastly.png");
+    private static final ResourceLocation ANIMATION = NetherExp.location("animations/ghastly.animation.json");
 
     @Override
     public ResourceLocation getModelResource(GhastlyEntity animatable) {

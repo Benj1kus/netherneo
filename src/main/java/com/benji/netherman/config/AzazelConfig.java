@@ -13,8 +13,6 @@ public class AzazelConfig {
 
     public static final ModConfigSpec.IntValue MASK_REGEN_COOLDOWN;
     public static final ModConfigSpec.BooleanValue MASK_FIRE_IMMUNITY;
-
-
     
     public static final ModConfigSpec.DoubleValue LAUNCH_ATTACK_DAMAGE;
     public static final ModConfigSpec.DoubleValue PULL_ATTACK_DAMAGE;

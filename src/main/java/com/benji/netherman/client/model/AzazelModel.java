@@ -1,19 +1,19 @@
 package com.benji.netherman.client.model;
 
 import com.benji.netherman.NetherExp;
-import com.benji.netherman.entity.AzazelEntity;
+import com.benji.netherman.common.entity.AzazelEntity;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 
 public class AzazelModel extends GeoModel<AzazelEntity> {
 
-    private static final ResourceLocation MODEL_NORMAL = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "geo/azazel.geo.json");
-    private static final ResourceLocation MODEL_LOW_HP = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "geo/azazel_lowhp.geo.json");
-    private static final ResourceLocation TEX_GOLD = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/azazel_gold.png");
+    private static final ResourceLocation MODEL_NORMAL = NetherExp.location("geo/azazel.geo.json");
+    private static final ResourceLocation MODEL_LOW_HP = NetherExp.location("geo/azazel_lowhp.geo.json");
+    private static final ResourceLocation TEX_GOLD = NetherExp.location("textures/entity/azazel_gold.png");
 
-    private static final ResourceLocation TEX_PRAY = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/azazel_pray.png");
-    private static final ResourceLocation TEX_NORMAL = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/azazel.png");
-    private static final ResourceLocation TEX_DAMAGED = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/azazel_damaged.png");
+    private static final ResourceLocation TEX_PRAY = NetherExp.location("textures/entity/azazel_pray.png");
+    private static final ResourceLocation TEX_NORMAL = NetherExp.location("textures/entity/azazel.png");
+    private static final ResourceLocation TEX_DAMAGED = NetherExp.location("textures/entity/azazel_damaged.png");
 
     @Override
     public ResourceLocation getModelResource(AzazelEntity animatable) {
@@ -46,6 +46,6 @@ public class AzazelModel extends GeoModel<AzazelEntity> {
 
     @Override
     public ResourceLocation getAnimationResource(AzazelEntity animatable) {
-        return ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "animations/azazel.animation.json");
+        return NetherExp.location("animations/azazel.animation.json");
     }
 }

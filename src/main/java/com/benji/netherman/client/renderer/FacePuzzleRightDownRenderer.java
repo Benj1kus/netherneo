@@ -1,7 +1,7 @@
 package com.benji.netherman.client.renderer;
 
-import com.benji.netherman.block.entity.FacePuzzleBlockEntity;
 import com.benji.netherman.client.model.FacePuzzleRightDownModel;
+import com.benji.netherman.common.block.entity.FacePuzzleBlockEntity;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import software.bernie.geckolib.renderer.GeoBlockRenderer;
 

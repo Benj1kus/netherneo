@@ -8,7 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 public class NoteScreen extends Screen {
-    private static final ResourceLocation NOTE_TEXTURE = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/gui/note_gui.png");
+    private static final ResourceLocation NOTE_TEXTURE = NetherExp.location("textures/gui/note_gui.png");
     private static final int IMAGE_WIDTH = 130;
     private static final int IMAGE_HEIGHT = 160;
 

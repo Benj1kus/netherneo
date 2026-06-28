@@ -1,14 +1,14 @@
 package com.benji.netherman.client.model;
 
 import com.benji.netherman.NetherExp;
-import com.benji.netherman.entity.StatueEntity;
+import com.benji.netherman.common.entity.StatueEntity;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 
 public class StatueModel extends GeoModel<StatueEntity> {
-    private static final ResourceLocation MODEL = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "geo/statue_entity.geo.json");
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/statue_entity.png");
-    private static final ResourceLocation ANIMATION = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "animations/statue_entity.animation.json");
+    private static final ResourceLocation MODEL = NetherExp.location("geo/statue_entity.geo.json");
+    private static final ResourceLocation TEXTURE = NetherExp.location("textures/entity/statue_entity.png");
+    private static final ResourceLocation ANIMATION = NetherExp.location("animations/statue_entity.animation.json");
 
     @Override
     public ResourceLocation getModelResource(StatueEntity animatable) {

@@ -1,7 +1,7 @@
 package com.benji.netherman.client.model;
 
 import com.benji.netherman.NetherExp;
-import com.benji.netherman.entity.BellGuardianEntity;
+import com.benji.netherman.common.entity.BellGuardianEntity;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 
@@ -9,16 +9,16 @@ public class BellGuardianModel extends GeoModel<BellGuardianEntity> {
 
     @Override
     public ResourceLocation getModelResource(BellGuardianEntity animatable) {
-        return  ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "geo/bell_guardian.geo.json");
+        return NetherExp.location("geo/bell_guardian.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureResource(BellGuardianEntity animatable) {
-        return  ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/bell_guardian.png");
+        return NetherExp.location("textures/entity/bell_guardian.png");
     }
 
     @Override
     public ResourceLocation getAnimationResource(BellGuardianEntity animatable) {
-        return  ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "animations/bell_guardian.animation.json");
+        return NetherExp.location("animations/bell_guardian.animation.json");
     }
 }

@@ -1,7 +1,7 @@
 package com.benji.netherman.client.renderer;
 
 import com.benji.netherman.NetherExp;
-import com.benji.netherman.block.entity.SamsoniteBellBlockEntity;
+import com.benji.netherman.common.block.entity.SamsoniteBellBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.geom.ModelLayers;
@@ -15,6 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 
 public class SamsoniteBellRenderer implements BlockEntityRenderer<SamsoniteBellBlockEntity> {
+
     public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/samsonite_bell.png");
     private final ModelPart bellBody;
 

@@ -1,15 +1,15 @@
 package com.benji.netherman.client.model;
 
 import com.benji.netherman.NetherExp;
-import com.benji.netherman.block.entity.GrandDoorBlockEntity;
+import com.benji.netherman.common.block.entity.GrandDoorBlockEntity;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 
 public class GrandDoorModel extends GeoModel<GrandDoorBlockEntity> {
 
-    private static final ResourceLocation MODEL = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "geo/grand_door.geo.json");
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/block/grand_door.png");
-    private static final ResourceLocation ANIMATION = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "animations/grand_door.animation.json");
+    private static final ResourceLocation MODEL = NetherExp.location("geo/grand_door.geo.json");
+    private static final ResourceLocation TEXTURE = NetherExp.location("textures/block/grand_door.png");
+    private static final ResourceLocation ANIMATION = NetherExp.location("animations/grand_door.animation.json");
 
     @Override
     public ResourceLocation getModelResource(GrandDoorBlockEntity animatable) {

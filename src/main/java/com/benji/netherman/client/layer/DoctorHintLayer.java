@@ -1,7 +1,7 @@
 package com.benji.netherman.client.layer;
 
 import com.benji.netherman.NetherExp;
-import com.benji.netherman.entity.DoctorEntity;
+import com.benji.netherman.common.entity.DoctorEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -18,9 +18,9 @@ import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 public class DoctorHintLayer extends GeoRenderLayer<DoctorEntity> {
 
 
-    private static final ResourceLocation HINT_1 = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/doctor_hint.png");
-    private static final ResourceLocation HINT_2 = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/doctoradditional_hint.png");
-    private static final ResourceLocation HINT_3 = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/doctortrade_hint.png");
+    private static final ResourceLocation HINT_1 = NetherExp.location("textures/entity/doctor_hint.png");
+    private static final ResourceLocation HINT_2 = NetherExp.location("textures/entity/doctoradditional_hint.png");
+    private static final ResourceLocation HINT_3 = NetherExp.location("textures/entity/doctortrade_hint.png");
 
     public DoctorHintLayer(GeoEntityRenderer<DoctorEntity> entityRendererIn) {
         super(entityRendererIn);

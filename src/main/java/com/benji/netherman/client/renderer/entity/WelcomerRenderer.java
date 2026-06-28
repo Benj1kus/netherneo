@@ -1,7 +1,7 @@
 package com.benji.netherman.client.renderer.entity;
 
 import com.benji.netherman.client.model.WelcomerModel;
-import com.benji.netherman.entity.WelcomerEntity;
+import com.benji.netherman.common.entity.WelcomerEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 

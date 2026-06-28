@@ -3,7 +3,7 @@ package com.benji.netherman.client.renderer;
 import com.benji.netherman.NetherExp;
 import com.benji.netherman.client.layer.GenericEmissiveLayer;
 import com.benji.netherman.client.model.LaserModel;
-import com.benji.netherman.entity.LaserEntity;
+import com.benji.netherman.common.entity.LaserEntity;
 import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
@@ -15,7 +15,7 @@ public class LaserRenderer extends GeoEntityRenderer<LaserEntity> {
         this.shadowRadius = 0.0f; 
 
         
-        ResourceLocation emissiveTexture = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/laser_emissive.png");
+        ResourceLocation emissiveTexture = NetherExp.location("textures/entity/laser_emissive.png");
         addRenderLayer(new GenericEmissiveLayer<>(this, emissiveTexture));
     }
 

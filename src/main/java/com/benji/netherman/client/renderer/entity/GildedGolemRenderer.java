@@ -1,7 +1,7 @@
 package com.benji.netherman.client.renderer.entity;
 
 import com.benji.netherman.client.model.GildedGolemModel;
-import com.benji.netherman.entity.GildedGolemEntity;
+import com.benji.netherman.common.entity.GildedGolemEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 

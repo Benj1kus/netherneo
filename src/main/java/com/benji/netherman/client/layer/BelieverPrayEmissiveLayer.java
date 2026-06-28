@@ -1,7 +1,7 @@
 package com.benji.netherman.client.layer;
 
 import com.benji.netherman.NetherExp;
-import com.benji.netherman.entity.BelieverEntity;
+import com.benji.netherman.common.entity.BelieverEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -12,7 +12,7 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
 public class BelieverPrayEmissiveLayer extends GeoRenderLayer<BelieverEntity> {
-    private static final ResourceLocation EMISSIVE = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/believer_pray_emissive.png");
+    private static final ResourceLocation EMISSIVE = NetherExp.location("textures/entity/believer_pray_emissive.png");
 
     public BelieverPrayEmissiveLayer(GeoEntityRenderer<BelieverEntity> entityRendererIn) {
         super(entityRendererIn);

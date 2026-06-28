@@ -2,10 +2,10 @@ package com.benji.netherman.client.sound;
 
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
 import net.minecraft.client.resources.sounds.SoundInstance;
+import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.core.Holder;
 import net.minecraft.world.entity.player.Player;
 
 public class ZoneAmbientSoundInstance extends AbstractTickableSoundInstance {

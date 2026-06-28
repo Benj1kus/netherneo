@@ -1,6 +1,6 @@
 package com.benji.netherman.client.layer;
 
-import com.benji.netherman.entity.GuardianEntity;
+import com.benji.netherman.common.entity.GuardianEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;

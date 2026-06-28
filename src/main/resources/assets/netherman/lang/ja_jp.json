@@ -173,6 +173,7 @@
 
   "block.netherman.totemus.arrived": "到着しました",
   "block.netherman.totemus.zone": "ゾーン",
+  "block.netherman.totemus.zone.maze": "アザゼルの迷宮",
   "block.netherman.totemus.zone.azazel": "アザゼルの隠れ家",
   "block.netherman.totemus.zone.city": "聖なる都市",
   "block.netherman.totemus.zone.quarries": "呪われた採石場",
@@ -222,6 +223,7 @@
   "effect.netherman.fear": "恐怖？",
   "effect.netherman.alertness": "警戒？",
   "effect.netherman.faith": "信仰？",
+  "effect.netherman.alertness": "警戒？",
   "effect.netherman.anxiety": "恐れるな",
   "effect.netherman.excitement": "高揚？"
 }

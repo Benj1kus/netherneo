@@ -1,23 +1,23 @@
 package com.benji.netherman.client.model;
 
 import com.benji.netherman.NetherExp;
-import com.benji.netherman.entity.VillagerPrisonerEntity;
+import com.benji.netherman.common.entity.VillagerPrisonerEntity;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.model.GeoModel;
 
 public class VillagerPrisonerModel extends GeoModel<VillagerPrisonerEntity> {
     @Override
     public ResourceLocation getModelResource(VillagerPrisonerEntity animatable) {
-        return ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "geo/villager_prisoner.geo.json");
+        return NetherExp.location("geo/villager_prisoner.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureResource(VillagerPrisonerEntity animatable) {
-        return ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/villager_prisoner.png");
+        return NetherExp.location("textures/entity/villager_prisoner.png");
     }
 
     @Override
     public ResourceLocation getAnimationResource(VillagerPrisonerEntity animatable) {
-        return ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "animations/villager_prisoner.animation.json");
+        return NetherExp.location("animations/villager_prisoner.animation.json");
     }
 }

@@ -1,7 +1,7 @@
 package com.benji.netherman.client.renderer;
 
 import com.benji.netherman.client.model.BellGuardianModel;
-import com.benji.netherman.entity.BellGuardianEntity;
+import com.benji.netherman.common.entity.BellGuardianEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 

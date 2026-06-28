@@ -2,7 +2,7 @@ package com.benji.netherman.client.renderer;
 
 import com.benji.netherman.client.layer.TraderHintLayer;
 import com.benji.netherman.client.model.TraderModel;
-import com.benji.netherman.entity.TraderEntity;
+import com.benji.netherman.common.entity.TraderEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 

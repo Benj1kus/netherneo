@@ -1,7 +1,7 @@
 package com.benji.netherman.client.layer;
 
 import com.benji.netherman.NetherExp;
-import com.benji.netherman.entity.TraderEntity;
+import com.benji.netherman.common.entity.TraderEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -16,8 +16,8 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer;
 import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
 public class TraderHintLayer extends GeoRenderLayer<TraderEntity> {
-    private static final ResourceLocation HINT_TEXTURE = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/trader_hint.png");
-    private static final ResourceLocation WAIT_TEXTURE = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/trader_wait.png");
+    private static final ResourceLocation HINT_TEXTURE = NetherExp.location("textures/entity/trader_hint.png");
+    private static final ResourceLocation WAIT_TEXTURE = NetherExp.location("textures/entity/trader_wait.png");
 
     public TraderHintLayer(GeoEntityRenderer<TraderEntity> entityRendererIn) {
         super(entityRendererIn);

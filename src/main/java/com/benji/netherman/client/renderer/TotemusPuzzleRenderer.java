@@ -2,7 +2,7 @@ package com.benji.netherman.client.renderer;
 
 import com.benji.netherman.NetherExp;
 import com.benji.netherman.client.model.TotemusPuzzleModel;
-import com.benji.netherman.entity.TotemusPuzzleEntity;
+import com.benji.netherman.common.entity.TotemusPuzzleEntity;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
@@ -10,12 +10,12 @@ import software.bernie.geckolib.renderer.GeoEntityRenderer;
 public class TotemusPuzzleRenderer extends GeoEntityRenderer<TotemusPuzzleEntity> {
 
     private static final ResourceLocation[] TEXTURES = new ResourceLocation[] {
-             ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/totemus_puzzle_red.png"),    // 0
-             ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/totemus_puzzle_orange.png"), // 1
-             ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/totemus_puzzle_yellow.png"), // 2
-             ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/totemus_puzzle_green.png"),  // 3
-             ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/totemus_puzzle_blue.png"),   // 4
-             ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/totemus_puzzle_purple.png")  // 5
+             NetherExp.location("textures/entity/totemus_puzzle_red.png"),    // 0
+             NetherExp.location("textures/entity/totemus_puzzle_orange.png"), // 1
+             NetherExp.location("textures/entity/totemus_puzzle_yellow.png"), // 2
+             NetherExp.location("textures/entity/totemus_puzzle_green.png"),  // 3
+             NetherExp.location("textures/entity/totemus_puzzle_blue.png"),   // 4
+             NetherExp.location("textures/entity/totemus_puzzle_purple.png")  // 5
     };
 
     public TotemusPuzzleRenderer(EntityRendererProvider.Context renderManager) {

@@ -1,22 +1,18 @@
 package com.benji.netherman.client;
 
 import com.benji.netherman.NetherExp;
+import com.benji.netherman.init.ModEffects;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.client.DeltaTracker;
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.LayeredDraw;
-import net.minecraft.client.Minecraft;
-import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.resources.ResourceLocation;
 
 public class ManipulationOverlay {
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/misc/manipulation_overlay.png");
+    private static final ResourceLocation TEXTURE = NetherExp.location("textures/misc/manipulation_overlay.png");
 
     public static final LayeredDraw.Layer HUD_OVERLAY = (guiGraphics, deltaTracker) -> {
         Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft.player != null && minecraft.player.hasEffect(NetherExp.MANIPULATION_EFFECT)) {
+        if (minecraft.player != null && minecraft.player.hasEffect(ModEffects.MANIPULATION)) {
             RenderSystem.disableDepthTest();
             RenderSystem.depthMask(false);
             RenderSystem.enableBlend();

@@ -1,8 +1,8 @@
 package com.benji.netherman.client.renderer;
 
 import com.benji.netherman.NetherExp;
-import com.benji.netherman.block.LabyrinthTeleportBlock;
-import com.benji.netherman.block.entity.LabyrinthTeleportBlockEntity;
+import com.benji.netherman.common.block.LabyrinthTeleportBlock;
+import com.benji.netherman.common.block.entity.LabyrinthTeleportBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BeaconRenderer;
@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class LabyrinthTeleportRenderer implements BlockEntityRenderer<LabyrinthTeleportBlockEntity> {
 
-    public static final ResourceLocation BEAM_TEXTURE = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/block/azazel_beacon_beam.png");
+    public static final ResourceLocation BEAM_TEXTURE = NetherExp.location("textures/block/azazel_beacon_beam.png");
 
     public LabyrinthTeleportRenderer(BlockEntityRendererProvider.Context context) {
     }

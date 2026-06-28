@@ -1,7 +1,7 @@
 package com.benji.netherman.client.layer;
 
 import com.benji.netherman.NetherExp;
-import com.benji.netherman.entity.BlacksmithEntity;
+import com.benji.netherman.common.entity.BlacksmithEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -17,7 +17,7 @@ import software.bernie.geckolib.renderer.layer.GeoRenderLayer;
 
 public class BlacksmithHintLayer extends GeoRenderLayer<BlacksmithEntity> {
 
-    private static final ResourceLocation HINT_TEXTURE = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/entity/blacksmith_hint.png");
+    private static final ResourceLocation HINT_TEXTURE = NetherExp.location("textures/entity/blacksmith_hint.png");
 
     public BlacksmithHintLayer(GeoEntityRenderer<BlacksmithEntity> entityRendererIn) {
         super(entityRendererIn);

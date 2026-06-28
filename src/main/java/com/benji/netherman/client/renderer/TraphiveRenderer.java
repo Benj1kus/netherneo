@@ -1,8 +1,8 @@
 package com.benji.netherman.client.renderer;
 
-import com.benji.netherman.block.entity.TraphiveBlockEntity;
-import com.benji.netherman.client.layer.TraphiveAnimatedEmissiveLayer; 
+import com.benji.netherman.client.layer.TraphiveAnimatedEmissiveLayer;
 import com.benji.netherman.client.model.TraphiveModel;
+import com.benji.netherman.common.block.entity.TraphiveBlockEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;

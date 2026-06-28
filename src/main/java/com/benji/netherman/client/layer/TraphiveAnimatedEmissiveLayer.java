@@ -1,7 +1,7 @@
 package com.benji.netherman.client.layer;
 
 import com.benji.netherman.NetherExp;
-import com.benji.netherman.block.entity.TraphiveBlockEntity;
+import com.benji.netherman.common.block.entity.TraphiveBlockEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -17,7 +17,7 @@ public class TraphiveAnimatedEmissiveLayer extends GeoRenderLayer<TraphiveBlockE
     private static final ResourceLocation[] FRAMES = new ResourceLocation[7];
     static {
         for (int i = 0; i < 7; i++) {
-            FRAMES[i] = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/block/traphive_emissive_" + i + ".png");
+            FRAMES[i] = NetherExp.location("textures/block/traphive_emissive_" + i + ".png");
         }
     }
 

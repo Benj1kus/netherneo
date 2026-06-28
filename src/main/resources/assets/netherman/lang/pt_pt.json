@@ -172,6 +172,7 @@
 
   "block.netherman.totemus.arrived": "VOCÊ CHEGOU",
   "block.netherman.totemus.zone": "ZONA",
+  "block.netherman.totemus.zone.maze": "LABIRINTO DE AZAZEL",
   "block.netherman.totemus.zone.azazel": "O COVIL DE AZAZEL",
   "block.netherman.totemus.zone.city": "A CIDADE SAGRADA",
   "block.netherman.totemus.zone.quarries": "AS PEDREIRAS MALDITAS",
@@ -225,6 +226,7 @@
   "effect.netherman.fear": "Medo?",
   "effect.netherman.alertness": "Alerta?",
   "effect.netherman.faith": "Fé?",
+  "effect.netherman.alertness": "Alerta?",
   "effect.netherman.anxiety": "Não temas",
   "effect.netherman.excitement": "Entusiasmo?"
 }

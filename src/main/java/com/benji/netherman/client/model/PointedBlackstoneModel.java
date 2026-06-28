@@ -1,7 +1,7 @@
 package com.benji.netherman.client.model;
 
 import com.benji.netherman.NetherExp;
-import com.benji.netherman.block.entity.PointedBlackstoneBlockEntity;
+import com.benji.netherman.common.block.entity.PointedBlackstoneBlockEntity;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.PointedDripstoneBlock;
@@ -12,7 +12,7 @@ import software.bernie.geckolib.model.GeoModel;
 public class PointedBlackstoneModel extends GeoModel<PointedBlackstoneBlockEntity> {
     @Override
     public ResourceLocation getModelResource(PointedBlackstoneBlockEntity animatable) {
-        return ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "geo/pointed_blackstone.geo.json");
+        return NetherExp.location("geo/pointed_blackstone.geo.json");
     }
 
     @Override
@@ -36,14 +36,14 @@ public class PointedBlackstoneModel extends GeoModel<PointedBlackstoneBlockEntit
             }
 
             
-            return ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/block/pointed_blackstone_" + dirStr + "_" + thickStr + ".png");
+            return NetherExp.location("textures/block/pointed_blackstone_" + dirStr + "_" + thickStr + ".png");
         }
 
-        return ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/block/pointed_blackstone_down_base.png");
+        return NetherExp.location("textures/block/pointed_blackstone_down_base.png");
     }
 
     @Override
     public ResourceLocation getAnimationResource(PointedBlackstoneBlockEntity animatable) {
-        return ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "animations/empty.animation.json");
+        return NetherExp.location("animations/empty.animation.json");
     }
 }

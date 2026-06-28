@@ -1,17 +1,17 @@
 package com.benji.netherman.client.model;
 
 import com.benji.netherman.NetherExp;
-import com.benji.netherman.block.AltarBlock;
-import com.benji.netherman.block.entity.AltarBlockEntity;
+import com.benji.netherman.common.block.AltarBlock;
+import com.benji.netherman.common.block.entity.AltarBlockEntity;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.BlockState;
 import software.bernie.geckolib.model.GeoModel;
 
 public class AltarModel extends GeoModel<AltarBlockEntity> {
 
-    private static final ResourceLocation DEFAULT_MODEL = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "geo/altar.geo.json");
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "textures/block/altar.png");
-    private static final ResourceLocation ANIMATION = ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "animations/altar.animation.json");
+    private static final ResourceLocation DEFAULT_MODEL = NetherExp.location("geo/altar.geo.json");
+    private static final ResourceLocation TEXTURE = NetherExp.location("textures/block/altar.png");
+    private static final ResourceLocation ANIMATION = NetherExp.location("animations/altar.animation.json");
 
     @Override
     public ResourceLocation getModelResource(AltarBlockEntity animatable) {
@@ -30,9 +30,9 @@ public class AltarModel extends GeoModel<AltarBlockEntity> {
                 boolean isActive = state.getValue(AltarBlock.ACTIVE);
 
                 if (isActive) {
-                    return ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "geo/altar_" + letterChar + "_active.geo.json");
+                    return NetherExp.location("geo/altar_" + letterChar + "_active.geo.json");
                 } else {
-                    return ResourceLocation.fromNamespaceAndPath(NetherExp.MODID, "geo/altar_" + letterChar + ".geo.json");
+                    return NetherExp.location("geo/altar_" + letterChar + ".geo.json");
                 }
             }
         }
