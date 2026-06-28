@@ -1,5 +1,7 @@
 package com.benji.netherman.common.entity;
 
+import com.benji.netherman.NetherExpClient;
+import com.benji.netherman.common.effect.ManipulationEffect;
 import com.benji.netherman.config.AzazelConfig;
 import com.benji.netherman.init.*;
 import net.minecraft.ChatFormatting;
@@ -24,6 +26,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -99,6 +102,14 @@ public class AzazelEntity extends Monster implements GeoEntity {
         builder.define(ATTACK_STATE, 0);
         builder.define(PHASE_STATE, 0);
         builder.define(MERCY_TICK, 0);
+    }
+
+    @Override
+    public boolean addEffect(MobEffectInstance effect, @Nullable Entity source) {
+        if (effect.getEffect() == ModEffects.MANIPULATION.get()) {
+            return false;
+        }
+        return super.addEffect(effect, source);
     }
 
     @Override
