@@ -48,6 +48,10 @@ public class AzazelConfig {
     public static final ModConfigSpec.DoubleValue HUMAN_PROJECTILE_SPIKE_DAMAGE;
     public static final ModConfigSpec.IntValue HUMAN_PROJECTILE_SPIKE_WITHER_DURATION;
 
+    public static final ModConfigSpec.DoubleValue HUMAN_MELEE_ATTACK_RADIUS;
+    public static final ModConfigSpec.DoubleValue HUMAN_MID_ATTACK_RADIUS_MAX;
+    public static final ModConfigSpec.DoubleValue HUMAN_LONG_ATTACK_RADIUS_MIN;
+    public static final ModConfigSpec.DoubleValue HUMAN_MOVEMENT_STOP_RADIUS;
     
     public static final ModConfigSpec.DoubleValue PLAYER_DETECTION_RADIUS;
     public static final ModConfigSpec.IntValue MINI_BOSS_COOLDOWN;
@@ -113,6 +117,11 @@ public class AzazelConfig {
 
         HUMAN_SPIKE_DAMAGE = BUILDER.comment("Damage for the ground spikes").defineInRange("humanSpikeDamage", 10.0, 0.0, 200.0);
         HUMAN_SPIKE_WITHER_DURATION = BUILDER.comment("Wither effect duration (in ticks) for ground spikes. 100 = 5 seconds. 0 = disable.").defineInRange("humanSpikeWitherDuration", 100, 0, 1200);
+
+        HUMAN_MELEE_ATTACK_RADIUS = BUILDER.comment("Maximum distance for melee attacks (blocks)").defineInRange("humanMeleeAttackRadius", 3.0, 1.0, 50.0);
+        HUMAN_MID_ATTACK_RADIUS_MAX = BUILDER.comment("Maximum distance for mid-range attacks (blocks)").defineInRange("humanMidAttackRadiusMax", 8.0, 1.0, 50.0);
+        HUMAN_LONG_ATTACK_RADIUS_MIN = BUILDER.comment("Minimum distance for long-range attacks (blocks)").defineInRange("humanLongAttackRadiusMin", 6.0, 1.0, 50.0);
+        HUMAN_MOVEMENT_STOP_RADIUS = BUILDER.comment("Distance at which boss stops walking and starts attacking (blocks)").defineInRange("humanMovementStopRadius", 8.0, 1.0, 50.0);
 
         HUMAN_PROJECTILE_SPIKE_DAMAGE = BUILDER.comment("Damage for the flying spike projectiles").defineInRange("humanProjectileSpikeDamage", 10.0, 0.0, 200.0);
         HUMAN_PROJECTILE_SPIKE_WITHER_DURATION = BUILDER.comment("Wither effect duration (in ticks) for flying spike projectiles. 100 = 5 sec.").defineInRange("humanProjectileSpikeWitherDuration", 100, 0, 1200);

@@ -50,7 +50,7 @@ public class AzazelHumanPhase2Goal extends Goal {
             }
         }
 
-        if (tick == 170) {
+        if (tick == 60) {
             boss.getEntityData().set(AzazelHumanEntity.IS_PHASE_2, true);
         }
 

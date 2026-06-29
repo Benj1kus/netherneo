@@ -1,5 +1,6 @@
 package com.benji.netherman.common.entity;
 
+import com.benji.netherman.config.AzazelConfig;
 import com.benji.netherman.init.ModEntities;
 import com.benji.netherman.init.ModSounds;
 import com.benji.netherman.NetherExp;
@@ -40,7 +41,9 @@ public class AzazelHumanLongRangeGoal extends Goal {
         LivingEntity target = boss.getTarget();
         if (target == null) return false;
 
-        if (boss.distanceToSqr(target) > 64.0D && cooldown <= 0) {
+        double longRadiusMin = AzazelConfig.HUMAN_LONG_ATTACK_RADIUS_MIN.get();
+
+        if (boss.distanceToSqr(target) > (longRadiusMin * longRadiusMin) && cooldown <= 0) {
             return boss.getRandom().nextBoolean();
         }
         return false;
