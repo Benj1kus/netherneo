@@ -3,6 +3,7 @@ package com.benji.netherman.init;
 import com.benji.netherman.NetherExp;
 import com.benji.netherman.common.entity.*;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.neoforged.bus.api.IEventBus;
@@ -24,6 +25,25 @@ public class ModEntities {
                     .sized(3.0F, 4.5F)
                     .fireImmune()
                     .build(NetherExp.location("azazel").toString()));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<AzazelHumanEntity>> AZAZEL_HUMAN = ENTITIES.register("azazel_human",
+            () -> EntityType.Builder.of(AzazelHumanEntity::new, MobCategory.MONSTER)
+                    .sized(2.5F, 12.75F)
+                    .fireImmune()
+                    .build(NetherExp.location("azazel_human").toString()));
+
+
+    public static final DeferredHolder<EntityType<?>, EntityType<AzazelSplashEntity>> SPLASH_ENTITY = ENTITIES.register("azazel_splash",
+            () -> EntityType.Builder.<AzazelSplashEntity>of(AzazelSplashEntity::new, MobCategory.MISC)
+                    .sized(3.5F, 6.5F).clientTrackingRange(64).build("azazel_splash"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<AzazelSpikesProjectileEntity>> SPIKE_PROJECTILE_ENTITY = ENTITIES.register("azazel_spike_projectile",
+            () -> EntityType.Builder.<AzazelSpikesProjectileEntity>of(AzazelSpikesProjectileEntity::new, MobCategory.MISC)
+                    .sized(1.0F, 1.5F).clientTrackingRange(64).build("azazel_spike_projectile"));
+
+    public static final DeferredHolder<EntityType<?>, EntityType<AzazelSpikeEntity>> SPIKE_ENTITY = ENTITIES.register("azazel_spike",
+            () -> EntityType.Builder.<AzazelSpikeEntity>of(AzazelSpikeEntity::new, MobCategory.MISC)
+                    .sized(0.75F, 3.125F).clientTrackingRange(64).build("azazel_spike"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<GildedGolemEntity>> GILDED_GOLEM = ENTITIES.register("gilded_golem",
             () -> EntityType.Builder.of(GildedGolemEntity::new, MobCategory.MISC)

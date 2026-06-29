@@ -22,11 +22,52 @@ public class ClientZoneAmbientEvents {
 
     private static int bossMusicTimer = 0;
     private static boolean isPlayingBossIntro = false;
+    private static int shakeTimer = 0;
+    private static float shakeIntensity = 0.0F;
+
+    public static void startScreenShake(int ticks, float intensity) {
+        shakeTimer = ticks;
+        shakeIntensity = intensity;
+    }
+
+    @SubscribeEvent
+    public static void onCameraSetup(net.neoforged.neoforge.client.event.ViewportEvent.ComputeCameraAngles event) {
+        if (shakeTimer > 0) {
+            Minecraft mc = Minecraft.getInstance();
+            if (mc.isPaused()) return;
+
+            shakeTimer--;
+
+            float shakeX = (mc.player.getRandom().nextFloat() - 0.5F) * shakeIntensity;
+            float shakeY = (mc.player.getRandom().nextFloat() - 0.5F) * shakeIntensity;
+            float shakeZ = (mc.player.getRandom().nextFloat() - 0.5F) * shakeIntensity;
+
+            event.setPitch(event.getPitch() + shakeX);
+            event.setYaw(event.getYaw() + shakeY);
+            event.setRoll(event.getRoll() + shakeZ);
+
+            if (shakeTimer < 10) {
+                shakeIntensity *= 0.8F;
+            }
+        }
+    }
+
 
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent.Post event) {
         if (event.getEntity() != Minecraft.getInstance().player) return;
         LocalPlayer player = (LocalPlayer) event.getEntity();
+
+        //cutscene
+        if (Minecraft.getInstance().screen == null) {
+            for (com.benji.netherman.common.entity.AzazelHumanEntity boss : player.level().getEntitiesOfClass(com.benji.netherman.common.entity.AzazelHumanEntity.class, player.getBoundingBox().inflate(20.0D))) {
+                int state = boss.getEntityData().get(com.benji.netherman.common.entity.AzazelHumanEntity.BOSS_STATE);
+                if (state == 2 || state == 3) {
+                    Minecraft.getInstance().setScreen(new com.benji.netherman.client.gui.AzazelHumanCutsceneScreen(boss));
+                    break;
+                }
+            }
+        }
 
         int currentZoneType = -1;
         Holder<MobEffect> activeEffect = null;

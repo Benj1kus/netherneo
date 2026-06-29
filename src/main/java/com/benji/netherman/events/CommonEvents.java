@@ -11,6 +11,8 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 
+import static com.benji.netherman.init.ModEntities.AZAZEL_HUMAN;
+
 @EventBusSubscriber(modid = NetherExp.MODID)
 public class CommonEvents {
 
@@ -101,6 +103,7 @@ public class CommonEvents {
         event.put(ModEntities.AZAZEL_GUIDE_BOOK.get(), AzazelGuideBookEntity.createAttributes().build());
         event.put(ModEntities.TOTEMUS_PUZZLE.get(), TotemusPuzzleEntity.createAttributes().build());
         event.put(ModEntities.GILDED_GOLEM.get(), GildedGolemEntity.createAttributes().build());
+        event.put(ModEntities.AZAZEL_HUMAN.get(), AzazelHumanEntity.createAttributes().build());
         event.put(ModEntities.AZAZEL.get(), AzazelEntity.createAttributes().build());
         event.put(ModEntities.BELL_GUARDIAN.get(), BellGuardianEntity.createAttributes().build());
         event.put(ModEntities.LASER.get(), LaserEntity.createAttributes().build());

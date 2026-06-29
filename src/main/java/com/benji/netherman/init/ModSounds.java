@@ -19,7 +19,30 @@ public class ModSounds {
 
     public static final DeferredHolder<SoundEvent, SoundEvent> BLACKSMITH_IDLE = registerSoundEvent("blacksmith_idle");
     public static final DeferredHolder<SoundEvent, SoundEvent> RIFTSOUND = registerSoundEvent("riftsound");
-//test
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> SPEECH_1 = registerSoundEvent("speech_1");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SPEECH_2 = registerSoundEvent("speech_2");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SPEECH_3 = registerSoundEvent("speech_3");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SPEECH_4 = registerSoundEvent("speech_4");
+    public static final DeferredHolder<SoundEvent, SoundEvent> LAUGH = registerSoundEvent("laugh");
+    public static final DeferredHolder<SoundEvent, SoundEvent> HUMAN_DAMAGE_1 = registerSoundEvent("human_damage1");
+    public static final DeferredHolder<SoundEvent, SoundEvent> HUMAN_DAMAGE_2 = registerSoundEvent("human_damage2");
+    public static final DeferredHolder<SoundEvent, SoundEvent> ROAR = registerSoundEvent("roar");
+    public static final DeferredHolder<SoundEvent, SoundEvent> DODGE = registerSoundEvent("dodge");
+    public static final DeferredHolder<SoundEvent, SoundEvent> STOMP = registerSoundEvent("stomp");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SWING_1 = registerSoundEvent("swing1");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SWING_2 = registerSoundEvent("swing2");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SMOKE_BREATH = registerSoundEvent("smoke_breath");
+
+    public static final DeferredHolder<SoundEvent, SoundEvent> GRUNT_1 = registerSoundEvent("grunt1");
+    public static final DeferredHolder<SoundEvent, SoundEvent> GRUNT_2 = registerSoundEvent("grunt2");
+    public static final DeferredHolder<SoundEvent, SoundEvent> GRUNT_3 = registerSoundEvent("grunt3");
+    public static final DeferredHolder<SoundEvent, SoundEvent> GRUNT_4 = registerSoundEvent("grunt4");
+    public static final DeferredHolder<SoundEvent, SoundEvent> GRUNT_5 = registerSoundEvent("grunt5");
+    public static final DeferredHolder<SoundEvent, SoundEvent> GRUNT_6 = registerSoundEvent("grunt6");
+    public static final DeferredHolder<SoundEvent, SoundEvent> GRUNT_7 = registerSoundEvent("grunt7");
+    public static final DeferredHolder<SoundEvent, SoundEvent> GRUNT_8 = registerSoundEvent("grunt8");
+
     public static final DeferredHolder<SoundEvent, SoundEvent> AZAZEL_VOICE = registerSoundEvent("azazel_voice");
     public static final DeferredHolder<SoundEvent, SoundEvent> CLOCK = registerSoundEvent("clock");
     public static final DeferredHolder<SoundEvent, SoundEvent> WHISPER = registerSoundEvent("whisper");

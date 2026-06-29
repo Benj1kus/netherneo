@@ -78,6 +78,10 @@ public class NetherExpClient {
         event.registerEntityRenderer(ModEntities.STATUE_BOSSUNIT.get(), StatueBossunitRenderer::new);
         event.registerEntityRenderer(ModEntities.BLACKSMITH.get(), BlacksmithRenderer::new);
         event.registerEntityRenderer(ModEntities.DOCTOR.get(), DoctorRenderer::new);
+        event.registerEntityRenderer(ModEntities.AZAZEL_HUMAN.get(), AzazelHumanRenderer::new);
+        event.registerEntityRenderer(ModEntities.SPLASH_ENTITY.get(), AzazelSplashRenderer::new);
+        event.registerEntityRenderer(ModEntities.SPIKE_PROJECTILE_ENTITY.get(), AzazelSpikeProjectileRenderer::new);
+        event.registerEntityRenderer(ModEntities.SPIKE_ENTITY.get(), AzazelSpikeRenderer::new);
         event.registerEntityRenderer(ModEntities.TRADER.get(), TraderRenderer::new);
         event.registerEntityRenderer(ModEntities.STATUE.get(), StatueRenderer::new);
         event.registerEntityRenderer(ModEntities.BELIEVER.get(), BelieverRenderer::new);

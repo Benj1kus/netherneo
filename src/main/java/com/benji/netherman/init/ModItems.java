@@ -20,6 +20,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.Collection;
 import java.util.function.Supplier;
 
+import static com.benji.netherman.init.ModBlocks.*;
+
 public class ModItems {
     private static final Supplier<Item> SIMPLE_SUPPLIER = () -> new Item(new Item.Properties());
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(NetherExp.MODID);
@@ -68,12 +70,12 @@ public class ModItems {
 
     public static final DeferredItem<Item> AZAZEL_SPAWN_EGG = registerSpawnEgg("azazel", ModEntities.AZAZEL);
 
+
     public static final DeferredItem<Item> MUSIC_DISC_BOSS = registerMusicDisc("boss", ModJukeboxSongs.BOSS_SONG);
     public static final DeferredItem<Item> MUSIC_DISC_QUAR = registerMusicDisc("quar", ModJukeboxSongs.CAVE_AMBIENT);
     public static final DeferredItem<Item> MUSIC_DISC_SACRED = registerMusicDisc("sacred", ModJukeboxSongs.CITY_AMBIENT);
     public static final DeferredItem<Item> MUSIC_DISC_AZAZEL = registerMusicDisc("azazel", ModJukeboxSongs.CHURCH_AMBIENT);
     public static final DeferredItem<Item> MUSIC_DISC_MAZE = registerMusicDisc("maze", ModJukeboxSongs.MAZE_AMBIENT);
-
 
     private static DeferredItem<Item> registerSimple(String name, Item.Properties itemProperties) {
         return register(name, () -> new Item(itemProperties));
