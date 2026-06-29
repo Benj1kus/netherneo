@@ -51,6 +51,10 @@ public class ModEntities {
                     .fireImmune()
                     .build(NetherExp.location("gilded_golem").toString()));
 
+    public static final DeferredHolder<EntityType<?>, EntityType<AzazelEarthquakeEntity>> EARTHQUAKE_ENTITY = ENTITIES.register("azazel_earthquake",
+            () -> EntityType.Builder.<AzazelEarthquakeEntity>of(AzazelEarthquakeEntity::new, MobCategory.MISC)
+                    .sized(1.0F, 1.0F).clientTrackingRange(64).build("azazel_earthquake"));
+
     public static final DeferredHolder<EntityType<?>, EntityType<StatueBossunitEntity>> STATUE_BOSSUNIT = ENTITIES.register("statue_bossunit",
             () -> EntityType.Builder.of(StatueBossunitEntity::new, MobCategory.MONSTER)
                     .sized(0.625F, 2.125F)

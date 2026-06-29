@@ -62,7 +62,7 @@ public class ClientZoneAmbientEvents {
         if (Minecraft.getInstance().screen == null) {
             for (com.benji.netherman.common.entity.AzazelHumanEntity boss : player.level().getEntitiesOfClass(com.benji.netherman.common.entity.AzazelHumanEntity.class, player.getBoundingBox().inflate(20.0D))) {
                 int state = boss.getEntityData().get(com.benji.netherman.common.entity.AzazelHumanEntity.BOSS_STATE);
-                if (state == 2 || state == 3) {
+                if (state == 2 || state == 3 || state == 100) {
                     Minecraft.getInstance().setScreen(new com.benji.netherman.client.gui.AzazelHumanCutsceneScreen(boss));
                     break;
                 }

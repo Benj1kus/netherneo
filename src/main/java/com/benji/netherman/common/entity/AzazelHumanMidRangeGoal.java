@@ -1,5 +1,6 @@
 package com.benji.netherman.common.entity;
 
+import com.benji.netherman.config.AzazelConfig;
 import com.benji.netherman.init.ModEffects;
 import com.benji.netherman.init.ModSounds;
 import com.benji.netherman.NetherExp;
@@ -83,13 +84,13 @@ public class AzazelHumanMidRangeGoal extends Goal {
         if (attackState == 30) {
             if (currentAnimTick == 8) {
                 boss.level().playSound(null, boss.blockPosition(), ModSounds.SWING_1.get(), SoundSource.HOSTILE, 2.0F, 1.0F);
-                executeSpearAttack(40.0F, 2.0D, false);
+                executeSpearAttack(AzazelConfig.HUMAN_SPEAR_MID_PUSH_DAMAGE.get().floatValue(), AzazelConfig.HUMAN_SPEAR_MID_PUSH_KNOCKBACK.get(), false);
             }
         }
         else if (attackState == 31) {
             if (currentAnimTick == 10) {
                 boss.level().playSound(null, boss.blockPosition(), ModSounds.SWING_2.get(), SoundSource.HOSTILE, 2.0F, 1.0F);
-                executeSpearAttack(25.0F, 2.0D, true);
+                executeSpearAttack(AzazelConfig.HUMAN_SPEAR_MID_PULL_DAMAGE.get().floatValue(), AzazelConfig.HUMAN_SPEAR_MID_PULL_KNOCKBACK.get(), true);
             }
         }
 

@@ -1,5 +1,6 @@
 package com.benji.netherman.common.entity;
 
+import com.benji.netherman.config.AzazelConfig;
 import com.benji.netherman.init.ModSounds;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -98,10 +99,14 @@ public class AzazelHumanMeleeGoal extends Goal {
                     sl.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, boss.getX(), boss.getY() + 0.5, boss.getZ(), 50, 2.0, 0.2, 2.0, 0.1);
                 }
 
+                float stompDamage = AzazelConfig.HUMAN_STOMP_DAMAGE.get().floatValue();
+                double stompKb = AzazelConfig.HUMAN_STOMP_KNOCKBACK.get();
+
                 for (Player p : boss.level().getEntitiesOfClass(Player.class, boss.getBoundingBox().inflate(15.0D))) {
                     Vec3 push = p.position().subtract(boss.position()).normalize();
-                    p.setDeltaMovement(push.x * 1.2D, 1.8D, push.z * 1.2D);
-                    p.hurt(boss.damageSources().mobAttack(boss), 25.0F);
+                    p.setDeltaMovement(push.x * stompKb, stompKb * 1.5D, push.z * stompKb);
+
+                    p.hurt(boss.damageSources().mobAttack(boss), stompDamage);
                     p.hurtMarked = true;
                 }
             }
@@ -118,17 +123,17 @@ public class AzazelHumanMeleeGoal extends Goal {
             }
             if (currentAnimTick == 5) {
                 boss.level().playSound(null, boss.blockPosition(), ModSounds.SWING_1.get(), SoundSource.HOSTILE, 2.0F, 1.0F);
-                hitWithScythe(30.0F, 0.5D);
+                hitWithScythe(AzazelConfig.HUMAN_SCYTHE_1_DAMAGE.get().floatValue(), AzazelConfig.HUMAN_SCYTHE_1_KNOCKBACK.get());
             }
             else if (currentAnimTick == 15) {
                 boss.level().playSound(null, boss.blockPosition(), ModSounds.SWING_2.get(), SoundSource.HOSTILE, 2.0F, 1.0F);
-                hitWithScythe(50.0F, 1.5D);
+                hitWithScythe(AzazelConfig.HUMAN_SCYTHE_2_DAMAGE.get().floatValue(), AzazelConfig.HUMAN_SCYTHE_2_KNOCKBACK.get());
             }
         }
         else if (attackState == 30) {
             if (currentAnimTick == 8) {
                 boss.level().playSound(null, boss.blockPosition(), ModSounds.SWING_1.get(), SoundSource.HOSTILE, 2.0F, 1.0F);
-                executeSpearAttack(40.0F, 2.0D, false);
+                executeSpearAttack(AzazelConfig.HUMAN_SPEAR_MELEE_DAMAGE.get().floatValue(), AzazelConfig.HUMAN_SPEAR_MELEE_KNOCKBACK.get(), false);
             }
         }
         else if (attackState == 22) {

@@ -79,6 +79,7 @@ public class NetherExpClient {
         event.registerEntityRenderer(ModEntities.BLACKSMITH.get(), BlacksmithRenderer::new);
         event.registerEntityRenderer(ModEntities.DOCTOR.get(), DoctorRenderer::new);
         event.registerEntityRenderer(ModEntities.AZAZEL_HUMAN.get(), AzazelHumanRenderer::new);
+        event.registerEntityRenderer(ModEntities.EARTHQUAKE_ENTITY.get(), AzazelEarthquakeRenderer::new);
         event.registerEntityRenderer(ModEntities.SPLASH_ENTITY.get(), AzazelSplashRenderer::new);
         event.registerEntityRenderer(ModEntities.SPIKE_PROJECTILE_ENTITY.get(), AzazelSpikeProjectileRenderer::new);
         event.registerEntityRenderer(ModEntities.SPIKE_ENTITY.get(), AzazelSpikeRenderer::new);

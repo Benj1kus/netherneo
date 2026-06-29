@@ -32,6 +32,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -51,12 +52,16 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
     public static final EntityDataAccessor<Integer> BOSS_STATE = SynchedEntityData.defineId(AzazelHumanEntity.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> DIALOGUE_TICK = SynchedEntityData.defineId(AzazelHumanEntity.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Integer> ATTACK_TIMER = SynchedEntityData.defineId(AzazelHumanEntity.class, EntityDataSerializers.INT);
+    public static final EntityDataAccessor<Boolean> IS_PHASE_2 = SynchedEntityData.defineId(AzazelHumanEntity.class, EntityDataSerializers.BOOLEAN);
+
 
     public float getDamageTakenRecently() { return this.damageTakenRecently; }
     public void resetDamageTaken() { this.damageTakenRecently = 0.0F; }
     public int getDefendCooldown() { return this.defendCooldown; }
     public void setDefendCooldown(int ticks) { this.defendCooldown = ticks; }
     public int forcedAttackGoal = 0;
+    private int crackStage = 0;
+    public boolean phase2Triggered = false;
 
     private final ServerBossEvent bossEvent = (ServerBossEvent) (new ServerBossEvent(Component.literal("Azazel, The Awakened"), BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.PROGRESS)).setDarkenScreen(true);
     private float damageTakenRecently = 0.0F;
@@ -82,6 +87,7 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
         builder.define(BOSS_STATE, 0);
         builder.define(DIALOGUE_TICK, 0);
         builder.define(ATTACK_TIMER, 0);
+        builder.define(IS_PHASE_2, false);
     }
 
 
@@ -118,6 +124,8 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
     @Override
     protected void registerGoals() {
         this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<>(this, Player.class, false, false));
+        this.goalSelector.addGoal(0, new AzazelHumanUltimateGoal(this));
+        this.goalSelector.addGoal(0, new AzazelHumanPhase2Goal(this));
         this.goalSelector.addGoal(1, new AzazelHumanMeleeGoal(this));
         this.goalSelector.addGoal(2, new AzazelHumanLongRangeGoal(this));
         this.goalSelector.addGoal(3, new AzazelHumanMidRangeGoal(this));
@@ -179,6 +187,15 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
         if (this.level().isClientSide()) return false;
         int state = this.entityData.get(BOSS_STATE);
 
+        if (state == 100 || state == 101) {
+            return false;
+        }
+
+        if (this.getHealth() - amount <= 0.0F && state < 100) {
+            startDeathCinematic();
+            return false;
+        }
+
         // invinvicibility
         if (state < 5) {
             if (state == 3 && source.getEntity() instanceof Player) {
@@ -190,7 +207,7 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
         }
 
         // 11= shield, 12=rhino attack, 13= jump  22=stay defence
-        if (state == 11 || state == 12 || state == 13 || state == 22) {
+        if (state == 11 || state == 12 || state == 13 || state == 22 || state == 70) {
             if (source.getEntity() != null) {
                 this.playSound(com.benji.netherman.init.ModSounds.DODGE.get(), 1.0F, 0.8F + this.random.nextFloat() * 0.4F);
 
@@ -221,6 +238,20 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
         return super.hurt(source, amount);
     }
 
+    private void startDeathCinematic() {
+        this.entityData.set(BOSS_STATE, 100);
+        this.entityData.set(DIALOGUE_TICK, 0);
+        this.getNavigation().stop();
+        this.setTarget(null);
+        this.setHealth(1.0F);
+
+        // remove boss-theme
+        java.util.List<Player> nearbyPlayers = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(100.0D));
+        for (Player p : nearbyPlayers) {
+            p.removeEffect(ModEffects.ANXIETY);
+        }
+    }
+
     @Override
     public void tick() {
         super.tick();
@@ -228,6 +259,89 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
         if (!this.level().isClientSide()) {
             int state = this.entityData.get(BOSS_STATE);
             int tick = this.entityData.get(DIALOGUE_TICK);
+
+            if (state == 100 || state == 101) {
+                tick++;
+                this.entityData.set(DIALOGUE_TICK, tick);
+
+                if (tick == 1) {
+                    this.playSound(ModSounds.ROAR.get(), 4.0F, 1.0F);
+                }
+
+                if (tick > 45 && tick <= 93 && tick % 2 == 0) {
+                    this.playSound(ModSounds.AZAZEL_VOICE.get(), 1.0F, 0.8F + this.random.nextFloat() * 0.4F);
+                }
+
+                if (tick == 120) {
+                    this.entityData.set(BOSS_STATE, 101);
+                    this.playSound(ModSounds.LAUGH.get(), 2.0F, 1.0F);
+                }
+
+                if (tick >= 180) {
+                    if (this.level() instanceof ServerLevel serverLevel) {
+                        serverLevel.playSound(null, this.blockPosition(), SoundEvents.GENERIC_EXPLODE.value(), net.minecraft.sounds.SoundSource.HOSTILE, 4.0F, 1.0F);
+                        serverLevel.sendParticles(ParticleTypes.EXPLOSION_EMITTER, this.getX(), this.getY() + 1.0D, this.getZ(), 1, 0, 0, 0, 0);
+                        serverLevel.sendParticles(ParticleTypes.CAMPFIRE_COSY_SMOKE, this.getX(), this.getY() + 1.0D, this.getZ(), 40, 1.0D, 1.0D, 1.0D, 0.1D);
+
+                        for (int i = 0; i < 30; i++) {
+                            net.minecraft.world.item.Item goldItem = this.random.nextBoolean() ? Items.DIAMOND : net.minecraft.world.item.Items.GOLD_NUGGET;
+                            net.minecraft.world.entity.item.ItemEntity gold = new net.minecraft.world.entity.item.ItemEntity(
+                                    serverLevel, this.getX(), this.getY() + 1.0D, this.getZ(), new net.minecraft.world.item.ItemStack(goldItem, 1)
+                            );
+                            gold.setDeltaMovement((this.random.nextDouble() - 0.5D) * 0.5D, 0.5D + this.random.nextDouble() * 0.3D, (this.random.nextDouble() - 0.5D) * 0.5D);
+                            serverLevel.addFreshEntity(gold);
+                        }
+
+                        BlockPos barrelPos = this.blockPosition();
+                        serverLevel.setBlockAndUpdate(barrelPos, Blocks.BARREL.defaultBlockState());
+
+                        net.minecraft.world.level.block.entity.BlockEntity blockEntity = serverLevel.getBlockEntity(barrelPos);
+                        if (blockEntity instanceof net.minecraft.world.level.block.entity.BarrelBlockEntity barrel) {
+                            java.util.List<Integer> availableSlots = new java.util.ArrayList<>();
+                            for (int i = 0; i < 27; i++) availableSlots.add(i);
+                            java.util.Collections.shuffle(availableSlots);
+
+                            net.minecraft.world.item.ItemStack[] loot = new net.minecraft.world.item.ItemStack[] {
+                                    new net.minecraft.world.item.ItemStack(ModItems.MANIPULATOR_STICK.get(), 1),
+                                    new net.minecraft.world.item.ItemStack(ModItems.MUSIC_DISC_QUAR.get(), 1),
+                                    new net.minecraft.world.item.ItemStack(ModItems.MUSIC_DISC_MAZE.get(), 1),
+                                    new net.minecraft.world.item.ItemStack(ModItems.CHANCE_TOTEM.get(), 2),
+                                    new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.TOTEM_OF_UNDYING, 1),
+                                    new net.minecraft.world.item.ItemStack(ModItems.NOTE.get(), 1),
+                                    new net.minecraft.world.item.ItemStack((ModBlocks.AZAZEL_TROPHY.get().asItem()), 1),
+                                    new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.DIAMOND, 25),
+                                    new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.NETHERITE_SCRAP, 12),
+                                    new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.ENCHANTED_GOLDEN_APPLE, 4),
+                                    new net.minecraft.world.item.ItemStack((ModBlocks.NETHER_SPAWNER.get().asItem()), 1)
+                            };
+
+                            for (int i = 0; i < loot.length && i < availableSlots.size(); i++) {
+                                barrel.setItem(availableSlots.get(i), loot[i]);
+                            }
+                        }
+                    }
+                    this.bossEvent.removeAllPlayers();
+                    this.discard();
+                }
+                return;
+            }
+
+            if (state >= 5 && this.isAlive() && this.forcedAttackGoal == 0) {
+                float hpPct = this.getHealth() / this.getMaxHealth();
+                if (hpPct <= 0.3F && !this.phase2Triggered) {
+                    this.phase2Triggered = true;
+                    this.forcedAttackGoal = 5;
+                } else if (hpPct <= 0.7F && this.crackStage == 0) {
+                    this.crackStage = 1;
+                    this.forcedAttackGoal = 4;
+                } else if (hpPct <= 0.5F && this.crackStage == 1) {
+                    this.crackStage = 2;
+                    this.forcedAttackGoal = 4;
+                } else if (hpPct <= 0.1F && this.crackStage == 2) {
+                    this.crackStage = 3;
+                    this.forcedAttackGoal = 4;
+                }
+            }
 
             if (this.defendCooldown > 0) this.defendCooldown--;
 
@@ -297,8 +411,9 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
                 }
 
                 if (this.getTarget() != null && this.forcedAttackGoal == 0) {
-                    if (this.random.nextFloat() < 0.05F) { // 10% шанс
-                        this.forcedAttackGoal = this.random.nextInt(3) + 1; // Выдаст 1, 2 или 3
+                    float attackChance = this.entityData.get(IS_PHASE_2) ? 0.15F : 0.05F;
+                    if (this.random.nextFloat() < attackChance) {
+                        this.forcedAttackGoal = this.random.nextInt(3) + 1;
                     }
                 }
             }
@@ -353,6 +468,11 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
                 case 51 -> event.setAndContinue(RawAnimation.begin().thenPlay("spear_attack").thenLoop("idle"));
                 case 52 -> event.setAndContinue(RawAnimation.begin().thenPlay("spear_attack").thenLoop("idle"));
                 case 53 -> event.setAndContinue(RawAnimation.begin().thenPlay("spear_attack").thenLoop("idle"));
+                case 60 -> event.setAndContinue(RawAnimation.begin().thenPlay("leg_attack").thenLoop("idle"));
+                case 70 -> event.setAndContinue(RawAnimation.begin().thenPlay("phase").thenLoop("idle"));
+
+                case 100 -> event.setAndContinue(RawAnimation.begin().thenPlay("fall").thenLoop("fall_idle"));
+                case 101 -> event.setAndContinue(RawAnimation.begin().thenPlay("fall_death"));
 
                 case 20 -> event.setAndContinue(RawAnimation.begin().thenPlay("leg_attack").thenLoop("idle"));
                 case 21 -> event.setAndContinue(RawAnimation.begin().thenPlay("scythe_attack").thenLoop("idle"));
@@ -373,6 +493,9 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
         super.addAdditionalSaveData(tag);
         tag.putInt("BossState", this.entityData.get(BOSS_STATE));
         tag.putInt("DialogueTick", this.entityData.get(DIALOGUE_TICK));
+        tag.putInt("CrackStage", this.crackStage);
+        tag.putBoolean("IsPhase2", this.entityData.get(IS_PHASE_2));
+        tag.putBoolean("Phase2Triggered", this.phase2Triggered);
     }
 
     @Override
@@ -398,6 +521,9 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
         super.readAdditionalSaveData(tag);
         this.entityData.set(BOSS_STATE, tag.getInt("BossState"));
         this.entityData.set(DIALOGUE_TICK, tag.getInt("DialogueTick"));
+        this.entityData.set(IS_PHASE_2, tag.getBoolean("IsPhase2"));
+        this.phase2Triggered = tag.getBoolean("Phase2Triggered");
+        this.crackStage = tag.getInt("CrackStage");
 
         if (!this.level().isClientSide() && this.getAttribute(Attributes.MAX_HEALTH) != null) {
             this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(AzazelConfig.HUMAN_MAX_HEALTH.get());
