@@ -62,10 +62,60 @@ public class NetherExpClient {
             if (block.get() instanceof GeoBlockItem geoBlockItem) {
                 event.registerItem(new IClientItemExtensions() {
                     @Override
-                    public @NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {return new GeoBlockItemRenderer(geoBlockItem);}
+                    public @org.jetbrains.annotations.NotNull BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                        return new GeoBlockItemRenderer(geoBlockItem);
+                    }
                 }, geoBlockItem);
             }
         }
+        event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions() {
+            private com.benji.netherman.client.renderer.AzazelArmorRenderer renderer;
+
+            @Override
+            @SuppressWarnings("deprecation") 
+            public net.minecraft.client.model.HumanoidModel<?> getHumanoidArmorModel(net.minecraft.world.entity.LivingEntity livingEntity, net.minecraft.world.item.ItemStack itemStack, net.minecraft.world.entity.EquipmentSlot equipmentSlot, net.minecraft.client.model.HumanoidModel<?> original) {
+                if (this.renderer == null) {
+                    this.renderer = new com.benji.netherman.client.renderer.AzazelArmorRenderer();
+                }
+
+                this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
+
+                return this.renderer;
+            }
+        }, ModItems.AZAZEL_HELMET.get(), ModItems.AZAZEL_CHESTPLATE.get(), ModItems.AZAZEL_LEGGINGS.get(), ModItems.AZAZEL_BOOTS.get());
+
+        event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions() {
+            private software.bernie.geckolib.renderer.GeoItemRenderer<com.benji.netherman.common.item.AzazelSpearItem> renderer;
+            @Override
+            public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                if (this.renderer == null) {
+                    this.renderer = new software.bernie.geckolib.renderer.GeoItemRenderer<>(new com.benji.netherman.client.model.AzazelSpearModel());
+                }
+                return this.renderer;
+            }
+        }, ModItems.AZAZEL_SPEAR.get());
+
+        event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions() {
+            private software.bernie.geckolib.renderer.GeoItemRenderer<com.benji.netherman.common.item.AzazelScytheItem> renderer;
+            @Override
+            public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                if (this.renderer == null) {
+                    this.renderer = new software.bernie.geckolib.renderer.GeoItemRenderer<>(new com.benji.netherman.client.model.AzazelScytheModel());
+                }
+                return this.renderer;
+            }
+        }, ModItems.AZAZEL_SCYTHE.get());
+
+        event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions() {
+            private software.bernie.geckolib.renderer.GeoItemRenderer<com.benji.netherman.common.item.AzazelShieldItem> renderer;
+            @Override
+            public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                if (this.renderer == null) {
+                    this.renderer = new software.bernie.geckolib.renderer.GeoItemRenderer<>(new com.benji.netherman.client.model.AzazelShieldModel());
+                }
+                return this.renderer;
+            }
+        }, ModItems.AZAZEL_SHIELD.get());
     }
 
     public void registerRenderers(final EntityRenderersEvent.RegisterRenderers event) {

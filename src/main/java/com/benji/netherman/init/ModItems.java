@@ -6,10 +6,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.JukeboxSong;
-import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.DeferredSpawnEggItem;
@@ -96,6 +93,27 @@ public class ModItems {
                 .jukeboxPlayable(song)
         ));
     }
+
+    public static final DeferredItem<Item> AZAZEL_SPEAR = ITEMS.register("azazel_spear",
+            () -> new AzazelSpearItem(new Item.Properties().stacksTo(1)));
+
+    public static final DeferredItem<Item> AZAZEL_SCYTHE = ITEMS.register("azazel_scythe",
+            () -> new AzazelScytheItem(new Item.Properties().stacksTo(1)));
+
+    public static final net.neoforged.neoforge.registries.DeferredItem<net.minecraft.world.item.Item> AZAZEL_HELMET = ITEMS.register("azazel_helmet",
+            () -> new AzazelArmorItem(ModArmorMaterials.AZAZEL_MATERIAL, ArmorItem.Type.HELMET, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.HELMET.getDurability(37))));
+
+    public static final net.neoforged.neoforge.registries.DeferredItem<net.minecraft.world.item.Item> AZAZEL_CHESTPLATE = ITEMS.register("azazel_chestplate",
+            () -> new AzazelArmorItem(ModArmorMaterials.AZAZEL_MATERIAL, ArmorItem.Type.CHESTPLATE, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.CHESTPLATE.getDurability(37))));
+
+    public static final net.neoforged.neoforge.registries.DeferredItem<net.minecraft.world.item.Item> AZAZEL_LEGGINGS = ITEMS.register("azazel_leggings",
+            () -> new AzazelArmorItem(ModArmorMaterials.AZAZEL_MATERIAL, ArmorItem.Type.LEGGINGS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.LEGGINGS.getDurability(37))));
+
+    public static final net.neoforged.neoforge.registries.DeferredItem<net.minecraft.world.item.Item> AZAZEL_BOOTS = ITEMS.register("azazel_boots",
+            () -> new AzazelArmorItem(ModArmorMaterials.AZAZEL_MATERIAL, ArmorItem.Type.BOOTS, new Item.Properties().stacksTo(1).durability(ArmorItem.Type.BOOTS.getDurability(37))));
+
+    public static final DeferredItem<Item> AZAZEL_SHIELD = ITEMS.register("azazel_shield",
+            () -> new AzazelShieldItem(new Item.Properties().stacksTo(1)));
 
     private static <T extends Item> DeferredItem<T> register(String id, Supplier<T> pIProp) {
         return ITEMS.register(id.toLowerCase(), pIProp);

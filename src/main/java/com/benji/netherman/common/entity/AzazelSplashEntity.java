@@ -52,8 +52,8 @@ public class AzazelSplashEntity extends Projectile implements GeoEntity {
 
         if (move.lengthSqr() > 0.001D) {
             double d0 = move.horizontalDistance();
-            this.setYRot((float)(Mth.atan2(move.x, move.z) * (180F / Math.PI)) + 90.0F);
-            this.setXRot((float)(Mth.atan2(move.y, d0) * (180F / Math.PI)));
+            this.setYRot((float)(Mth.atan2(move.x, move.z) * (double)(180F / (float)Math.PI)));
+            this.setXRot((float)(Mth.atan2(move.y, d0) * (double)(180F / (float)Math.PI)));
             this.yRotO = this.getYRot();
             this.xRotO = this.getXRot();
         }
@@ -66,9 +66,11 @@ public class AzazelSplashEntity extends Projectile implements GeoEntity {
     @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
-        if (!this.level().isClientSide() && result.getEntity() instanceof Player player) {
+        if (!this.level().isClientSide() && result.getEntity() instanceof LivingEntity target) {
+            if (target == this.getOwner() || target instanceof AzazelHumanEntity) return;
+
             float damage = com.benji.netherman.config.AzazelConfig.HUMAN_SPLASH_DAMAGE.get().floatValue();
-            player.hurt(this.damageSources().mobProjectile(this, (LivingEntity) this.getOwner()), damage);
+            target.hurt(this.damageSources().mobProjectile(this, (LivingEntity) this.getOwner()), damage);
 
             ((ServerLevel) this.level()).sendParticles(ParticleTypes.CRIT, this.getX(), this.getY(), this.getZ(), 30, 1.0, 1.0, 1.0, 0.2);
             this.discard();

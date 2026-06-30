@@ -35,6 +35,7 @@ public class NetherExp {
         ModEffects.init(modEventBus);
         ModCreativeTabs.init(modEventBus);
         ModRecipeSerializers.init(modEventBus);
+        ModArmorMaterials.init(modEventBus);
         ModStructureTypes.init(modEventBus);
         ModSounds.SOUNDS.register(modEventBus);
 
