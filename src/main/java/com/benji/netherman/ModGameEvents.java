@@ -1,14 +1,18 @@
 package com.benji.netherman;
 
 import com.benji.netherman.NetherExp;
+import com.benji.netherman.client.renderer.AzazelWingTrails;
 import com.benji.netherman.init.ModItems;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -21,14 +25,24 @@ import java.util.WeakHashMap;
 @EventBusSubscriber(modid = NetherExp.MODID)
 public class ModGameEvents {
 
+    public static class DrillData {
+        public int ticks;
+        public Vec3 direction;
+
+        public DrillData(int ticks, Vec3 direction) {
+            this.ticks = ticks;
+            this.direction = direction;
+        }
+    }
+
     private static final WeakHashMap<Player, Integer> BOOST_TRAILS = new WeakHashMap<>();
+    public static final WeakHashMap<Player, DrillData> ACTIVE_DRILLS = new WeakHashMap<>();
 
     @SubscribeEvent
     public static void onLivingHurt(LivingIncomingDamageEvent event) {
         if (event.getEntity() instanceof Player player) {
 
             if (event.getSource().is(DamageTypes.FALL)) {
-
                 boolean hasFullSet = player.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.AZAZEL_HELMET.get()) &&
                         player.getItemBySlot(EquipmentSlot.CHEST).is(ModItems.AZAZEL_CHESTPLATE.get()) &&
                         player.getItemBySlot(EquipmentSlot.LEGS).is(ModItems.AZAZEL_LEGGINGS.get()) &&
@@ -39,13 +53,75 @@ public class ModGameEvents {
                     event.setAmount(originalAmount * 0.2F);
                 }
             }
+
+            if (event.getSource().is(DamageTypes.FLY_INTO_WALL)) {
+                if (player.getItemBySlot(EquipmentSlot.CHEST).is(ModItems.AZAZEL_CHESTPLATE.get())) {
+
+                    event.setCanceled(true);
+
+                    Vec3 look = player.getLookAngle().normalize();
+                    ACTIVE_DRILLS.put(player, new DrillData(12, look));
+
+                    player.level().playSound(
+                            null,
+                            player.blockPosition(),
+                            SoundEvents.GENERIC_EXPLODE.value(),
+                            SoundSource.PLAYERS,
+                            1.5F,
+                            1.2F
+                    );
+
+                    if (player.level().isClientSide()) {
+                        AzazelWingTrails.startDrillingSparks(player, 12, look);
+                    }
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerTick(PlayerTickEvent.Pre event) {
+        Player player = event.getEntity();
+        DrillData drill = ACTIVE_DRILLS.get(player);
+
+        if (drill != null && drill.ticks > 0) {
+            drill.ticks--;
+
+            player.setDeltaMovement(drill.direction.scale(0.85D));
+            player.hurtMarked = true;
+
+            if (!player.level().isClientSide() && player.level() instanceof ServerLevel serverLevel) {
+                Vec3 targetPos = player.position().add(drill.direction.scale(1.2D));
+                BlockPos centerBlock = BlockPos.containing(targetPos.x, targetPos.y + 0.6D, targetPos.z);
+
+                int r = 1;
+                for (int x = -r; x <= r; x++) {
+                    for (int y = -r; y <= r + 1; y++) {
+                        for (int z = -r; z <= r; z++) {
+                            BlockPos targetBlock = centerBlock.offset(x, y, z);
+                            BlockState state = serverLevel.getBlockState(targetBlock);
+
+                            if (!state.isAir() && state.getDestroySpeed(serverLevel, targetBlock) >= 0) {
+                                serverLevel.destroyBlock(targetBlock, true, player);
+                            }
+                        }
+                    }
+                }
+
+                // Стандартные огненные партиклы
+                serverLevel.sendParticles(ParticleTypes.FLAME, player.getX(), player.getY() + 0.8D, player.getZ(), 6, 0.4D, 0.4D, 0.4D, 0.1D);
+                serverLevel.sendParticles(ParticleTypes.LAVA, player.getX(), player.getY() + 0.8D, player.getZ(), 3, 0.3D, 0.3D, 0.3D, 0.1D);
+            }
+
+            if (drill.ticks <= 0) {
+                ACTIVE_DRILLS.remove(player);
+            }
         }
     }
 
     @SubscribeEvent
     public static void onPlayerTakeDamage(LivingIncomingDamageEvent event) {
         if (event.getEntity() instanceof Player player) {
-
             boolean hasShieldInMainHand = player.getMainHandItem().is(ModItems.AZAZEL_SHIELD.get());
             boolean hasShieldInOffHand = player.getOffhandItem().is(ModItems.AZAZEL_SHIELD.get());
 
@@ -68,7 +144,6 @@ public class ModGameEvents {
                             EquipmentSlot slot = hasShieldInMainHand ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND;
 
                             int durabilityToConsume = Math.max(1, (int) event.getAmount());
-
                             shieldStack.hurtAndBreak(durabilityToConsume, player, slot);
                         }
                     }
@@ -109,35 +184,9 @@ public class ModGameEvents {
                     );
 
                     BOOST_TRAILS.put(player, 35);
+                    com.benji.netherman.client.renderer.AzazelWingTrails.spawnShockwave(player);
+                    com.benji.netherman.client.renderer.AzazelWingTrails.startBoost(player, 160);
                 }
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onPlayerTick(PlayerTickEvent.Pre event) {
-        Player player = event.getEntity();
-
-        if (player.level().isClientSide()) {
-            Integer ticks = BOOST_TRAILS.get(player);
-
-            if (ticks != null && ticks > 0) {
-                BOOST_TRAILS.put(player, ticks - 1);
-
-                Vec3 look = player.getLookAngle();
-                Vec3 up = new Vec3(0, 1, 0);
-                Vec3 rightOffset = look.cross(up).normalize().scale(0.65D);
-                Vec3 centerPos = player.position().add(0, 0.4D, 0);
-
-                Vec3 leftTrail = centerPos.add(rightOffset).subtract(look.scale(0.4D));
-                Vec3 rightTrail = centerPos.subtract(rightOffset).subtract(look.scale(0.4D));
-
-                player.level().addParticle(ParticleTypes.CLOUD,
-                        leftTrail.x, leftTrail.y, leftTrail.z, 0, 0, 0);
-                player.level().addParticle(ParticleTypes.CLOUD,
-                        rightTrail.x, rightTrail.y, rightTrail.z, 0, 0, 0);
-            } else if (ticks != null) {
-                BOOST_TRAILS.remove(player);
             }
         }
     }

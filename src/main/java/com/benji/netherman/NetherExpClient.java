@@ -72,7 +72,7 @@ public class NetherExpClient {
             private com.benji.netherman.client.renderer.AzazelArmorRenderer renderer;
 
             @Override
-            @SuppressWarnings("deprecation") 
+            @SuppressWarnings("deprecation")
             public net.minecraft.client.model.HumanoidModel<?> getHumanoidArmorModel(net.minecraft.world.entity.LivingEntity livingEntity, net.minecraft.world.item.ItemStack itemStack, net.minecraft.world.entity.EquipmentSlot equipmentSlot, net.minecraft.client.model.HumanoidModel<?> original) {
                 if (this.renderer == null) {
                     this.renderer = new com.benji.netherman.client.renderer.AzazelArmorRenderer();
