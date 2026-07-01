@@ -94,6 +94,8 @@ public class ModItems {
         ));
     }
 
+    public static final DeferredItem<Item> QUOTA = ITEMS.register("quota",
+            () -> new QuotaItem(new Item.Properties().stacksTo(1)));
 
     public static final DeferredItem<Item> FAITH_PART = ITEMS.register("faith_part",
             () -> new Item(new Item.Properties().stacksTo(27)));

@@ -21,6 +21,7 @@ public class ClientFogHandler {
             fogProgress -= 0.01f;
         }
         fogProgress = Mth.clamp(fogProgress, 0.0f, 1.0f);
+        isInsideMansion = false;
     }
 
     @SubscribeEvent

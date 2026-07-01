@@ -81,6 +81,63 @@ public class ModGameEvents {
 
 
     @SubscribeEvent
+    public static void onLivingDeath(net.neoforged.neoforge.event.entity.living.LivingDeathEvent event) {
+
+        if (event.getSource().getEntity() instanceof Player player) {
+            net.minecraft.world.entity.LivingEntity victim = event.getEntity();
+
+            if (victim instanceof com.benji.netherman.common.entity.BelieverEntity || victim instanceof com.benji.netherman.common.entity.BelieverVillagerEntity) {
+                com.benji.netherman.QuotaManager.failQuota(player);
+                return;
+            }
+
+            com.benji.netherman.QuotaManager.addProgress(player, 2, 1);
+
+            if (victim instanceof net.minecraft.world.entity.npc.Villager || victim instanceof net.minecraft.world.entity.animal.IronGolem) {
+                com.benji.netherman.QuotaManager.addProgress(player, 1, 1);
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerTickQuota(net.neoforged.neoforge.event.tick.PlayerTickEvent.Post event) {
+        Player player = event.getEntity();
+        if (!player.level().isClientSide()) {
+            net.minecraft.nbt.CompoundTag data = player.getPersistentData();
+
+            if (data.getBoolean("AzazelCultist") && data.contains("QuotaTimeLeft")) {
+                int timeLeft = data.getInt("QuotaTimeLeft");
+                if (timeLeft > 0) {
+                    data.putInt("QuotaTimeLeft", timeLeft - 1);
+                } else {
+                    com.benji.netherman.QuotaManager.failQuota(player);
+                }
+            }
+
+            if (data.contains("AzazelPenaltyTime")) {
+                long penaltyTime = data.getLong("AzazelPenaltyTime");
+                if (player.level().getGameTime() >= penaltyTime) {
+                    com.benji.netherman.QuotaManager.restoreHealth(player);
+                    data.remove("AzazelPenaltyTime");
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onBlockPlace(net.neoforged.neoforge.event.level.BlockEvent.EntityPlaceEvent event) {
+        if (!event.getLevel().isClientSide() && event.getEntity() instanceof Player player) {
+            net.minecraft.world.level.block.state.BlockState state = event.getState();
+
+            if (state.is(net.minecraft.world.level.block.Blocks.GOLD_BLOCK) || state.is(net.minecraft.world.level.block.Blocks.BELL)) {
+                if (com.benji.netherman.QuotaManager.checkAltarStructure((net.minecraft.world.level.Level) event.getLevel(), event.getPos())) {
+                    com.benji.netherman.QuotaManager.addProgress(player, 0, 1);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
     public static void onLivingDrops(net.neoforged.neoforge.event.entity.living.LivingDropsEvent event) {
         if (event.getSource().getEntity() instanceof net.minecraft.world.entity.player.Player player) {
 

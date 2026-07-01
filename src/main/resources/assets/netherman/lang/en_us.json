@@ -86,6 +86,7 @@
   "block.netherman.samsonit_bricks_stairs": "Samsonite brick stairs",
   "block.netherman.samsonit_bricks_wall": "Samsonite brick wall",
   "block.netherman.samsonit_tiles": "Samsonite tiles",
+  "block.netherman.samsonite_bell": "Samsonite bell",
 
   "boss.netherman.azazel_human.death_line": "§4ᒲᔑ∷ᔑᔑꖎ ╎ℸ ̣ 'ᓭ ᒲ|| ⎓ᔑ⚍ꖎℸ ̣...",
 
@@ -117,11 +118,20 @@
   "tooltip.netherman.azazel_helmet.line2": "- ʖᒷꖎ⨅ᒷʖ⚍ʖ 5:10",
   "tooltip.netherman.azazel_chestplate.line1": "Righteousness will be a belt around His waist",
   "tooltip.netherman.azazel_chestplate.line2": "- ᔑᓭᒲ↸ᒷ⚍ᓭ 6:14",
+  "tooltip.netherman.azazel_chestplate.line3": "[RMB] for boost",
   "tooltip.netherman.azazel_leggings.line1": "He makes my feet like those of a lamb",
   "tooltip.netherman.azazel_leggings.line2": "- ℸ ̣ ⍑ᒷ ꖎᔑᒲʖ 10:15",
   "tooltip.netherman.azazel_boots.line1": "For He commands His angels concerning you, to guard you in all your ways",
   "tooltip.netherman.azazel_boots.line2": "- ʖᒷꖎ╎ᔑꖎ 8:12",
   "tooltip.netherman.azazel_set_bonus": "ᒲᔑ∷ᔑᔑꖎ╎ᓭ⚍∷⊣↸",
+  "tooltip.netherman.essence.line2": "[RMB] to recover lost hearts",
+
+  "gui.netherman.quota.altar": "Build an Altar to Azazel",
+  "gui.netherman.quota.destroy": "Destroy a village or kill %s/%s villagers",
+  "gui.netherman.quota.sacrifice": "Sacrifice mobs %s/%s",
+  "gui.netherman.quota.mine": "Mine gold ingots %s/%s",
+  "gui.netherman.quota.pillagers": "Convert pillagers to faith %s/%s",
+  "gui.netherman.quota.villagers": "Convert villagers to faith %s/%s",
 
   "entity.netherman.bell_guardian": "Bellemoth",
   "entity.netherman.welcomer": "Welcomer",
@@ -140,6 +150,16 @@
   "entity.netherman.piglin_prisoner": "Prisoner Piglin",
   "entity.netherman.ghastly": "Ghastly",
   "entity.netherman.manipulator": "Manipulator",
+
+  "entity.netherman.azazel_human": "The True Azazel",
+
+  "entity.netherman.azazel_splash": "ꖎᒷᔑ⊣ᒷ",
+  "entity.netherman.azazel_earthquake": "ꖎᒷᔑ⊣ᒷ",
+  "entity.netherman.azazel_spike_projectile": "ꖎᒷᔑ⊣ᒷ",
+  "entity.netherman.azazel_spike": "ꖎᒷᔑ⊣ᒷ",
+  "item.netherman.locker_quest1": "⎓⚍リ",
+  "item.netherman.locker_quest2": "∷ᔑ⊣ᒷ",
+  "item.netherman.locker_quest3": "⎓ᔑ╎ℸ ̣ ⍑",
 
   "entity.netherman.azazel.mistake": "THAT WAS A MISTAKE",
   "entity.netherman.azazel.surrender": "Hand over your weapon if you want to live!",
@@ -244,6 +264,18 @@
   "item.netherman.music_disc_sacred": "§bMusic Disc",
   "item.netherman.music_disc_maze": "§bMusic Disc",
   "item.netherman.music_disc_azazel": "§bMusic Disc",
+
+  "item.netherman.quota": "Cult Scroll",
+  "item.netherman.faith_essence": "Essence of Faith",
+  "item.netherman.faith_part": "Piece of Faith",
+
+  "item.netherman.azazel_helmet": "§6Golden Wreath",
+  "item.netherman.azazel_chestplate": "Preacher's chestplate",
+  "item.netherman.azazel_leggings": "Preacher's leggings",
+  "item.netherman.azazel_boots": "Preacher's boots",
+  "item.netherman.azazel_spear": "§6Longinus",
+  "item.netherman.azazel_scythe": "§6Judicus",
+  "item.netherman.azazel_shield": "§4Aegis of Faith",
 
 
   "jukebox_song.netherman.boss_fight": "Toby Fox - GUARDIAN",

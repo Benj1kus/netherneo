@@ -10,6 +10,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.monster.Pillager;
@@ -38,7 +39,23 @@ public class FaithEssenceItem extends Item {
         tooltipComponents.add(Component.translatable("tooltip.netherman.essence.line1", essence)
                 .withStyle(ChatFormatting.AQUA));
 
+        tooltipComponents.add(Component.translatable("tooltip.netherman.essence.line2", essence)
+                .withStyle(ChatFormatting.BLUE));
+
         tooltipComponents.add(essence);
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        if (!level.isClientSide()) {
+            if (player.getPersistentData().contains("AzazelPenaltyTime")) {
+                com.benji.netherman.QuotaManager.restoreHealth(player);
+                player.getPersistentData().remove("AzazelPenaltyTime");
+                if (!player.isCreative()) player.getItemInHand(hand).shrink(1);
+                return InteractionResultHolder.consume(player.getItemInHand(hand));
+            }
+        }
+        return super.use(level, player, hand);
     }
 
     @Override
@@ -87,6 +104,13 @@ public class FaithEssenceItem extends Item {
             }
 
             target.discard();
+
+            if (target instanceof Pillager) {
+                com.benji.netherman.QuotaManager.addProgress(player, 4, 1);
+            } else if (target instanceof Villager) {
+                com.benji.netherman.QuotaManager.addProgress(player, 5, 1);
+            }
+
 
             if (!player.isCreative()) {
                 stack.shrink(1);
