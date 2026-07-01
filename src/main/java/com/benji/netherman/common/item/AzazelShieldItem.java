@@ -2,7 +2,9 @@ package com.benji.netherman.common.item;
 
 import com.benji.netherman.init.ModEffects;
 import com.benji.netherman.init.ModSounds;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -12,9 +14,12 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ShieldItem;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
@@ -74,6 +79,13 @@ public class AzazelShieldItem extends ShieldItem implements GeoItem {
     @Override
     public int getUseDuration(ItemStack stack, LivingEntity entity) {
         return 0;
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        Component shield = Component.translatable("tooltip.netherman.shield")
+                .withStyle(ChatFormatting.GOLD);
+        tooltipComponents.add(shield);
     }
 
     @Override

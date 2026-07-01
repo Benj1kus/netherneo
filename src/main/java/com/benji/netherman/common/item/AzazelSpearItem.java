@@ -5,7 +5,9 @@ import com.benji.netherman.init.ModItems;
 import com.benji.netherman.init.ModSounds;
 import com.benji.netherman.common.entity.AzazelHumanEntity;
 import com.benji.netherman.common.entity.AzazelSpikeEntity;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -15,12 +17,15 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
@@ -78,6 +83,17 @@ public class AzazelSpearItem extends SwordItem implements GeoItem {
             }
         }
         return InteractionResultHolder.pass(stack);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        Component spear = Component.translatable("tooltip.netherman.spear")
+                .withStyle(ChatFormatting.DARK_RED);
+
+        tooltipComponents.add(Component.translatable("tooltip.netherman.spear.line1", spear)
+                .withStyle(ChatFormatting.GOLD));
+
+        tooltipComponents.add(spear);
     }
 
     @Override

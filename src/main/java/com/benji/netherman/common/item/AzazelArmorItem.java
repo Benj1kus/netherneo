@@ -1,11 +1,12 @@
 package com.benji.netherman.common.item;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
+import net.minecraft.world.level.Level;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.AnimatableManager;
@@ -14,6 +15,9 @@ import software.bernie.geckolib.animation.PlayState;
 import software.bernie.geckolib.animation.RawAnimation;
 import software.bernie.geckolib.constant.DataTickets;
 import software.bernie.geckolib.util.GeckoLibUtil;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class AzazelArmorItem extends ArmorItem implements GeoItem {
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
@@ -36,6 +40,34 @@ public class AzazelArmorItem extends ArmorItem implements GeoItem {
             }
         }
         return true;
+    }
+
+
+    @Override
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        ArmorItem.Type type = this.getType();
+
+        switch (type) {
+            case HELMET -> {
+                tooltipComponents.add(Component.translatable("tooltip.netherman.azazel_helmet.line1").withStyle(ChatFormatting.GOLD));
+                tooltipComponents.add(Component.translatable("tooltip.netherman.azazel_helmet.line2").withStyle(ChatFormatting.YELLOW));
+            }
+            case CHESTPLATE -> {
+                tooltipComponents.add(Component.translatable("tooltip.netherman.azazel_chestplate.line1").withStyle(ChatFormatting.GOLD));
+                tooltipComponents.add(Component.translatable("tooltip.netherman.azazel_chestplate.line2").withStyle(ChatFormatting.YELLOW));
+            }
+            case LEGGINGS -> {
+                tooltipComponents.add(Component.translatable("tooltip.netherman.azazel_leggings.line1").withStyle(ChatFormatting.GOLD));
+                tooltipComponents.add(Component.translatable("tooltip.netherman.azazel_leggings.line2").withStyle(ChatFormatting.YELLOW));
+            }
+            case BOOTS -> {
+                tooltipComponents.add(Component.translatable("tooltip.netherman.azazel_boots.line1").withStyle(ChatFormatting.GOLD));
+                tooltipComponents.add(Component.translatable("tooltip.netherman.azazel_boots.line2").withStyle(ChatFormatting.YELLOW));
+            }
+        }
+
+        tooltipComponents.add(Component.empty());
+        tooltipComponents.add(Component.translatable("tooltip.netherman.azazel_set_bonus").withStyle(ChatFormatting.DARK_RED));
     }
 
     @Override

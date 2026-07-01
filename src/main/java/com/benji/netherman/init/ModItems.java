@@ -94,6 +94,14 @@ public class ModItems {
         ));
     }
 
+
+    public static final DeferredItem<Item> FAITH_PART = ITEMS.register("faith_part",
+            () -> new Item(new Item.Properties().stacksTo(27)));
+
+    public static final DeferredItem<Item> FAITH_ESSENCE = ITEMS.register("faith_essence",
+            () -> new FaithEssenceItem(new Item.Properties().stacksTo(27)));
+
+
     public static final DeferredItem<Item> AZAZEL_SPEAR = ITEMS.register("azazel_spear",
             () -> new AzazelSpearItem(new Item.Properties().stacksTo(1)));
 
