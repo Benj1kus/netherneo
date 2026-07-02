@@ -94,6 +94,22 @@ public class ModItems {
         ));
     }
 
+    public static final  DeferredItem<Item> ANGEL_SPAWNER_ITEM = ITEMS.register("angel_spawner",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.ANGEL_SPAWNER.get(), new net.minecraft.world.item.Item.Properties()));
+
+    public static final  DeferredItem<Item> FACE_SPAWNER_ITEM = ITEMS.register("face_spawner",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.FACE_SPAWNER.get(), new net.minecraft.world.item.Item.Properties()));
+
+    public static final  DeferredItem<Item> VILLAGE_SPAWNER_ITEM = ITEMS.register("village_spawner",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.VILLAGE_SPAWNER.get(), new net.minecraft.world.item.Item.Properties()));
+
+    public static final  DeferredItem<Item> KING_SPAWNER_ITEM = ITEMS.register("king_spawner",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.KING_SPAWNER.get(), new net.minecraft.world.item.Item.Properties()));
+
+    public static final  DeferredItem<Item> THRONE_SPAWNER_ITEM = ITEMS.register("throne_spawner",
+            () -> new net.minecraft.world.item.BlockItem(ModBlocks.THRONE_SPAWNER.get(), new net.minecraft.world.item.Item.Properties()));
+
+
     public static final DeferredItem<Item> QUOTA = ITEMS.register("quota",
             () -> new QuotaItem(new Item.Properties().stacksTo(1)));
 

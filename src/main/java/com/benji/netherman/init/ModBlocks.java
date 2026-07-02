@@ -40,6 +40,22 @@ public class ModBlocks {
             ModSounds.SAMSONIT_BRICKS_STEP
     );
 
+    public static final DeferredBlock<Block> ANGEL_SPAWNER = BLOCKS.register("angel_spawner",
+            () -> new PaintingSpawnerBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRUCTURE_VOID).noCollission().noLootTable(), ModPaintings.ANGEL_PAINTING));
+
+    public static final DeferredBlock<Block> FACE_SPAWNER = BLOCKS.register("face_spawner",
+            () -> new PaintingSpawnerBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRUCTURE_VOID).noCollission().noLootTable(), ModPaintings.FACE_PAINTING));
+
+    public static final DeferredBlock<Block> VILLAGE_SPAWNER = BLOCKS.register("village_spawner",
+            () -> new PaintingSpawnerBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRUCTURE_VOID).noCollission().noLootTable(), ModPaintings.VILLAGE_PAINTING));
+
+    public static final DeferredBlock<Block> KING_SPAWNER = BLOCKS.register("king_spawner",
+            () -> new PaintingSpawnerBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRUCTURE_VOID).noCollission().noLootTable(), ModPaintings.KING_PAINTING));
+
+    public static final DeferredBlock<Block> THRONE_SPAWNER = BLOCKS.register("throne_spawner",
+            () -> new PaintingSpawnerBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.STRUCTURE_VOID).noCollission().noLootTable(), ModPaintings.THRONE_PAINTING));
+
+
     public static final DeferredBlock<Block> A_PUZZLE = register("a_puzzle", () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.TUFF)
                     .strength(6.0F)
                     .requiresCorrectToolForDrops()

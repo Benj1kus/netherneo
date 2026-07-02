@@ -11,6 +11,15 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class ModBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, NetherExp.MODID);
 
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PaintingSpawnerBlockEntity>> PAINTING_SPAWNER =
+            BLOCK_ENTITIES.register("painting_spawner", () -> BlockEntityType.Builder.of(PaintingSpawnerBlockEntity::new,
+                    ModBlocks.ANGEL_SPAWNER.get(),
+                    ModBlocks.FACE_SPAWNER.get(),
+                    ModBlocks.VILLAGE_SPAWNER.get(),
+                    ModBlocks.KING_SPAWNER.get(),
+                    ModBlocks.THRONE_SPAWNER.get()
+            ).build(null));
+
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<GhastlyNestBlockEntity>> GHASTLY_NEST = BLOCK_ENTITIES.register("ghastly_nest",
             () -> BlockEntityType.Builder.of(GhastlyNestBlockEntity::new, ModBlocks.GHASTLY_NEST.get()).build(null));
 
