@@ -391,8 +391,16 @@ public class ModBlocks {
             .noOcclusion(),
             3, ModBlockEntities.FACE_PUZZLE_LEFT_DOWN), new Item.Properties());
 
-    public static final DeferredBlock<Block> SAMSONITE_BELL = register("samsonite_bell",
-            () -> new SamsoniteBellBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.BELL)), new Item.Properties());
+    public static final DeferredBlock<Block> SAMSONITE_BELL = register(
+            "samsonite_bell",
+            () -> new SamsoniteBellBlock(
+                    BlockBehaviour.Properties.ofFullCopy(Blocks.BELL)
+                            .strength(5.0F)
+                            .requiresCorrectToolForDrops()
+                            .noOcclusion()
+            ),
+            new Item.Properties()
+    );
 
     public static final DeferredBlock<Block> LABYRINTH_BELLSPAWN = register("labyrinth_bellspawn",
             () -> new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.NETHERITE_BLOCK)
