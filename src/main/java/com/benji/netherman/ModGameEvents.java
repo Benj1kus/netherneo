@@ -3,6 +3,7 @@ package com.benji.netherman;
 import com.benji.netherman.NetherExp;
 import com.benji.netherman.client.renderer.AzazelWingTrails;
 import com.benji.netherman.init.ModItems;
+import com.benji.netherman.init.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -200,7 +201,6 @@ public class ModGameEvents {
                     }
                 }
 
-                // Стандартные огненные партиклы
                 serverLevel.sendParticles(ParticleTypes.FLAME, player.getX(), player.getY() + 0.8D, player.getZ(), 6, 0.4D, 0.4D, 0.4D, 0.1D);
                 serverLevel.sendParticles(ParticleTypes.LAVA, player.getX(), player.getY() + 0.8D, player.getZ(), 3, 0.3D, 0.3D, 0.3D, 0.1D);
             }
@@ -262,7 +262,7 @@ public class ModGameEvents {
                             player.blockPosition(),
                             SoundEvents.ENDER_DRAGON_FLAP,
                             SoundSource.PLAYERS,
-                            1.5F,
+                            0.8F,
                             1.0F
                     );
 
@@ -271,9 +271,11 @@ public class ModGameEvents {
                             player.blockPosition(),
                             SoundEvents.PHANTOM_FLAP,
                             SoundSource.PLAYERS,
-                            1.0F,
+                            0.5F,
                             1.3F
                     );
+
+                    player.level().playSound(player, player.blockPosition(), ModSounds.SHOCK.get(), net.minecraft.sounds.SoundSource.PLAYERS, 5.0F, 1.0F);
 
                     BOOST_TRAILS.put(player, 35);
                     com.benji.netherman.client.renderer.AzazelWingTrails.spawnShockwave(player);

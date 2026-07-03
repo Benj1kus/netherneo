@@ -16,6 +16,7 @@ public class ModSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> UNIT_IDLE = registerSoundEvent("unit_idle");
     public static final DeferredHolder<SoundEvent, SoundEvent> SPINNING_WHEEL = registerSoundEvent("spinning_wheel");
 
+    public static final DeferredHolder<SoundEvent, SoundEvent> SHOCK = registerSoundEvent("shock");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> BLACKSMITH_IDLE = registerSoundEvent("blacksmith_idle");
     public static final DeferredHolder<SoundEvent, SoundEvent> RIFTSOUND = registerSoundEvent("riftsound");

@@ -13,6 +13,7 @@
   "prison2": { "sounds": [ "netherman:prison2" ] },
   "prison3": { "sounds": [ "netherman:prison3" ] },
   "prison4": { "sounds": [ "netherman:prison4" ] },
+  "shock": { "sounds": [ "netherman:shock" ] },
 
   "hirring": { "sounds": [ "netherman:hirring" ] },
   "totemus_puzzle": { "sounds": [ "netherman:totemus_puzzle" ] },
