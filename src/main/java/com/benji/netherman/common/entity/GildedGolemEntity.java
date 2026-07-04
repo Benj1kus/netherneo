@@ -83,9 +83,11 @@ public class GildedGolemEntity extends IronGolem implements GeoEntity {
         
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this).setAlertOthers());
 
-        
+
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Mob.class, 5, false, false,
-                (entity) -> entity instanceof net.minecraft.world.entity.animal.Animal || entity instanceof net.minecraft.world.entity.animal.IronGolem || entity instanceof net.minecraft.world.entity.npc.AbstractVillager));
+                (entity) -> entity instanceof net.minecraft.world.entity.animal.Animal ||
+                        (entity instanceof net.minecraft.world.entity.animal.IronGolem && !(entity instanceof GildedGolemEntity)) ||
+                        entity instanceof net.minecraft.world.entity.npc.AbstractVillager));
     }
 
     @Override
