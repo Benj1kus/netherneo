@@ -263,20 +263,31 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
             return false;
         }
 
-        // invinvicibility
+        // Неуязвимость до боя и старт фазы 4
         if (state < 5) {
             if (state == 3 && source.getEntity() instanceof Player) {
                 this.entityData.set(BOSS_STATE, 4);
                 this.entityData.set(DIALOGUE_TICK, 0);
-                this.playSound(com.benji.netherman.init.ModSounds.LAUGH.get(), 2.0F, 1.0F);
+                this.playSound(ModSounds.LAUGH.get(), 2.0F, 1.0F);
+
+                // Прыжок с трона
+                Vec3 forward = Vec3.directionFromRotation(0, this.getYRot()).normalize();
+                this.setPos(this.getX() + forward.x * 2.0D, this.getY(), this.getZ() + forward.z * 2.0D);
+
+                // Наложение эффекта PRAEMIUM на бесконечность (-1)
+                if (this.level() instanceof ServerLevel sl) {
+                    for (ServerPlayer p : sl.getEntitiesOfClass(ServerPlayer.class, this.getBoundingBox().inflate(64.0D))) {
+                        p.addEffect(new MobEffectInstance(ModEffects.PRAEMIUM, -1, 0, false, false, true));
+                    }
+                }
             }
             return false;
         }
 
-        // 11= shield, 12=rhino attack, 13= jump  22=stay defence
+        // Блокирование урона в защитных фазах (11, 12, 13, 22, 70)
         if (state == 11 || state == 12 || state == 13 || state == 22 || state == 70) {
             if (source.getEntity() != null) {
-                this.playSound(com.benji.netherman.init.ModSounds.DODGE.get(), 1.0F, 0.8F + this.random.nextFloat() * 0.4F);
+                this.playSound(ModSounds.DODGE.get(), 1.0F, 0.8F + this.random.nextFloat() * 0.4F);
 
                 if (this.level() instanceof ServerLevel sl) {
                     sl.sendParticles(ParticleTypes.CRIT, this.getX(), this.getY() + 3.5D, this.getZ(), 10, 0.5, 0.5, 0.5, 0.1);
@@ -285,11 +296,11 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
             return false;
         }
 
-        // dodging
+        // Случайные уклонения (dodging)
         if (state >= 5 && this.random.nextFloat() < 0.25F) {
             this.entityData.set(BOSS_STATE, 40);
             this.entityData.set(ATTACK_TIMER, 40);
-            this.playSound(com.benji.netherman.init.ModSounds.DODGE.get(), 1.0F, 0.8F + this.random.nextFloat() * 0.4F);
+            this.playSound(ModSounds.DODGE.get(), 1.0F, 0.8F + this.random.nextFloat() * 0.4F);
 
             if (this.level() instanceof ServerLevel sl) {
                 sl.sendParticles(ParticleTypes.SWEEP_ATTACK, this.getX(), this.getY() + 1.5D, this.getZ(), 5, 0.5, 0.5, 0.5, 0.05);
@@ -315,7 +326,7 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
         // remove boss-theme
         java.util.List<Player> nearbyPlayers = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(100.0D));
         for (Player p : nearbyPlayers) {
-            p.removeEffect(ModEffects.ANXIETY);
+            p.removeEffect(ModEffects.PRAEMIUM);
         }
     }
 
@@ -570,7 +581,7 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
 
             if (state == 5 && this.tickCount % 20 == 0) {
                 for (ServerPlayer p : this.level().getEntitiesOfClass(ServerPlayer.class, this.getBoundingBox().inflate(100.0D))) {
-                    p.addEffect(new MobEffectInstance(ModEffects.ANXIETY, 3000, 0, false, false, true));
+                    p.addEffect(new MobEffectInstance(ModEffects.PRAEMIUM, -1, 0, false, false, true));
                 }
 
                 if (this.getTarget() != null && this.forcedAttackGoal == 0) {

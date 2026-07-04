@@ -19,15 +19,20 @@ public class ClientZoneAmbientEvents {
     private static ZoneAmbientSoundInstance currentAmbientSound = null;
     private static int lastZoneType = -1;
 
-
     private static int bossMusicTimer = 0;
     private static boolean isPlayingBossIntro = false;
     private static int shakeTimer = 0;
     private static float shakeIntensity = 0.0F;
 
+    private static int screenCooldown = 0;
+
     public static void startScreenShake(int ticks, float intensity) {
         shakeTimer = ticks;
         shakeIntensity = intensity;
+    }
+
+    public static void flagClick() {
+        screenCooldown = 40;
     }
 
     @SubscribeEvent
@@ -52,14 +57,16 @@ public class ClientZoneAmbientEvents {
         }
     }
 
-
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent.Post event) {
         if (event.getEntity() != Minecraft.getInstance().player) return;
         LocalPlayer player = (LocalPlayer) event.getEntity();
 
-        //cutscene
-        if (Minecraft.getInstance().screen == null) {
+        if (screenCooldown > 0) {
+            screenCooldown--;
+        }
+
+        if (Minecraft.getInstance().screen == null && screenCooldown <= 0) {
             for (com.benji.netherman.common.entity.AzazelHumanEntity boss : player.level().getEntitiesOfClass(com.benji.netherman.common.entity.AzazelHumanEntity.class, player.getBoundingBox().inflate(20.0D))) {
                 int state = boss.getEntityData().get(com.benji.netherman.common.entity.AzazelHumanEntity.BOSS_STATE);
                 if (state == 2 || state == 3 || state == 100) {
@@ -72,8 +79,10 @@ public class ClientZoneAmbientEvents {
         int currentZoneType = -1;
         Holder<MobEffect> activeEffect = null;
 
-
-        if (player.hasEffect(ModEffects.ALERTNESS)) {
+        if (player.hasEffect(ModEffects.PRAEMIUM)) {
+            currentZoneType = 5;
+            activeEffect = ModEffects.PRAEMIUM;
+        } else if (player.hasEffect(ModEffects.ALERTNESS)) {
             currentZoneType = 4;
             activeEffect = ModEffects.ALERTNESS;
         } else if (player.hasEffect(ModEffects.ANXIETY)) {
@@ -90,18 +99,16 @@ public class ClientZoneAmbientEvents {
             activeEffect = ModEffects.FEAR;
         }
 
-
-        if (currentZoneType == 3 && isPlayingBossIntro) {
+        if ((currentZoneType == 3 || currentZoneType == 5) && isPlayingBossIntro) {
             bossMusicTimer--;
             if (bossMusicTimer <= 0) {
                 isPlayingBossIntro = false;
-
-
                 if (currentAmbientSound != null) {
                     Minecraft.getInstance().getSoundManager().stop(currentAmbientSound);
                 }
 
-                currentAmbientSound = new ZoneAmbientSoundInstance(ModSounds.BOSS_FIGHT_LOOP.get(), player, activeEffect, true);
+                var loopSound = (currentZoneType == 5) ? ModSounds.AZAZEL_FIGHT_LOOP.get() : ModSounds.BOSS_FIGHT_LOOP.get();
+                currentAmbientSound = new ZoneAmbientSoundInstance(loopSound, player, activeEffect, true);
                 Minecraft.getInstance().getSoundManager().play(currentAmbientSound);
             }
         }
@@ -113,15 +120,14 @@ public class ClientZoneAmbientEvents {
             }
 
             if (currentZoneType != -1) {
-                if (currentZoneType == 3) {
-
-                    currentAmbientSound = new ZoneAmbientSoundInstance(ModSounds.BOSS_FIGHT.get(), player, activeEffect, false);
+                if (currentZoneType == 3 || currentZoneType == 5) {
+                    var introSound = (currentZoneType == 5) ? ModSounds.AZAZEL_FIGHT.get() : ModSounds.BOSS_FIGHT.get();
+                    currentAmbientSound = new ZoneAmbientSoundInstance(introSound, player, activeEffect, false);
                     Minecraft.getInstance().getSoundManager().play(currentAmbientSound);
 
-                    bossMusicTimer = 2900;
+                    bossMusicTimer = (currentZoneType == 5) ? 6020 : 2900;
                     isPlayingBossIntro = true;
                 } else {
-
                     var soundEvent = switch (currentZoneType) {
                         case 4 -> ModSounds.MAZE_AMBIENT.get();
                         case 2 -> ModSounds.CHURCH_AMBIENT.get();

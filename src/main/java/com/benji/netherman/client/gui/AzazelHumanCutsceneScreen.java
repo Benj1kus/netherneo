@@ -2,6 +2,7 @@ package com.benji.netherman.client.gui;
 
 import com.benji.netherman.NetherExp;
 import com.benji.netherman.common.entity.AzazelHumanEntity;
+import com.benji.netherman.client.events.ClientZoneAmbientEvents;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.language.I18n;
@@ -10,11 +11,11 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 
 public class AzazelHumanCutsceneScreen extends Screen {
-    private static final ResourceLocation CINEMATIC = NetherExp.location( "textures/gui/cinematic_large.png");
-    private static final ResourceLocation ICON_SURRENDER = NetherExp.location( "textures/gui/surrender_icon.png");
-    private static final ResourceLocation ICON_SURRENDER_HOVER = NetherExp.location( "textures/gui/surrender_icon_choose.png");
-    private static final ResourceLocation ICON_ATTACK = NetherExp.location( "textures/gui/attack_icon.png");
-    private static final ResourceLocation ICON_ATTACK_HOVER = NetherExp.location( "textures/gui/attack_icon_choose.png");
+    private static final ResourceLocation CINEMATIC = NetherExp.location("textures/gui/cinematic_large.png");
+    private static final ResourceLocation ICON_SURRENDER = NetherExp.location("textures/gui/surrender_icon.png");
+    private static final ResourceLocation ICON_SURRENDER_HOVER = NetherExp.location("textures/gui/surrender_icon_choose.png");
+    private static final ResourceLocation ICON_ATTACK = NetherExp.location("textures/gui/attack_icon.png");
+    private static final ResourceLocation ICON_ATTACK_HOVER = NetherExp.location("textures/gui/attack_icon_choose.png");
 
     private final AzazelHumanEntity boss;
 
@@ -53,12 +54,10 @@ public class AzazelHumanCutsceneScreen extends Screen {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-
         int width = graphics.guiWidth();
         int height = graphics.guiHeight();
 
         graphics.setColor(1.0F, 1.0F, 1.0F, 1.0F);
-
         graphics.blit(CINEMATIC, 0, 0, 0.0F, 0.0F, width, height, width, height);
 
         int state = boss.getEntityData().get(AzazelHumanEntity.BOSS_STATE);
@@ -117,12 +116,24 @@ public class AzazelHumanCutsceneScreen extends Screen {
             int attackX = centerX + 40 - btnSize;
 
             if (mouseX >= surrenderX && mouseX <= surrenderX + btnSize && mouseY >= baseY && mouseY <= baseY + btnSize) {
+                ClientZoneAmbientEvents.flagClick();
+
+                this.minecraft.player.lookAt(net.minecraft.commands.arguments.EntityAnchorArgument.Anchor.EYES, boss.position().add(0, boss.getBbHeight() / 2.0F, 0));
+                this.minecraft.player.connection.send(new net.minecraft.network.protocol.game.ServerboundMovePlayerPacket.Rot(
+                        this.minecraft.player.getYRot(), this.minecraft.player.getXRot(), this.minecraft.player.onGround()));
+
                 this.minecraft.gameMode.interact(this.minecraft.player, boss, InteractionHand.MAIN_HAND);
                 this.minecraft.setScreen(null);
                 return true;
             }
 
             if (mouseX >= attackX && mouseX <= attackX + btnSize && mouseY >= baseY && mouseY <= baseY + btnSize) {
+                ClientZoneAmbientEvents.flagClick();
+
+                this.minecraft.player.lookAt(net.minecraft.commands.arguments.EntityAnchorArgument.Anchor.EYES, boss.position().add(0, boss.getBbHeight() / 2.0F, 0));
+                this.minecraft.player.connection.send(new net.minecraft.network.protocol.game.ServerboundMovePlayerPacket.Rot(
+                        this.minecraft.player.getYRot(), this.minecraft.player.getXRot(), this.minecraft.player.onGround()));
+
                 this.minecraft.gameMode.attack(this.minecraft.player, boss);
                 this.minecraft.setScreen(null);
                 return true;

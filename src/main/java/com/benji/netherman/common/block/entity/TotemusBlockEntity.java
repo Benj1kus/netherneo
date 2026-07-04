@@ -52,7 +52,7 @@ public class TotemusBlockEntity extends BlockEntity {
             for (BlockPos checkPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
                 BlockState neighbor = level.getBlockState(checkPos);
 
-                if (neighbor.is(ModBlocks.BLACKSTONE_COLUMN.get())) {
+                if (neighbor.is(ModBlocks.CHISELED_SAMSONIT.get())) {
                     newType = 4;
                     break;
                 } else if (neighbor.is(ModBlocks.BLACKSTONE_COLUMN.get()) && newType < 3) {

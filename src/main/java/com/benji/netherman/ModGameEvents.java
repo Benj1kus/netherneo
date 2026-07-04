@@ -2,6 +2,7 @@ package com.benji.netherman;
 
 import com.benji.netherman.NetherExp;
 import com.benji.netherman.client.renderer.AzazelWingTrails;
+import com.benji.netherman.init.ModEffects;
 import com.benji.netherman.init.ModItems;
 import com.benji.netherman.init.ModSounds;
 import net.minecraft.core.BlockPos;
@@ -10,6 +11,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.damagesource.DamageTypes;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -17,8 +19,10 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.living.LivingEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 import java.util.WeakHashMap;
@@ -77,6 +81,34 @@ public class ModGameEvents {
                     }
                 }
             }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onEntityTick(EntityTickEvent.Post event) {
+        if (!(event.getEntity() instanceof Player player)) {
+            return;
+        }
+
+        if (player.level().isClientSide()) {
+            return;
+        }
+
+        boolean hasFullSet =
+                player.getItemBySlot(EquipmentSlot.HEAD).is(ModItems.AZAZEL_HELMET.get()) &&
+                        player.getItemBySlot(EquipmentSlot.CHEST).is(ModItems.AZAZEL_CHESTPLATE.get()) &&
+                        player.getItemBySlot(EquipmentSlot.LEGS).is(ModItems.AZAZEL_LEGGINGS.get()) &&
+                        player.getItemBySlot(EquipmentSlot.FEET).is(ModItems.AZAZEL_BOOTS.get());
+
+        if (hasFullSet && player.tickCount % 20 == 0) {
+            player.addEffect(new MobEffectInstance(
+                    ModEffects.DESTINY,
+                    220,
+                    0,
+                    false,
+                    false,
+                    true
+            ));
         }
     }
 

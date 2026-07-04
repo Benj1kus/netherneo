@@ -15,6 +15,9 @@
   "prison4": { "sounds": [ "netherman:prison4" ] },
   "shock": { "sounds": [ "netherman:shock" ] },
 
+  "azazel_fight": { "sounds": [ "netherman:azazel_fight" ] },
+  "azazel_fight_loop": { "sounds": [ "netherman:azazel_fight_loop" ] },
+
   "hirring": { "sounds": [ "netherman:hirring" ] },
   "totemus_puzzle": { "sounds": [ "netherman:totemus_puzzle" ] },
   "maze_ambient": { "sounds": [ "netherman:maze_ambient" ] },

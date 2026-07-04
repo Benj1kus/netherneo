@@ -18,6 +18,8 @@ public class ModEffects {
     public static final DeferredHolder<MobEffect, ZoneEffect> FAITH = EFFECTS.register("faith", () -> new ZoneEffect(0x800080));
     public static final DeferredHolder<MobEffect, ZoneEffect> ANXIETY = EFFECTS.register("anxiety", () -> new ZoneEffect(0x8B0000));
     public static final DeferredHolder<MobEffect, ZoneEffect> ALERTNESS = EFFECTS.register("alertness", () -> new ZoneEffect(0x8B0000));
+    public static final DeferredHolder<MobEffect, ZoneEffect> DESTINY = EFFECTS.register("destiny", () -> new ZoneEffect(0x8B0000));
+    public static final DeferredHolder<MobEffect, ZoneEffect> PRAEMIUM = EFFECTS.register("praemium", () -> new ZoneEffect(0x8B0000));
 
     public static void init(IEventBus bus) {
         EFFECTS.register(bus);
