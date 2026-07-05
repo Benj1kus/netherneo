@@ -125,7 +125,7 @@ public class ClientZoneAmbientEvents {
                     currentAmbientSound = new ZoneAmbientSoundInstance(introSound, player, activeEffect, false);
                     Minecraft.getInstance().getSoundManager().play(currentAmbientSound);
 
-                    bossMusicTimer = (currentZoneType == 5) ? 6020 : 2900;
+                    bossMusicTimer = (currentZoneType == 5) ? 2500 : 2900;
                     isPlayingBossIntro = true;
                 } else {
                     var soundEvent = switch (currentZoneType) {
