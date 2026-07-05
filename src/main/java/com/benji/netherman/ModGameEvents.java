@@ -312,6 +312,7 @@ public class ModGameEvents {
                     BOOST_TRAILS.put(player, 35);
                     com.benji.netherman.client.renderer.AzazelWingTrails.spawnShockwave(player);
                     com.benji.netherman.client.renderer.AzazelWingTrails.startBoost(player, 160);
+                    net.neoforged.neoforge.network.PacketDistributor.sendToServer(new com.benji.netherman.common.network.AzazelBoostPacket());
                 }
             }
         }

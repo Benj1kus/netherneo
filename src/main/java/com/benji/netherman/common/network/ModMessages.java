@@ -10,7 +10,13 @@ public class ModMessages {
     public static void register(final RegisterPayloadHandlersEvent event) {
         final PayloadRegistrar registrar = event.registrar("1.0");
 
-        
+
+        registrar.playToServer(
+                AzazelBoostPacket.TYPE,
+                AzazelBoostPacket.STREAM_CODEC,
+                AzazelBoostPacket::handle
+        );
+
         registrar.playToClient(
                 FogSyncS2CPacket.TYPE,
                 FogSyncS2CPacket.STREAM_CODEC,
