@@ -99,9 +99,10 @@ public class BelieverVillagerEntity extends PathfinderMob implements GeoEntity, 
         super.travel(travelVector);
     }
 
-    
-    
-    
+    @Override
+    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
+        return false;
+    }
 
     @Override
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {

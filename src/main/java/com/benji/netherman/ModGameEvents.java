@@ -116,6 +116,17 @@ public class ModGameEvents {
     @SubscribeEvent
     public static void onLivingDeath(net.neoforged.neoforge.event.entity.living.LivingDeathEvent event) {
 
+        if (event.getEntity() instanceof net.minecraft.world.entity.player.Player deadPlayer) {
+            if (event.getSource().getEntity() instanceof com.benji.netherman.common.entity.AzazelHumanEntity) {
+
+                deadPlayer.displayClientMessage(
+                        net.minecraft.network.chat.Component.literal("You can change his stats in mod config")
+                                .withStyle(net.minecraft.ChatFormatting.AQUA),
+                        true
+                );
+            }
+        }
+
         if (event.getSource().getEntity() instanceof Player player) {
             net.minecraft.world.entity.LivingEntity victim = event.getEntity();
 

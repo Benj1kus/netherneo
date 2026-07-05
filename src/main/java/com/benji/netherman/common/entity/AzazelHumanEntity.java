@@ -698,6 +698,11 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
         }
 
     @Override
+    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
+        return false;
+    }
+
+    @Override
     public void readAdditionalSaveData(CompoundTag tag) {
         super.readAdditionalSaveData(tag);
         this.entityData.set(BOSS_STATE, tag.getInt("BossState"));
