@@ -263,18 +263,15 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
             return false;
         }
 
-        // Неуязвимость до боя и старт фазы 4
         if (state < 5) {
             if (state == 3 && source.getEntity() instanceof Player) {
                 this.entityData.set(BOSS_STATE, 4);
                 this.entityData.set(DIALOGUE_TICK, 0);
                 this.playSound(ModSounds.LAUGH.get(), 2.0F, 1.0F);
 
-                // Прыжок с трона
                 Vec3 forward = Vec3.directionFromRotation(0, this.getYRot()).normalize();
                 this.setPos(this.getX() + forward.x * 2.0D, this.getY(), this.getZ() + forward.z * 2.0D);
 
-                // Наложение эффекта PRAEMIUM на бесконечность (-1)
                 if (this.level() instanceof ServerLevel sl) {
                     for (ServerPlayer p : sl.getEntitiesOfClass(ServerPlayer.class, this.getBoundingBox().inflate(64.0D))) {
                         p.addEffect(new MobEffectInstance(ModEffects.PRAEMIUM, -1, 0, false, false, true));
@@ -284,7 +281,6 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
             return false;
         }
 
-        // Блокирование урона в защитных фазах (11, 12, 13, 22, 70)
         if (state == 11 || state == 12 || state == 13 || state == 22 || state == 70) {
             if (source.getEntity() != null) {
                 this.playSound(ModSounds.DODGE.get(), 1.0F, 0.8F + this.random.nextFloat() * 0.4F);
@@ -296,7 +292,6 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
             return false;
         }
 
-        // Случайные уклонения (dodging)
         if (state >= 5 && this.random.nextFloat() < 0.25F) {
             this.entityData.set(BOSS_STATE, 40);
             this.entityData.set(ATTACK_TIMER, 40);
@@ -393,6 +388,8 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
                                     new net.minecraft.world.item.ItemStack(ModItems.AZAZEL_SPEAR.get(), 1),
                                     new net.minecraft.world.item.ItemStack(ModItems.MUSIC_DISC_QUAR.get(), 1),
                                     new net.minecraft.world.item.ItemStack(ModItems.MUSIC_DISC_MAZE.get(), 1),
+                                    new net.minecraft.world.item.ItemStack(ModItems.MUSIC_DISC_GOD.get(), 1),
+                                    new net.minecraft.world.item.ItemStack(ModItems.MUSIC_DISC_SACRED.get(), 1),
                                     new net.minecraft.world.item.ItemStack(ModItems.CHANCE_TOTEM.get(), 2),
                                     new net.minecraft.world.item.ItemStack(ModItems.AZAZEL_SHIELD.get(), 2),
                                     new net.minecraft.world.item.ItemStack(ModItems.AZAZEL_CHESTPLATE.get(), 1),
@@ -400,6 +397,7 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
                                     new net.minecraft.world.item.ItemStack(ModItems.AZAZEL_LEGGINGS.get(), 1),
                                     new net.minecraft.world.item.ItemStack(ModItems.AZAZEL_BOOTS.get(), 1),
                                     new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.DIAMOND, 55),
+                                    new net.minecraft.world.item.ItemStack(Items.MILK_BUCKET, 1),
                                     new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.NETHERITE_SCRAP, 20),
                                     new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.ENCHANTED_GOLDEN_APPLE, 10),
                                     new net.minecraft.world.item.ItemStack((ModBlocks.AZAZEL_TROPHY.get().asItem()), 1),

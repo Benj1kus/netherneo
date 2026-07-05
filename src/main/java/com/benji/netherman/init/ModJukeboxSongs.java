@@ -12,4 +12,6 @@ public class ModJukeboxSongs {
     public static final ResourceKey<JukeboxSong> CITY_AMBIENT = ResourceKey.create(Registries.JUKEBOX_SONG, NetherExp.location("city_ambient"));
     public static final ResourceKey<JukeboxSong> CHURCH_AMBIENT = ResourceKey.create(Registries.JUKEBOX_SONG, NetherExp.location("church_ambient"));
     public static final ResourceKey<JukeboxSong> MAZE_AMBIENT = ResourceKey.create(Registries.JUKEBOX_SONG, NetherExp.location("maze_ambient"));
+    public static final ResourceKey<JukeboxSong> AZAZEL_SONG = ResourceKey.create(Registries.JUKEBOX_SONG, NetherExp.location("azazel_fight"));
+
 }

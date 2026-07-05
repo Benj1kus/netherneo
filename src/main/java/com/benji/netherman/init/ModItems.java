@@ -73,6 +73,7 @@ public class ModItems {
     public static final DeferredItem<Item> MUSIC_DISC_SACRED = registerMusicDisc("sacred", ModJukeboxSongs.CITY_AMBIENT);
     public static final DeferredItem<Item> MUSIC_DISC_AZAZEL = registerMusicDisc("azazel", ModJukeboxSongs.CHURCH_AMBIENT);
     public static final DeferredItem<Item> MUSIC_DISC_MAZE = registerMusicDisc("maze", ModJukeboxSongs.MAZE_AMBIENT);
+    public static final DeferredItem<Item> MUSIC_DISC_GOD = registerMusicDisc("god", ModJukeboxSongs.AZAZEL_SONG);
 
     private static DeferredItem<Item> registerSimple(String name, Item.Properties itemProperties) {
         return register(name, () -> new Item(itemProperties));

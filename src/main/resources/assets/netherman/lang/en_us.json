@@ -182,6 +182,12 @@
   "advancement.netherman.tame_ghastly.title": "New Friend:D",
   "advancement.netherman.tame_ghastly.description": "They're bees?",
 
+  "advancement.netherman.enter_maze.title": "Shh…",
+  "advancement.netherman.enter_maze.description": "Be careful",
+
+  "advancement.netherman.azazel.title": "Be praised",
+  "advancement.netherman.azazel.description": "Be proud",
+
   "book.netherman.page1.line1": "Welcome to §4§lCult of Azazel§f§l mod!",
   "book.netherman.page1.line2": "Here's a quick guide to what's in the mod.",
   "book.netherman.page1.line3": "Thanks for the play!",
@@ -264,6 +270,7 @@
   "item.netherman.music_disc_sacred": "§bMusic Disc",
   "item.netherman.music_disc_maze": "§bMusic Disc",
   "item.netherman.music_disc_azazel": "§bMusic Disc",
+  "item.netherman.music_disc_god": "§bMusic Disc",
 
   "item.netherman.quota": "Cult Scroll",
   "item.netherman.faith_essence": "Essence of Faith",
@@ -277,7 +284,7 @@
   "item.netherman.azazel_scythe": "§6Judicus",
   "item.netherman.azazel_shield": "§4Aegis of Faith",
 
-
+  "jukebox_song.netherman.azazel_fight": "Shirō Sagisu - Keep Your Head Above The Mayhem",
   "jukebox_song.netherman.boss_fight": "Toby Fox - GUARDIAN",
   "jukebox_song.netherman.cave_ambient": "Casmox - §kGUARDIAN",
   "jukebox_song.netherman.city_ambient": "Casmox - §kGUARDIAN",
