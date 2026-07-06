@@ -54,9 +54,9 @@ Localization Contributors:
 authors="Benj1kus"
 
 # The description text for the mod (multi line!) (#mandatory)
-description='''
-Small mod that add new structure in the Nether.
-'''
+description='''Mod that add several structures in nether
+and overworld for the glory of §4Azazel§r
+-----------------------------------------'''
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
 #[[mixins]]
