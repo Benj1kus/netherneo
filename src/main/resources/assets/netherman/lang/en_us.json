@@ -23,10 +23,6 @@
   "block.netherman.blackstone_axon": "Blackstone Axon",
   "block.netherman.crimson_honey_block": "Crimson Honey Block",
   "block.netherman.ghastly_nest": "Ghastly Nest",
-  "block.netherman.azazel_trophy": "§4Azazel Mask",
-  "item.netherman.azazel_trophy": "§4Azazel Mask",
-  "block.netherman.azazel_trophy_stage2": "§4Azazel Mask",
-  "block.netherman.azazel_trophy_stage3": "§4Azazel Mask",
   "item.netherman.azazel_guide_book": "§4Cult of Azazel Guidebook",
   "block.netherman.potent_magma": "Potent Magma",
   "block.netherman.a_puzzle": "§6[ᔑ]",
@@ -39,6 +35,11 @@
   "block.netherman.samsonit_bell": "Samsonite Carving Bell",
   "block.netherman.samsonit_eye": "Samsonite Carving Eye",
   "block.netherman.samsonit_key": "Keyhole",
+
+  "item.netherman.azazel_trophy": "§4Azazel Mask",
+  "block.netherman.azazel_trophy_stage2": "§4Azazel Mask",
+  "block.netherman.azazel_trophy_stage3": "§4Azazel Mask",
+  "block.netherman.azazel_trophy": "§4Azazel Mask",
 
   "block.netherman.maze_door": "Maze Door",
   "item.netherman.maze_key": "Samson Key",
