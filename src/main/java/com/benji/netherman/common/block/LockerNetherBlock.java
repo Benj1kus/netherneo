@@ -42,39 +42,37 @@ public class LockerNetherBlock extends HorizontalDirectionalBlock {
         return CODEC;
     }
 
-    
+
     @Override
     public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         if (!level.isClientSide()) {
 
-            
-            
-            int randomStage = level.random.nextInt(3) + 1; 
+            net.minecraft.nbt.CompoundTag playerData = player.getPersistentData();
+            int brokenCount = playerData.getInt("LockerQuestProgress") + 1;
 
             Item animationItem = ModItems.QUEST_ICON_1.get();
-            if (randomStage == 2) animationItem = ModItems.QUEST_ICON_2.get();
-            if (randomStage == 3) animationItem = ModItems.QUEST_ICON_3.get();
+            if (brokenCount == 2) animationItem = ModItems.QUEST_ICON_2.get();
+            if (brokenCount >= 3) animationItem = ModItems.QUEST_ICON_3.get();
 
-            
             level.playSound(null, pos, SoundEvents.BEACON_ACTIVATE, SoundSource.MASTER, 2.0F, 0.5F);
 
-            
             if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
                 net.neoforged.neoforge.network.PacketDistributor.sendToPlayer(
                         serverPlayer,
                         new TotemAnimationPayload(new ItemStack(animationItem))
                 );
             }
-
             
-            if (randomStage == 3) {
+            if (brokenCount >= 3) {
                 player.getInventory().add(new ItemStack(ModItems.ALTAR_COMPASS_KEY.get()));
+                playerData.putInt("LockerQuestProgress", 0);
+            } else {
+                playerData.putInt("LockerQuestProgress", brokenCount);
             }
 
-            
             triggerChainReactionAndPillars((ServerLevel) level, pos);
         }
-        return super.playerWillDestroy(level, pos, state, player); 
+        return super.playerWillDestroy(level, pos, state, player);
     }
 
     private void triggerChainReactionAndPillars(ServerLevel level, BlockPos startPos) {
