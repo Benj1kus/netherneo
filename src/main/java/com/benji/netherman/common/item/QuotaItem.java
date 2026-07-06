@@ -1,7 +1,6 @@
 package com.benji.netherman.common.item;
 
 import com.benji.netherman.QuotaManager;
-import com.benji.netherman.client.gui.QuotaScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
@@ -59,13 +58,9 @@ public class QuotaItem extends Item {
 
             level.playSound(null, player.blockPosition(), SoundEvents.BOOK_PAGE_TURN, SoundSource.PLAYERS, 1.0F, 1.0F);
         } else {
-            openScreen(stack);
+            com.benji.netherman.client.ClientActionDelegate.openQuotaScreen(stack);
         }
 
         return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
-    }
-
-    private void openScreen(ItemStack stack) {
-        Minecraft.getInstance().setScreen(new QuotaScreen(stack));
     }
 }
