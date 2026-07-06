@@ -3,6 +3,6 @@
   "description": {
     "translate": "jukebox_song.netherman.boss_fight"
   },
-  "length_in_seconds": 145,
+  "length_in_seconds": 123,
   "sound_event": "netherman:boss_fight"
 }
