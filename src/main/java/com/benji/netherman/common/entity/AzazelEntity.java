@@ -24,6 +24,7 @@ import net.minecraft.world.BossEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -74,6 +75,7 @@ public class AzazelEntity extends Monster implements GeoEntity {
     private final java.util.List<net.minecraft.core.BlockPos> prisonBlocks = new java.util.ArrayList<>();
     private net.minecraft.core.BlockPos prisonCenter = null;
     private Player prisonTarget = null;
+    public boolean isInstantKill = false;
 
     private int hitCounter = 0;
     private int attackTimer = 0;
@@ -181,6 +183,10 @@ public class AzazelEntity extends Monster implements GeoEntity {
     public boolean hurt(DamageSource source, float amount) {
         if (this.level().isClientSide()) return false;
 
+        if (source.is(DamageTypes.FELL_OUT_OF_WORLD) || source.is(net.minecraft.world.damagesource.DamageTypes.GENERIC_KILL)) {
+            this.isInstantKill = true;
+        }
+
         if (source.is(net.minecraft.world.damagesource.DamageTypes.IN_WALL)) {
             return false;
         }
@@ -193,11 +199,6 @@ public class AzazelEntity extends Monster implements GeoEntity {
 
         if (attackState == 2) {
             this.playSound(SoundEvents.SHIELD_BLOCK, 1.0F, 1.5F);
-            return false;
-        }
-
-        if (this.getHealth() - amount <= this.getMaxHealth() * 0.05F) {
-            startDeathCinematic();
             return false;
         }
 
@@ -295,6 +296,20 @@ public class AzazelEntity extends Monster implements GeoEntity {
         for (Player p : nearbyPlayers) {
             p.removeEffect(ModEffects.ANXIETY);
         }
+    }
+
+    @Override
+    public void setHealth(float health) {
+        int attackState = this.entityData.get(ATTACK_STATE);
+
+        if (health <= this.getMaxHealth() * 0.05F && attackState < 9 && !this.isInstantKill) {
+            super.setHealth(1.0F);
+            this.removeAllEffects();
+            startDeathCinematic();
+            return;
+        }
+
+        super.setHealth(health);
     }
 
     @Override

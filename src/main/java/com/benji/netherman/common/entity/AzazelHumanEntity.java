@@ -24,6 +24,7 @@ import net.minecraft.world.BossEvent;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -71,6 +72,7 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
     private int damageTimer = 0;
     private int defendCooldown = 0; // Кулдаун в 2 минуты (2400 тиков)
     private static final int[] LINE_LENGTHS = {31, 33, 40, 31, 28, 33, 35, 39, 29, 29};
+    public boolean isInstantKill = false;
 
     public AzazelHumanEntity(EntityType<? extends Monster> type, Level level) {
         super(type, level);
@@ -252,14 +254,14 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
     @Override
     public boolean hurt(DamageSource source, float amount) {
         if (this.level().isClientSide()) return false;
+
+        if (source.is(DamageTypes.FELL_OUT_OF_WORLD) || source.is(net.minecraft.world.damagesource.DamageTypes.GENERIC_KILL)) {
+            this.isInstantKill = true;
+        }
+
         int state = this.entityData.get(BOSS_STATE);
 
         if (state == 100 || state == 101 || state == 110 || state == 111) {
-            return false;
-        }
-
-        if (this.getHealth() - amount <= 0.0F && state < 100) {
-            startDeathCinematic();
             return false;
         }
 
@@ -325,6 +327,20 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
         }
     }
 
+
+    @Override
+    public void setHealth(float health) {
+        int state = this.entityData.get(BOSS_STATE);
+
+        if (health <= 0.0F && state < 100 && !this.isInstantKill) {
+            super.setHealth(1.0F);
+            this.removeAllEffects();
+            startDeathCinematic();
+            return;
+        }
+
+        super.setHealth(health);
+    }
 
     @Override
     public boolean canAttack(net.minecraft.world.entity.LivingEntity target) {
