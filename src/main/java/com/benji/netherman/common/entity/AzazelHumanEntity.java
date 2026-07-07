@@ -260,7 +260,7 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
                 source.is(net.minecraft.world.damagesource.DamageTypes.CRAMMING)) {
             return false;
         }
-        
+
         if (source.is(DamageTypes.FELL_OUT_OF_WORLD) || source.is(net.minecraft.world.damagesource.DamageTypes.GENERIC_KILL)) {
             this.isInstantKill = true;
         }
