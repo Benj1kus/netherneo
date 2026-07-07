@@ -155,6 +155,11 @@ public class AzazelEntity extends Monster implements GeoEntity {
     }
 
     @Override
+    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
+        return false;
+    }
+
+    @Override
     public void travel(Vec3 travelVector) {
         int attackState = this.entityData.get(ATTACK_STATE);
         

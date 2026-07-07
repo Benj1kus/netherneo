@@ -63,6 +63,11 @@ public class DoctorEntity extends PathfinderMob implements GeoEntity {
     }
 
     @Override
+    public boolean removeWhenFarAway(double distanceToClosestPlayer) {
+        return false;
+    }
+
+    @Override
     protected void registerGoals() {
         
         this.goalSelector.addGoal(1, new LookAtPlayerGoal(this, Player.class, 8.0F));
