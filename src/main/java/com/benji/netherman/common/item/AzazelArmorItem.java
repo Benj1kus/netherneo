@@ -35,10 +35,19 @@ public class AzazelArmorItem extends ArmorItem implements GeoItem {
     public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks) {
         if (!entity.level().isClientSide) {
             if ((flightTicks + 1) % 20 == 0) {
-                // ИСПРАВЛЕНИЕ: Новый синтаксис 1.21.1
                 stack.hurtAndBreak(1, entity, EquipmentSlot.CHEST);
             }
         }
+        return true;
+    }
+
+    @Override
+    public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
+        return repair.is(net.minecraft.world.item.Items.NETHERITE_INGOT) || super.isValidRepairItem(toRepair, repair);
+    }
+
+    @Override
+    public boolean isEnchantable(ItemStack stack) {
         return true;
     }
 
