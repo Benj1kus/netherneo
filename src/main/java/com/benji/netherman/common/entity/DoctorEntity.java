@@ -1,5 +1,6 @@
 package com.benji.netherman.common.entity;
 
+import com.benji.netherman.config.AzazelConfig;
 import com.benji.netherman.init.ModSounds;
 import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleTypes;
@@ -126,21 +127,28 @@ public class DoctorEntity extends PathfinderMob implements GeoEntity {
         return InteractionResult.sidedSuccess(false);
     }
 
-    private static List<Holder.Reference<MobEffect>> CACHED_EFFECTS = null;
-
-
     private void giveRandomPotion(Player player) {
         ItemStack potion = new ItemStack(Items.POTION);
 
-        if (CACHED_EFFECTS == null) {
-            CACHED_EFFECTS = this.level().registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.MOB_EFFECT).holders()
-                    .filter(holder -> holder.unwrapKey().isPresent() && holder.unwrapKey().get().location().getNamespace().equals("minecraft"))
-                    .toList();
-        }
+        boolean restrictMods = AzazelConfig.DOCTOR_VANILLA_POTIONS_ONLY.get();
+        java.util.List<? extends String> allowedNamespaces = AzazelConfig.DOCTOR_ALLOWED_MOD_NAMESPACES.get();
 
-        if (CACHED_EFFECTS.isEmpty()) return;
+        // Формируем список доступных эффектов, основываясь на конфиге
+        List<net.minecraft.core.Holder.Reference<MobEffect>> availableEffects = this.level().registryAccess()
+                .registryOrThrow(net.minecraft.core.registries.Registries.MOB_EFFECT).holders()
+                .filter(holder -> {
+                    if (!restrictMods) return true; // Если ограничение выключено, берем всё
 
-        var randomEffect = CACHED_EFFECTS.get(this.random.nextInt(CACHED_EFFECTS.size()));
+                    if (holder.unwrapKey().isEmpty()) return false;
+
+                    String namespace = holder.unwrapKey().get().location().getNamespace();
+                    return allowedNamespaces.contains(namespace); // Проверяем список модов
+                })
+                .toList();
+
+        if (availableEffects.isEmpty()) return;
+
+        var randomEffect = availableEffects.get(this.random.nextInt(availableEffects.size()));
 
         int durationTicks = 200 + this.random.nextInt(1600);
         int amplifier = this.random.nextInt(4);

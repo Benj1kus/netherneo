@@ -66,6 +66,9 @@ public class AzazelConfig {
     public static final ModConfigSpec.IntValue SHIELD_HITS_MIN;
     public static final ModConfigSpec.IntValue SHIELD_HITS_MAX;
 
+    public static final ModConfigSpec.BooleanValue DOCTOR_VANILLA_POTIONS_ONLY;
+    public static final ModConfigSpec.ConfigValue<java.util.List<? extends String>> DOCTOR_ALLOWED_MOD_NAMESPACES;
+
     public static final ModConfigSpec.IntValue MIDAS_GUARDIAN_COUNT;
     public static final ModConfigSpec.IntValue MIDAS_BOSSUNIT_COUNT;
     public static final ModConfigSpec.DoubleValue MIDAS_FIRE_DAMAGE;
@@ -137,6 +140,16 @@ public class AzazelConfig {
         BUILDER.push("Azazel Attack Frequencies");
         ATTACK_CHANCE = BUILDER.comment("Chance (1 in X ticks) for Azazel to perform an active attack. Lower = faster attacks.").defineInRange("attackChance", 80, 10, 600);
         PASSIVE_SUMMON_CHANCE = BUILDER.comment("Chance (1 in X ticks) to spawn minions passively while idle.").defineInRange("passiveSummonChance", 600, 100, 2400);
+        BUILDER.pop();
+
+        BUILDER.push("NPC Doctor Config");
+
+        DOCTOR_VANILLA_POTIONS_ONLY = BUILDER.comment("true = the Doctor will only give potions with effects from vanilla.false = it gives random effects from ANY installed mod")
+                .define("doctorVanillaPotionsOnly", false);
+
+        DOCTOR_ALLOWED_MOD_NAMESPACES = BUILDER.comment("A list of mod IDs (namespaces) allowed to be given as potions by the Doctor if doctorVanillaPotionsOnly is true.")
+                .defineListAllowEmpty(java.util.List.of("doctorAllowedModNamespaces"), () -> java.util.List.of("minecraft"), obj -> obj instanceof String);
+
         BUILDER.pop();
 
         
