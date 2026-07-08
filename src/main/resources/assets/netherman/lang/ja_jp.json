@@ -278,12 +278,12 @@
   "item.netherman.music_disc_azazel": "§b音楽ディスク",
   "item.netherman.music_disc_god": "§b音楽ディスク",
 
-  "item.netherman.music_disc_boss.desc": "Toby Fox - GUARDIAN",
-  "item.netherman.music_disc_quar.desc": "Casmox - §kGUARDIAN",
-  "item.netherman.music_disc_sacred.desc": "Casmox - §kGUARDIAN",
-  "item.netherman.music_disc_maze.desc": "Casmox - §kGUARDIAN",
-  "item.netherman.music_disc_azazel.desc": "Casmox - §kGUARDIAN",
-  "item.netherman.music_disc_god.desc": "§4ᒲᔑ∷ᔑᔑꖎ - §6§e§l神§6になれ",
+  "jukebox_song.netherman.azazel_fight": "§4ᒲᔑ∷ᔑᔑꖎ - §6Be the §e§lGod",
+  "jukebox_song.netherman.boss_fight": "ᔑ⨅ᔑ⨅ᒷꖎ - ᔑリ⊣ᒷꖎᓭ ⎓∷ᒲ",
+  "jukebox_song.netherman.cave_ambient": "Casmox - §kGUARDIAN",
+  "jukebox_song.netherman.city_ambient": "Casmox - §kGUARDIAN",
+  "jukebox_song.netherman.maze_ambient": "Casmox - §kGUARDIAN",
+  "jukebox_song.netherman.church_ambient": "Casmox - §kGUARDIAN",
 
   "effect.netherman.manipulation": "操り",
   "effect.netherman.destiny": "運命",
