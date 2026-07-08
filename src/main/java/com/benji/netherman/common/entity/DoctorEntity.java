@@ -128,20 +128,23 @@ public class DoctorEntity extends PathfinderMob implements GeoEntity {
 
     private static List<Holder.Reference<MobEffect>> CACHED_EFFECTS = null;
 
+
     private void giveRandomPotion(Player player) {
         ItemStack potion = new ItemStack(Items.POTION);
 
-        
         if (CACHED_EFFECTS == null) {
-            CACHED_EFFECTS = this.level().registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.MOB_EFFECT).holders().toList();
+            CACHED_EFFECTS = this.level().registryAccess().registryOrThrow(net.minecraft.core.registries.Registries.MOB_EFFECT).holders()
+                    .filter(holder -> holder.unwrapKey().isPresent() && holder.unwrapKey().get().location().getNamespace().equals("minecraft"))
+                    .toList();
         }
+
+        if (CACHED_EFFECTS.isEmpty()) return;
 
         var randomEffect = CACHED_EFFECTS.get(this.random.nextInt(CACHED_EFFECTS.size()));
 
         int durationTicks = 200 + this.random.nextInt(1600);
         int amplifier = this.random.nextInt(4);
 
-        
         potion.set(net.minecraft.core.component.DataComponents.POTION_CONTENTS, new net.minecraft.world.item.alchemy.PotionContents(
                 java.util.Optional.empty(),
                 java.util.Optional.empty(),
