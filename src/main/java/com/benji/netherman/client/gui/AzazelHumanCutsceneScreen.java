@@ -3,6 +3,7 @@ package com.benji.netherman.client.gui;
 import com.benji.netherman.NetherExp;
 import com.benji.netherman.common.entity.AzazelHumanEntity;
 import com.benji.netherman.client.events.ClientZoneAmbientEvents;
+import com.benji.netherman.common.network.AzazelCutscenePayload;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.language.I18n;
@@ -117,24 +118,16 @@ public class AzazelHumanCutsceneScreen extends Screen {
 
             if (mouseX >= surrenderX && mouseX <= surrenderX + btnSize && mouseY >= baseY && mouseY <= baseY + btnSize) {
                 ClientZoneAmbientEvents.flagClick();
-
-                this.minecraft.player.lookAt(net.minecraft.commands.arguments.EntityAnchorArgument.Anchor.EYES, boss.position().add(0, boss.getBbHeight() / 2.0F, 0));
-                this.minecraft.player.connection.send(new net.minecraft.network.protocol.game.ServerboundMovePlayerPacket.Rot(
-                        this.minecraft.player.getYRot(), this.minecraft.player.getXRot(), this.minecraft.player.onGround()));
-
-                this.minecraft.gameMode.interact(this.minecraft.player, boss, InteractionHand.MAIN_HAND);
+                // ОТПРАВЛЯЕМ КАСТОМНЫЙ ПАКЕТ: 0 = Сдаться
+                net.neoforged.neoforge.network.PacketDistributor.sendToServer(new AzazelCutscenePayload(0, boss.getId()));
                 this.minecraft.setScreen(null);
                 return true;
             }
 
             if (mouseX >= attackX && mouseX <= attackX + btnSize && mouseY >= baseY && mouseY <= baseY + btnSize) {
                 ClientZoneAmbientEvents.flagClick();
-
-                this.minecraft.player.lookAt(net.minecraft.commands.arguments.EntityAnchorArgument.Anchor.EYES, boss.position().add(0, boss.getBbHeight() / 2.0F, 0));
-                this.minecraft.player.connection.send(new net.minecraft.network.protocol.game.ServerboundMovePlayerPacket.Rot(
-                        this.minecraft.player.getYRot(), this.minecraft.player.getXRot(), this.minecraft.player.onGround()));
-
-                this.minecraft.gameMode.attack(this.minecraft.player, boss);
+                // ОТПРАВЛЯЕМ КАСТОМНЫЙ ПАКЕТ: 1 = Сражаться
+                net.neoforged.neoforge.network.PacketDistributor.sendToServer(new AzazelCutscenePayload(1, boss.getId()));
                 this.minecraft.setScreen(null);
                 return true;
             }

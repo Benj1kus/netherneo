@@ -12,6 +12,12 @@ public class ModMessages {
 
 
         registrar.playToServer(
+                AzazelCutscenePayload.TYPE,
+                AzazelCutscenePayload.CODEC,
+                ServerPayloadHandler::handleAzazelCutscene
+        );
+
+        registrar.playToServer(
                 AzazelBoostPacket.TYPE,
                 AzazelBoostPacket.STREAM_CODEC,
                 AzazelBoostPacket::handle
