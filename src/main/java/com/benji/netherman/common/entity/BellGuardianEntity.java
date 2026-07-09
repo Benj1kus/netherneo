@@ -73,7 +73,7 @@ public class BellGuardianEntity extends Monster implements GeoEntity {
             }
 
             if (this.getTarget() != null) {
-                Player target = (Player) this.getTarget();
+                net.minecraft.world.entity.LivingEntity target = this.getTarget();
                 this.getLookControl().setLookAt(target, 30.0F, 30.0F);
 
                 if (this.distanceTo(target) > 1.5D) {
