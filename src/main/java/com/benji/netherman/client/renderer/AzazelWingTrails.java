@@ -218,13 +218,23 @@ public class AzazelWingTrails {
                 if (data.ticksRemaining > 0 && Minecraft.getInstance().level != null) {
                     Player player = Minecraft.getInstance().level.getPlayerByUUID(entry.getKey());
                     if (player != null && player.isAlive()) {
-                        Vec3 playerPos = player.getPosition(partialTick).add(0, 0.4D, 0);
+
+                        double x = net.minecraft.util.Mth.lerp(partialTick, player.xo, player.getX());
+                        double y = net.minecraft.util.Mth.lerp(partialTick, player.yo, player.getY());
+                        double z = net.minecraft.util.Mth.lerp(partialTick, player.zo, player.getZ());
+                        Vec3 playerPos = new Vec3(x, y, z).add(0, 0.4D, 0);
+
                         Vec3 look = player.getViewVector(partialTick);
-                        Vec3 right = look.cross(new Vec3(0, 1, 0)).normalize();
+
+                        Vec3 upVec = new Vec3(0, 1, 0);
+                        if (Math.abs(look.y) > 0.99D) {
+                            upVec = new Vec3(1, 0, 0);
+                        }
+
+                        Vec3 right = look.cross(upVec).normalize();
                         Vec3 backUp = right.cross(look).normalize();
 
                         float boostProgress = Math.min(1.0F, data.ticksRemaining / 15.0F);
-                        drawVaporCone(buffer, matrix, playerPos, look, right, backUp, boostProgress);
                     }
                 }
             }
@@ -249,6 +259,7 @@ public class AzazelWingTrails {
 
         poseStack.popPose();
         RenderSystem.depthMask(true);
+        RenderSystem.enableBlend();
         RenderSystem.enableCull();
     }
 
@@ -269,38 +280,6 @@ public class AzazelWingTrails {
         addVertex(buffer, matrix, p1.subtract(right), r, g, b, alpha);
         addVertex(buffer, matrix, p2.subtract(right), r, g, b, alpha);
         addVertex(buffer, matrix, p2.add(right), r, g, b, alpha);
-    }
-
-    private static void drawVaporCone(VertexConsumer buffer, Matrix4f matrix, Vec3 center, Vec3 look, Vec3 right, Vec3 backUp, float boostProgress) {
-        if (boostProgress <= 0.01F) return;
-        int maxAlpha = (int) (60 * boostProgress);
-        int rings = 6, segments = 24;
-        float length = 0.3F, maxRadius = 1.7F;
-        Vec3[] prevRing = new Vec3[segments + 1];
-
-        for (int rIndex = 0; rIndex <= rings; rIndex++) {
-            float rProgress = (float) rIndex / rings;
-            float currentRadius = maxRadius * (float)Math.sqrt(rProgress);
-            float zOffset = length * (1.0F - rProgress) - 0.3F;
-            Vec3 currentRingCenter = center.add(look.scale(zOffset));
-            Vec3[] currentRing = new Vec3[segments + 1];
-
-            for (int i = 0; i <= segments; i++) {
-                double angle = (i * 2.0 * Math.PI) / segments;
-                Vec3 dirVec = right.scale(Math.cos(angle)).add(backUp.scale(Math.sin(angle)));
-                currentRing[i] = currentRingCenter.add(dirVec.scale(currentRadius));
-
-                if (rIndex > 0 && i > 0) {
-                    int a1 = (int) (maxAlpha * (1.0F - (float)(rIndex - 1) / rings));
-                    int a2 = (int) (maxAlpha * (1.0F - (float)rIndex / rings));
-                    addVertex(buffer, matrix, prevRing[i - 1], 255, 255, 255, a1);
-                    addVertex(buffer, matrix, currentRing[i - 1], 255, 255, 255, a2);
-                    addVertex(buffer, matrix, currentRing[i], 255, 255, 255, a2);
-                    addVertex(buffer, matrix, prevRing[i], 255, 255, 255, a1);
-                }
-            }
-            prevRing = currentRing;
-        }
     }
 
     private static void drawRibbon(VertexConsumer buffer, Matrix4f matrix, LinkedList<Vec3> points, Vec3 camPos, float startWidth) {
