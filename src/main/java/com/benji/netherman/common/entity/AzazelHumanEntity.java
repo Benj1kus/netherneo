@@ -194,6 +194,7 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
 
         if (source.is(DamageTypes.FELL_OUT_OF_WORLD) || source.is(net.minecraft.world.damagesource.DamageTypes.GENERIC_KILL)) {
             this.isInstantKill = true;
+            return super.hurt(source, amount);
         }
 
         int state = this.entityData.get(BOSS_STATE);
