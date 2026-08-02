@@ -1,6 +1,7 @@
 package com.benji.netherman;
 
 import com.benji.netherman.init.ModEntities;
+import com.benji.netherman.init.ModItems;
 import com.benji.netherman.init.ModSounds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -128,6 +129,21 @@ public class QuotaManager {
 
     public static void failQuota(Player player) {
         CompoundTag data = player.getPersistentData();
+
+
+        boolean isCultist = data.getBoolean("AzazelCultist");
+
+        boolean hasQuota = false;
+        for (int i = 0; i < player.getInventory().getContainerSize(); i++) {
+            if (player.getInventory().getItem(i).is(ModItems.QUOTA.get())) {
+                hasQuota = true;
+                break;
+            }
+        }
+
+        if (!isCultist || !hasQuota) {
+            return;
+        }
 
         player.level().playSound(null, player.blockPosition(), ModSounds.BELL_BEAST_LAUGH.get(), SoundSource.PLAYERS, 1.5F, 1.0F);
 
