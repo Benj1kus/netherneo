@@ -8,11 +8,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -37,6 +40,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.fml.common.Mod;
 import org.jetbrains.annotations.Nullable;
@@ -320,32 +324,12 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
 
                         net.minecraft.world.level.block.entity.BlockEntity blockEntity = serverLevel.getBlockEntity(barrelPos);
                         if (blockEntity instanceof net.minecraft.world.level.block.entity.BarrelBlockEntity barrel) {
-                            java.util.List<Integer> availableSlots = new java.util.ArrayList<>();
-                            for (int i = 0; i < 27; i++) availableSlots.add(i);
-                            java.util.Collections.shuffle(availableSlots);
 
-                            net.minecraft.world.item.ItemStack[] loot = new net.minecraft.world.item.ItemStack[] {
-                                    new net.minecraft.world.item.ItemStack(ModItems.AZAZEL_SPEAR.get(), 1),
-                                    new net.minecraft.world.item.ItemStack(ModItems.MUSIC_DISC_QUAR.get(), 1),
-                                    new net.minecraft.world.item.ItemStack(ModItems.MUSIC_DISC_MAZE.get(), 1),
-                                    new net.minecraft.world.item.ItemStack(ModItems.MUSIC_DISC_GOD.get(), 1),
-                                    new net.minecraft.world.item.ItemStack(ModItems.MUSIC_DISC_SACRED.get(), 1),
-                                    new net.minecraft.world.item.ItemStack(ModItems.CHANCE_TOTEM.get(), 2),
-                                    new net.minecraft.world.item.ItemStack(ModItems.AZAZEL_SHIELD.get(), 2),
-                                    new net.minecraft.world.item.ItemStack(ModItems.AZAZEL_CHESTPLATE.get(), 1),
-                                    new net.minecraft.world.item.ItemStack(ModItems.AZAZEL_HELMET.get(), 1),
-                                    new net.minecraft.world.item.ItemStack(ModItems.AZAZEL_LEGGINGS.get(), 1),
-                                    new net.minecraft.world.item.ItemStack(ModItems.AZAZEL_BOOTS.get(), 1),
-                                    new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.DIAMOND, 55),
-                                    new net.minecraft.world.item.ItemStack(Items.MILK_BUCKET, 1),
-                                    new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.NETHERITE_SCRAP, 20),
-                                    new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.ENCHANTED_GOLDEN_APPLE, 10),
-                                    new net.minecraft.world.item.ItemStack((ModBlocks.AZAZEL_TROPHY.get().asItem()), 1),
-                            };
+                            ResourceLocation lootId = ResourceLocation.fromNamespaceAndPath("netherman", "chests/azazel_human_barrel");
 
-                            for (int i = 0; i < loot.length && i < availableSlots.size(); i++) {
-                                barrel.setItem(availableSlots.get(i), loot[i]);
-                            }
+                            ResourceKey<LootTable> lootKey = ResourceKey.create(Registries.LOOT_TABLE, lootId);
+
+                            barrel.setLootTable(lootKey, this.random.nextLong());
                         }
                     }
                     this.bossEvent.removeAllPlayers();

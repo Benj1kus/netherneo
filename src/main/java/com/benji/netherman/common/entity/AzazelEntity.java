@@ -6,6 +6,7 @@ import com.benji.netherman.config.AzazelConfig;
 import com.benji.netherman.init.*;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundSetSubtitleTextPacket;
@@ -14,6 +15,8 @@ import net.minecraft.network.protocol.game.ClientboundSetTitlesAnimationPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -43,6 +46,7 @@ import net.minecraft.world.entity.projectile.EvokerFangs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -458,7 +462,7 @@ public class AzazelEntity extends Monster implements GeoEntity {
                             for (int i = 0; i < 30; i++) {
                                 net.minecraft.world.item.Item goldItem = this.random.nextBoolean() ? net.minecraft.world.item.Items.GOLD_INGOT : net.minecraft.world.item.Items.GOLD_NUGGET;
                                 net.minecraft.world.entity.item.ItemEntity gold = new net.minecraft.world.entity.item.ItemEntity(
-                                        serverLevel, this.getX(), this.getY() + 1.0D, this.getZ(), new ItemStack(goldItem, 1)
+                                        serverLevel, this.getX(), this.getY() + 1.0D, this.getZ(), new net.minecraft.world.item.ItemStack(goldItem, 1)
                                 );
                                 gold.setDeltaMovement((this.random.nextDouble() - 0.5D) * 0.5D, 0.5D + this.random.nextDouble() * 0.3D, (this.random.nextDouble() - 0.5D) * 0.5D);
                                 serverLevel.addFreshEntity(gold);
@@ -469,29 +473,15 @@ public class AzazelEntity extends Monster implements GeoEntity {
 
                             net.minecraft.world.level.block.entity.BlockEntity blockEntity = serverLevel.getBlockEntity(barrelPos);
                             if (blockEntity instanceof net.minecraft.world.level.block.entity.BarrelBlockEntity barrel) {
-                                java.util.List<Integer> availableSlots = new java.util.ArrayList<>();
-                                for (int i = 0; i < 27; i++) availableSlots.add(i);
-                                java.util.Collections.shuffle(availableSlots);
 
-                                ItemStack[] loot = new ItemStack[] {
-                                        new ItemStack(ModItems.MANIPULATOR_STICK.get(), 1),
-                                        new ItemStack(ModItems.CHANCE_TOTEM.get(), 2), new ItemStack(ModItems.MUSIC_DISC_AZAZEL.get(), 1),
-                                        new ItemStack(ModItems.MUSIC_DISC_AZAZEL.get(), 1),
-                                        new ItemStack(ModItems.MUSIC_DISC_BOSS.get(), 1),
-                                        new ItemStack(Items.TOTEM_OF_UNDYING, 1),
-                                        new ItemStack(ModItems.NOTE.get(), 1),
-                                        new ItemStack(ModBlocks.AZAZEL_TROPHY.get(), 1),
-                                        new ItemStack(Items.DIAMOND, 25),
-                                        new ItemStack(Items.NETHERITE_SCRAP, 12),
-                                        new ItemStack(Items.ENCHANTED_GOLDEN_APPLE, 4),
-                                        new ItemStack(ModBlocks.NETHER_SPAWNER.get(), 1)
-                                };
+                                ResourceLocation lootId = ResourceLocation.fromNamespaceAndPath("netherman", "chests/azazel_barrel");
 
-                                for (int i = 0; i < loot.length && i < availableSlots.size(); i++) {
-                                    barrel.setItem(availableSlots.get(i), loot[i]);
-                                }
+                                ResourceKey<LootTable> lootKey = ResourceKey.create(Registries.LOOT_TABLE, lootId);
+
+                                barrel.setLootTable(lootKey, this.random.nextLong());
                             }
                         }
+                        this.bossEvent.removeAllPlayers();
                         this.discard();
                     }
                 }
