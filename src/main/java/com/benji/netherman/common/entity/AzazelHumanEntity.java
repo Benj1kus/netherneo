@@ -246,7 +246,7 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
         this.entityData.set(DIALOGUE_TICK, 0);
         this.getNavigation().stop();
         this.setTarget(null);
-        this.setHealth(1.0F);
+        super.setHealth(1.0F);
 
         // remove boss-theme
         java.util.List<Player> nearbyPlayers = this.level().getEntitiesOfClass(Player.class, this.getBoundingBox().inflate(100.0D));
@@ -422,7 +422,7 @@ public class AzazelHumanEntity extends Monster implements GeoEntity {
                 return;
             }
 
-            if (state >= 5 && this.isAlive() && this.forcedAttackGoal == 0) {
+            if (state >= 5 && state < 100 && this.isAlive() && this.forcedAttackGoal == 0) {
                 float hpPct = this.getHealth() / this.getMaxHealth();
                 if (hpPct <= 0.3F && !this.phase2Triggered) {
                     this.phase2Triggered = true;
