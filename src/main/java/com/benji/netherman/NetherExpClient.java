@@ -69,22 +69,6 @@ public class NetherExpClient {
             }
         }
         event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions() {
-            private com.benji.netherman.client.renderer.AzazelArmorRenderer renderer;
-
-            @Override
-            @SuppressWarnings("deprecation")
-            public net.minecraft.client.model.HumanoidModel<?> getHumanoidArmorModel(net.minecraft.world.entity.LivingEntity livingEntity, net.minecraft.world.item.ItemStack itemStack, net.minecraft.world.entity.EquipmentSlot equipmentSlot, net.minecraft.client.model.HumanoidModel<?> original) {
-                if (this.renderer == null) {
-                    this.renderer = new com.benji.netherman.client.renderer.AzazelArmorRenderer();
-                }
-
-                this.renderer.prepForRender(livingEntity, itemStack, equipmentSlot, original);
-
-                return this.renderer;
-            }
-        }, ModItems.AZAZEL_HELMET.get(), ModItems.AZAZEL_CHESTPLATE.get(), ModItems.AZAZEL_LEGGINGS.get(), ModItems.AZAZEL_BOOTS.get());
-
-        event.registerItem(new net.neoforged.neoforge.client.extensions.common.IClientItemExtensions() {
             private software.bernie.geckolib.renderer.GeoItemRenderer<com.benji.netherman.common.item.AzazelSpearItem> renderer;
             @Override
             public net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer getCustomRenderer() {
