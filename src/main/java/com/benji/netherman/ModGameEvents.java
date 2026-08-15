@@ -2,6 +2,7 @@ package com.benji.netherman;
 
 import com.benji.netherman.NetherExp;
 import com.benji.netherman.client.renderer.AzazelWingTrails;
+import com.benji.netherman.config.AzazelConfig;
 import com.benji.netherman.init.ModEffects;
 import com.benji.netherman.init.ModItems;
 import com.benji.netherman.init.ModSounds;
@@ -64,20 +65,22 @@ public class ModGameEvents {
 
                     event.setCanceled(true);
 
-                    Vec3 look = player.getLookAngle().normalize();
-                    ACTIVE_DRILLS.put(player, new DrillData(12, look));
+                    if (AzazelConfig.AZAZEL_ARMOR_BLOCK_BREAKING.get()) {
+                        Vec3 look = player.getLookAngle().normalize();
+                        ACTIVE_DRILLS.put(player, new DrillData(12, look));
 
-                    player.level().playSound(
-                            null,
-                            player.blockPosition(),
-                            SoundEvents.GENERIC_EXPLODE.value(),
-                            SoundSource.PLAYERS,
-                            1.5F,
-                            1.2F
-                    );
+                        player.level().playSound(
+                                null,
+                                player.blockPosition(),
+                                SoundEvents.GENERIC_EXPLODE.value(),
+                                SoundSource.PLAYERS,
+                                1.5F,
+                                1.2F
+                        );
 
-                    if (player.level().isClientSide()) {
-                        AzazelWingTrails.startDrillingSparks(player, 12, look);
+                        if (player.level().isClientSide()) {
+                            AzazelWingTrails.startDrillingSparks(player, 12, look);
+                        }
                     }
                 }
             }
@@ -227,18 +230,26 @@ public class ModGameEvents {
             player.hurtMarked = true;
 
             if (!player.level().isClientSide() && player.level() instanceof ServerLevel serverLevel) {
-                Vec3 targetPos = player.position().add(drill.direction.scale(1.2D));
-                BlockPos centerBlock = BlockPos.containing(targetPos.x, targetPos.y + 0.6D, targetPos.z);
 
-                int r = 1;
-                for (int x = -r; x <= r; x++) {
-                    for (int y = -r; y <= r + 1; y++) {
-                        for (int z = -r; z <= r; z++) {
-                            BlockPos targetBlock = centerBlock.offset(x, y, z);
-                            BlockState state = serverLevel.getBlockState(targetBlock);
+                if (AzazelConfig.AZAZEL_ARMOR_BLOCK_BREAKING.get()) {
+                    Vec3 targetPos = player.position().add(drill.direction.scale(1.2D));
+                    BlockPos centerBlock = BlockPos.containing(
+                            targetPos.x,
+                            targetPos.y + 0.6D,
+                            targetPos.z
+                    );
 
-                            if (!state.isAir() && state.getDestroySpeed(serverLevel, targetBlock) >= 0) {
-                                serverLevel.destroyBlock(targetBlock, true, player);
+                    int r = 1;
+
+                    for (int x = -r; x <= r; x++) {
+                        for (int y = -r; y <= r + 1; y++) {
+                            for (int z = -r; z <= r; z++) {
+                                BlockPos targetBlock = centerBlock.offset(x, y, z);
+                                BlockState state = serverLevel.getBlockState(targetBlock);
+
+                                if (!state.isAir() && state.getDestroySpeed(serverLevel, targetBlock) >= 0) {
+                                    serverLevel.destroyBlock(targetBlock, true, player);
+                                }
                             }
                         }
                     }

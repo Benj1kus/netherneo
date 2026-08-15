@@ -74,6 +74,7 @@ public class AzazelConfig {
     public static final ModConfigSpec.DoubleValue MIDAS_FIRE_DAMAGE;
     public static final ModConfigSpec.IntValue MIDAS_GOLD_TIME;
     public static final ModConfigSpec.IntValue MELEE_ATTACK_CHANCE;
+    public static final ModConfigSpec.BooleanValue AZAZEL_ARMOR_BLOCK_BREAKING;
 
     public static final ModConfigSpec.IntValue PRISON_RADIUS;
     public static final ModConfigSpec.IntValue PRISON_DURATION;
@@ -81,12 +82,21 @@ public class AzazelConfig {
 
 
     static {
+
+        BUILDER.push("Azazel Armor Configuration");
+
+        AZAZEL_ARMOR_BLOCK_BREAKING = BUILDER
+                .comment("Allows the Azazel Chestplate to break blocks when flying into them at high speed.")
+                .define("azazelArmorBlockBreaking", true);
+
+        BUILDER.pop();
         
         BUILDER.push("Azazel Boss Configuration");
         MAX_HEALTH = BUILDER.comment("Maximum health of Azazel").defineInRange("maxHealth", 800.0, 100.0, 10000.0);
         MOVEMENT_SPEED = BUILDER.comment("Movement speed of Azazel").defineInRange("movementSpeed", 0.2, 0.05, 1.0);
         KNOCKBACK_RESISTANCE = BUILDER.comment("Knockback resistance (1.0 = completely immune)").defineInRange("knockbackResistance", 1.0, 0.0, 1.0);
         BUILDER.pop();
+
 
         //AZAZEL HUMAN
         BUILDER.push("Azazel Human Configuration");
